@@ -19,14 +19,13 @@ import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "tb_vaga")
-public class Vaga {
+public class Vaga extends VagasObserver {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
-	private Evento evento;
+
 	
 	private int qtd_vagas;
 	
@@ -55,13 +54,7 @@ public class Vaga {
 		this.especialidade = especialidade;
 	}
 
-	public Evento getEvento() {
-		return evento;
-	}
 
-	public void setEvento(Evento evento) {
-		this.evento = evento;
-	}
 
 	public int getQtd_vagas() {
 		return qtd_vagas;
@@ -86,8 +79,14 @@ public class Vaga {
 
 	@Override
 	public String toString() {
-		return "Vaga [id=" + id + ", evento=" + evento.getDescricao() + ", qtd_vagas=" + qtd_vagas + ", especialidade="
+		return "Vaga [id=" + id + ", evento=" + evento.getState().getDescricao() + ", qtd_vagas=" + qtd_vagas + ", especialidade="
 				+ especialidade.getNome() + "]";
+	}
+
+	@Override
+	public void update() {
+		System.out.println("mudou kanalia...");
+		
 	}
 
 }

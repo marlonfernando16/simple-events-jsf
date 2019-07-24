@@ -6,6 +6,8 @@ import javax.persistence.ManyToOne;
 public abstract class VagasObserver {
 	@ManyToOne(fetch=FetchType.EAGER)
 	protected EventoSubject evento;
+	
+	public VagasObserver() {}
 	 
     public VagasObserver(EventoSubject evento) {
         this.evento= evento;

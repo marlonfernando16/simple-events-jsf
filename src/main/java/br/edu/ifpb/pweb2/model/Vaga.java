@@ -22,7 +22,7 @@ public class Vaga extends VagasObserver {
 		super(evento);
 		
 	}
-
+	public Vaga() {}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

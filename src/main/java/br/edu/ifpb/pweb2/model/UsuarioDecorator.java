@@ -1,9 +1,7 @@
 package br.edu.ifpb.pweb2.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
+import javax.persistence.MappedSuperclass;
+@MappedSuperclass
 public class UsuarioDecorator extends User {
 	User usuario;
 	

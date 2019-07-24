@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_evento")
-public class Evento {
+public class Evento extends EventoSubject {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,16 +42,6 @@ public class Evento {
 	
 	boolean finalizado;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "evento", cascade = CascadeType.REMOVE, orphanRemoval=true)
-	private List<Vaga> vagas = new ArrayList<>();
-
-	public boolean isFinalizado() {
-		return finalizado;
-	}
-
-	public void setFinalizado(boolean finalizado) {
-		this.finalizado = finalizado;
-	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "evento", cascade = CascadeType.ALL)
 	private List<Avaliacao_Evento> avaliacao_eventos = new ArrayList<>();
@@ -65,6 +55,14 @@ public class Evento {
 		this.local = l;
 	}
 	
+	public boolean isFinalizado() {
+		return finalizado;
+	}
+
+	public void setFinalizado(boolean finalizado) {
+		this.finalizado = finalizado;
+	}
+	
 	public void setAvaliacao_eventos(List<Avaliacao_Evento> avaliacao_eventos) {
 		this.avaliacao_eventos = avaliacao_eventos;
 	}
@@ -73,21 +71,13 @@ public class Evento {
 		return avaliacao_eventos;
 	}
 
-	public void add(Vaga vaga) {
-		this.vagas.add(vaga);
-	}
+	
 
 	public void setAvaliacao_eventos(ArrayList<Avaliacao_Evento> avaliacao_eventos) {
 		this.avaliacao_eventos = avaliacao_eventos;
 	}
 
-	public List<Vaga> getVagas() {
-		return vagas;
-	}
 
-	public void setVagas(ArrayList<Vaga> vagas) {
-		this.vagas = vagas;
-	}
 
 	public User getOwner() {
 		return owner;
@@ -129,18 +119,16 @@ public class Evento {
 		this.local = local;
 	}
 
-	public void setVagas(List<Vaga> vagas) {
-		this.vagas = vagas;
-	}
+
 
 	@Override
 	public String toString() {
 		return "Evento [id=" + id + ", descricao=" + descricao + ", data=" + data + ", local=" + local + ", owner="
-				+ owner + ", vagas=" + vagas + ", avaliacao_eventos=" + avaliacao_eventos +"finalizado"+finalizado+"media"+getMediaAvaliacao()+ "]";
+				+ owner + ", vagas=" + observers + ", avaliacao_eventos=" + avaliacao_eventos +"finalizado"+finalizado+"media"+getMediaAvaliacao()+ "]";
 	}
 	
 	public double getMediaAvaliacao() {
-		double sum = 0;
+		int sum = 0;
 		for (Avaliacao_Evento av:  this.avaliacao_eventos) {
 			sum += av.getNota_avaliacao_evento();
 		}

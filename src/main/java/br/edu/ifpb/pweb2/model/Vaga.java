@@ -21,6 +21,11 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = "tb_vaga")
 public class Vaga extends VagasObserver {
 	
+	public Vaga(EventoSubject evento) {
+		super(evento);
+		
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -36,7 +41,7 @@ public class Vaga extends VagasObserver {
 	@OneToOne
 	private Especialidade especialidade;
 
-	public Vaga() {};
+	
 
 	public Long getId() {
 		return id;

@@ -23,9 +23,6 @@ public class Vaga extends VagasObserver {
 		
 	}
 	public Vaga() {}
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 	
 
 	
@@ -40,13 +37,7 @@ public class Vaga extends VagasObserver {
 
 	
 
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Especialidade getEspecialidade() {
 		return especialidade;
@@ -81,7 +72,7 @@ public class Vaga extends VagasObserver {
 
 	@Override
 	public String toString() {
-		return "Vaga [id=" + id + ", evento=" + evento.getState().getDescricao() + ", qtd_vagas=" + qtd_vagas + ", especialidade="
+		return "Vaga [id=" + super.getId() + ", evento=" + evento.getState().getDescricao() + ", qtd_vagas=" + qtd_vagas + ", especialidade="
 				+ especialidade.getNome() + "]";
 	}
 

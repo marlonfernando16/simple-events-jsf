@@ -22,9 +22,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "tb_evento")
 public class Evento extends EventoSubject {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+
 
 	@NotEmpty(message = "Descricao e obrigatoria")
 	private String descricao;
@@ -87,13 +85,7 @@ public class Evento extends EventoSubject {
 		this.owner = owner;
 	}
 
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getDescricao() {
 		return descricao;
@@ -123,8 +115,8 @@ public class Evento extends EventoSubject {
 
 	@Override
 	public String toString() {
-		return "Evento [id=" + id + ", descricao=" + descricao + ", data=" + data + ", local=" + local + ", owner="
-				+ owner + ", vagas=" + observers + ", avaliacao_eventos=" + avaliacao_eventos +"finalizado"+finalizado+"media"+getMediaAvaliacao()+ "]";
+		return "Evento [id=" + super.getId() + ", descricao=" + descricao + ", data=" + data + ", local=" + local + ", owner="
+				+ owner + ", vagas=" + ", avaliacao_eventos=" + avaliacao_eventos +"finalizado"+finalizado+"media"+getMediaAvaliacao()+ "]";
 	}
 	
 	public double getMediaAvaliacao() {

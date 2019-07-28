@@ -76,14 +76,23 @@
 
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
+          <h:form>
+            <li class="nav-item active">
+              <h:commandLink styleClass="nav-link" action="index?faces-redirect=true">
+                Home
+              </h:commandLink>
+            </li>
+          </h:form>
           <li class="nav-item">
             <a class="nav-link" href="#Eventos">Eventos</a>
           </li>
+          <h:form>
+            <li class="nav-item ">
+              <h:commandLink styleClass="nav-link" action="cadastro?faces-redirect=true">
+                Cadastro
+              </h:commandLink>
+            </li>
+          </h:form>
         </ul>
 
         <!-- Right -->
@@ -131,7 +140,7 @@
                 lugar.</strong>
             </p>
             <h:form>
-              <h:commandLink styleClass="btn btn-indigo" id="singup" action="#{cadastrarBean.buttonAction}">
+              <h:commandLink styleClass="btn btn-indigo" id="singup" action="cadastro?faces-redirect=true">
                 <i class="fas fa-user-plus"></i> Sing up
               </h:commandLink>
             </h:form>
@@ -280,7 +289,8 @@
             <h3 class="mb-3 font-weight-bold dark-grey-text">
               <strong>Primeiro Evento</strong>
             </h3>
-            <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vitae tristique risus, vel accumsan nisl. In aliquet efficitur eleifend. Sed rhoncus velit ex, non egestas.</p>
+            <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vitae tristique
+              risus, vel accumsan nisl. In aliquet efficitur eleifend. Sed rhoncus velit ex, non egestas.</p>
             <p>
               <strong>Dia:</strong> 21 de Setembro de 2019 <br />
               <strong>Hora:</strong> 22h30min <br />
@@ -311,6 +321,42 @@
 
   <!--Footer-->
   <footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+    <!-- Social icons -->
+    <div class="pb-4">
+      <a href="">
+        <i class="fab fa-facebook-f mr-3"></i>
+      </a>
+
+      <a href="">
+        <i class="fab fa-twitter mr-3"></i>
+      </a>
+
+      <a href="">
+        <i class="fab fa-youtube mr-3"></i>
+      </a>
+
+      <a href="">
+        <i class="fab fa-google-plus-g mr-3"></i>
+      </a>
+
+      <a href="">
+        <i class="fab fa-dribbble mr-3"></i>
+      </a>
+
+      <a href="">
+        <i class="fab fa-pinterest mr-3"></i>
+      </a>
+
+      <a href="https://github.com/mdbootstrap/bootstrap-material-design" target="_blank">
+        <i class="fab fa-github mr-3"></i>
+      </a>
+
+      <a href="http://codepen.io/mdbootstrap/" target="_blank">
+        <i class="fab fa-codepen mr-3"></i>
+      </a>
+    </div>
+    <!-- Social icons -->
     <!--Copyright-->
     <div class="footer-copyright py-3">
       © 2019 Copyright:

@@ -120,7 +120,8 @@
 
                 <!-- Form -->
                 <h:form id="login-form">
-                  <!-- <p:growl id="growl" life="2000" autoUpdate="true" /> -->
+                  <h:outputScript name="jsf.js" library="javax.faces" target="body" />
+                  <p:growl id="growl" life="6000" autoUpdate="true" />
                   <!-- Heading -->
                   <h3 class="dark-grey-text text-center">
                     <strong>Sing up</strong>
@@ -149,16 +150,32 @@
                   </div>
 
                   <div class="md-form">
+                    <h:selectOneMenu id="typeuser" value="#{cadastroBean.typeUser}"
+                      class="browser-default custom-select">
+                      <f:ajax listener="#{cadastroBean.typeUserChange}" event="change" execute="@this"
+                        render="painelMsg" />
+                      <f:selectItems value="#{cadastroBean.typeUser.entrySet()}" var="entry" itemValue="#{entry.key}"
+                        itemLabel="#{entry.value}" />
+                    </h:selectOneMenu>
+                    
+                  </div>
+
+
+
+
+
+                  <div class="md-form">
                     <i class="fas fa-envelope prefix grey-text"></i>
-                    <h:inputText class="form-control" id="login" required="true" value="#{user.email}"
-                      requiredMessage="insert login" />
-                    <h:outputLabel for="login" value="Email" />
+                    <h:inputText class="form-control" id="email" required="true" value="#{user.email}"
+                      requiredMessage="insert email" />
+                    <h:outputLabel for="email" value="Email" />
                   </div>
 
                   <div class="md-form">
                     <i class="fas fa-key prefix grey-text"></i>
-                    <h:inputSecret id="password" required="true" value="#{user.senha}" requiredMessage="insert password" class="form-control" />
-                    <h:outputLabel for="password" value="Senha"/>
+                    <h:inputSecret id="password" required="true" value="#{user.senha}" requiredMessage="insert password"
+                      class="form-control" />
+                    <h:outputLabel for="password" value="Senha" />
                   </div>
 
                   <div class="text-center">
@@ -369,7 +386,6 @@
 
   <!-- SCRIPTS -->
   <!-- JQuery -->
-  <h:outputScript library="javax.faces" name="jsf.js" target="head" />
   <h:outputScript name="js/jquery-3.4.0.min.js" />
   <!-- Bootstrap tooltips -->
   <h:outputScript name="js/popper.min.js" />

@@ -13,11 +13,11 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
   <!-- Bootstrap core CSS -->
   <!-- Bootstrap core CSS -->
-  <h:outputStylesheet name="css/bootstrap.min.css" />
+  <h:outputStylesheet name="dashboard/css/bootstrap.min.css" />
   <!-- Material Design Bootstrap -->
-  <h:outputStylesheet name="css/mdb.min.css" />
+  <h:outputStylesheet name="dashboard/css/mdb.min.css" />
   <!-- Your custom styles (optional) -->
-  <h:outputStylesheet name="css/style.min.css" />
+  <h:outputStylesheet name="dashboard/css/style.min.css" />
   <style>
     .map-container {
       overflow: hidden;
@@ -42,24 +42,39 @@
     <!--Main Navigation-->
     <!-- Sidebar -->
     <div class="sidebar-fixed position-fixed">
-      <div class="list-group list-group-flush">
-        <!-- Listar todos os eventos -->
-        <a href="#" class="list-group-item active waves-effect">
-          <i class="fas fa-calendar mr-3"></i>Eventos
-        </a>
-        <!-- Listar apenas os eventos submetidos -->
-        <a href="#" class="list-group-item list-group-item-action waves-effect">
-          <i class="fas fa-check-square mr-3"></i>Submissões
-        </a>
-        <!-- Criar um evento -->
-        <a href="#" class="list-group-item list-group-item-action waves-effect">
-          <i class="fas fa-calendar-plus mr-3"></i>Criar
-        </a>
-        <!-- Ver perfil do usuário -->
-        <a href="#" class="list-group-item list-group-item-action waves-effect">
-          <i class="fas fa-user mr-3"></i>Perfil</a>
-      </div>
+      <h:form>
+        <div class="list-group list-group-flush">
+          <a class="logo-wrapper waves-effect">
+            <img src="" class="img-fluid" alt="Coloque a logo aqui" />
+          </a>
+          <!-- Listar todos os eventos -->
+          <h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
+            action="dashboard_evento?faces-redirect=true">
+            <i class="fas fa-calendar mr-3"></i>Eventos
+          </h:commandLink>
 
+          <!-- Listar apenas os eventos submetidos -->
+          <h:commandLink styleClass="list-group-item active waves-effect"
+            action="dashboard_submissoes?faces-redirect=true">
+            <i class="fas fa-check-square mr-3"></i>Submissões
+          </h:commandLink>
+          <!-- Criar um evento -->
+          <h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
+            action="dashboard_criar_evento?faces-redirect=true">
+            <i class="fas fa-calendar-plus mr-3"></i>Criar Evento
+          </h:commandLink>
+          <!-- Criar um evento -->
+          <h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
+            action="dashboard_criar_especialidade?faces-redirect=true">
+            <i class="fas fa-calendar-plus mr-3"></i>Criar Especialidade
+          </h:commandLink>
+          <!-- Ver perfil do usuário -->
+          <h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
+            action="dashboard_perfil?faces-redirect=true">
+            <i class="fas fa-user mr-3"></i>Perfil
+          </h:commandLink>
+        </div>
+      </h:form>
     </div>
     <!-- Sidebar -->
 
@@ -83,15 +98,6 @@
 
           <!-- Left -->
           <ul class="navbar-nav mr-auto">
-            <!-- <li class="nav-item active">
-              <a class="nav-link waves-effect" href="#">Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link waves-effect" href="" target="_blank">About
-                MDB</a>
-            </li> -->
           </ul>
 
           <!-- Right -->
@@ -99,12 +105,10 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <i class="fab fa-facebook-f"></i>
+                <i class="fas fa-bell"></i>
               </a>
               <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item" href="#">Menssagem</a>
               </div>
             </li>
             <li class="nav-item">
@@ -126,32 +130,6 @@
   <!--Main layout-->
   <main class="pt-5 mx-lg-5">
     <div class="container-fluid mt-5">
-
-      <!-- Heading -->
-      <div class="card mb-4 wow fadeIn">
-
-        <!--Card content-->
-        <div class="card-body d-sm-flex justify-content-between">
-
-          <h4 class="mb-2 mb-sm-0 pt-1">
-            <!-- <a href="" target="_blank">Home</a>
-            <span>/</span> -->
-            <span>Dashboard</span>
-          </h4>
-
-          <form class="d-flex justify-content-center">
-            <!-- Default input -->
-            <!-- <input type="search" placeholder="Type your query" aria-label="Search" class="form-control">
-            <button class="btn btn-primary btn-sm my-0 p" type="submit">
-              <i class="fas fa-search"></i>
-            </button> -->
-
-          </form>
-
-        </div>
-
-      </div>
-      <!-- Heading -->
       <!--Grid row-->
       <div class="row wow fadeIn">
 
@@ -197,7 +175,7 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
-            <h:form id="candidatar-form" modelAttribute="usuario" acceptCharset="UTF-8">
+            <h:form id="login-form">
               <div class="modal-header text-center">
                 <h4 class="modal-title w-100 font-weight-bold">Cadastro</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -207,41 +185,20 @@
               <div class="modal-body mx-3">
                 <div class="md-form mb-5">
                   <i class="fas fa-user prefix grey-text"></i>
-                  <input path="nome" class="form-control validate" />
-                  <label data-error="wrong" data-success="right" for="nome">Nome</label>
-                  <errors class="center red-text" path="nome" />
+                  <h:inputText class="form-control" id="nome" required="true" value="#{user.nome}"
+                    requiredMessage="insert login" />
+                  <h:outputLabel for="nome" value="Nome" />
                 </div>
 
                 <div class="md-form mb-5">
                   <i class="fas fa-phone prefix grey-text"></i>
-                  <input path="telefone" class="form-control validate" />
-                  <label data-error="wrong" data-success="right" for="telefone">Telefone</label>
-                  <errors class="center red-text" path="telefone" />
+                  <h:inputText class="form-control" id="phone" required="true" value="#{user.phone}"
+                    requiredMessage="insert phone" />
+                  <h:outputLabel for="phone" value="Telefone" />
                 </div>
-
-                <div class="md-form mb-5">
-                  <i class="fas fa-calendar prefix grey-text"></i>
-                  <input path="datanascimento" type="date" class="form-control validate" />
-                  <label data-error="wrong" data-success="right" for="datanascimento">Data de Nascimento</label>
-                  <errors class="center red-text" path="datanascimento" />
-                </div>
-
-                <div class="md-form mb-5">
-                  <i class="fas fa-envelope prefix grey-text"></i>
-                  <input path="email" type="email" class="form-control validate" />
-                  <label data-error="wrong" data-success="right" for="email">Email</label>
-                  <errors class="center red-text" path="email" />
-                </div>
-
-                <div class="md-form mb-4">
-                  <i class="fas fa-lock prefix grey-text"></i>
-                  <input path="senha" type="password" class="form-control validate" />
-                  <label data-error="wrong" data-success="right" for="orangeForm-pass">Senha</label>
-                </div>
-
               </div>
               <div class="modal-footer d-flex justify-content-center">
-                <button class="btn btn-deep-orange">Enviar</button>
+                <h:commandButton value="Cadastrar" class="btn btn-indigo" action="#{loginBean.autentique}" />
               </div>
             </h:form>
           </div>
@@ -250,12 +207,12 @@
     </div>
   </main>
   <!--Main layout-->
-
   <!--Footer-->
-  <footer class="page-footer text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
+  <footer class="page-footer fixed-bottom text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
     <!--Copyright-->
     <div class="footer-copyright py-3">
-      © 2019 Copyright: <a href="" target="_blank"> SimpleEvents.com </a>
+      © 2019 Copyright:
+      <a href=""> EquipeTOP.com </a>
     </div>
     <!--/.Copyright-->
 
@@ -265,13 +222,13 @@
   <!-- SCRIPTS -->
   <!-- JQuery -->
   <h:outputScript library="javax.faces" name="jsf.js" target="head" />
-  <h:outputScript name="js/jquery-3.4.0.min.js" />
+  <h:outputScript name="dashboard/js/jquery-3.4.0.min.js" />
   <!-- Bootstrap tooltips -->
-  <h:outputScript name="js/popper.min.js" />
+  <h:outputScript name="dashboard/js/popper.min.js" />
   <!-- Bootstrap core JavaScript -->
-  <h:outputScript name="js/bootstrap.min.js" />
+  <h:outputScript name="dashboard/js/bootstrap.min.js" />
   <!-- MDB core JavaScript -->
-  <h:outputScript name="js/mdb.min.js" />
+  <h:outputScript name="dashboard/js/mdb.min.js" />
   <!-- Initializations -->
   <script type="text/javascript">
     // Animations initialization

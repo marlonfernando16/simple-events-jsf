@@ -6,9 +6,10 @@
   xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <title>Simple Events</title>
+  <title>Cadastro</title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
   <!-- Bootstrap core CSS -->
@@ -60,9 +61,11 @@
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand" href="">
-        <strong>Simple Events</strong>
-      </a>
+      <h:form>
+        <h:commandLink styleClass="navbar-brand" action="index_login?faces-redirect=true">
+          <strong>Simple Events</strong>
+        </h:commandLink>
+      </h:form>
 
       <!-- Collapse -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -75,34 +78,18 @@
 
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
-          <h:form>
-            <li class="nav-item active">
-              <h:commandLink styleClass="nav-link" action="index?faces-redirect=true">
-                Home
-              </h:commandLink>
-            </li>
-          </h:form>
           <li class="nav-item">
             <a class="nav-link" href="#Eventos">Eventos</a>
           </li>
           <h:form>
-            <li class="nav-item ">
-              <h:commandLink styleClass="nav-link" action="cadastro?faces-redirect=true">
+            <li class="nav-item active">
+              <h:commandLink styleClass="nav-link" action="index_cadastro?faces-redirect=true">
                 Cadastro
               </h:commandLink>
+              <span class="sr-only">(current)</span>
             </li>
           </h:form>
         </ul>
-
-        <!-- Right -->
-        <ul class="navbar-nav nav-flex-icons">
-          <li class="nav-item">
-            <a href="#" class="nav-link border border-light rounded" target="_blank">
-              <i class="fas fa-user mr-2"></i>Fulano de Tal
-            </a>
-          </li>
-        </ul>
-
       </div>
 
     </div>
@@ -123,30 +110,6 @@
         <div class="row wow fadeIn">
 
           <!--Grid column-->
-          <div class="col-md-6 mb-4 white-text text-center text-md-left">
-
-            <h1 class="display-4 font-weight-bold">Cadastre-se e seja um
-              parceiro</h1>
-
-            <hr class="hr-light" />
-
-            <p>
-              <strong>O melhor site de eventos da internet</strong>
-            </p>
-
-            <p class="mb-4 d-none d-md-block">
-              <strong>Publique seus eventos, encontre colaboradores, seja um colaborador. Tudo em um único
-                lugar.</strong>
-            </p>
-            <h:form>
-              <h:commandLink styleClass="btn btn-indigo" id="singup" action="cadastro?faces-redirect=true">
-                <i class="fas fa-user-plus"></i> Sing up
-              </h:commandLink>
-            </h:form>
-          </div>
-          <!--Grid column-->
-
-          <!--Grid column-->
           <div class="col-md-6 col-xl-5 mb-4">
 
             <!--Card-->
@@ -157,28 +120,62 @@
 
                 <!-- Form -->
                 <h:form id="login-form">
+                  <h:outputScript name="jsf.js" library="javax.faces" target="body" />
+                  <p:growl id="growl" life="6000" autoUpdate="true" />
                   <!-- Heading -->
                   <h3 class="dark-grey-text text-center">
-                    <strong>Sing in</strong>
+                    <strong>Sing up</strong>
                   </h3>
                   <hr />
 
                   <div class="md-form">
-                    <i class="fas fa-envelope prefix grey-text"></i>
-                    <h:inputText class="form-control" id="login" required="true" value="#{user.nome}"
+                    <i class="fas fa-user prefix grey-text"></i>
+                    <h:inputText class="form-control" id="nome" required="true" value="#{user.nome}"
                       requiredMessage="insert login" />
-                    <h:outputLabel for="login" value="Email" />
+                    <h:outputLabel for="nome" value="Nome" />
+                  </div>
+
+                  <div class="md-form">
+                    <i class="fas fa-phone prefix grey-text"></i>
+                    <h:inputText class="form-control" id="phone" required="true" value="#{user.phone}"
+                      requiredMessage="insert phone" />
+                    <h:outputLabel for="phone" value="Telefone" />
+                  </div>
+
+                  <div class="md-form">
+                    <i class="fas fa-calendar prefix grey-text"></i>
+                    <h:inputText class="form-control" id="date" required="true" value="#{user.date}"
+                      requiredMessage="insert your date of birth" />
+                    <h:outputLabel for="date" value="Data de Nascimento" />
+                  </div>
+
+                  <div class="md-form">
+                    <h:selectOneMenu id="typeuser" value="#{cadastroBean.typeUser}"
+                      class="browser-default custom-select">
+                      <f:ajax listener="#{cadastroBean.typeUserChange}" event="change" execute="@this"
+                        render="painelMsg" />
+                      <f:selectItems value="#{cadastroBean.typeUser.entrySet()}" var="entry" itemValue="#{entry.key}"
+                        itemLabel="#{entry.value}" />
+                    </h:selectOneMenu>
+
+                  </div>
+
+                  <div class="md-form">
+                    <i class="fas fa-envelope prefix grey-text"></i>
+                    <h:inputText class="form-control" id="email" required="true" value="#{user.email}"
+                      requiredMessage="insert email" />
+                    <h:outputLabel for="email" value="Email" />
                   </div>
 
                   <div class="md-form">
                     <i class="fas fa-key prefix grey-text"></i>
                     <h:inputSecret id="password" required="true" value="#{user.senha}" requiredMessage="insert password"
                       class="form-control" />
-                    <label for="password">Senha</label>
+                    <h:outputLabel for="password" value="Senha" />
                   </div>
 
                   <div class="text-center">
-                    <h:commandButton value="Login" class="btn btn-indigo" action="#{loginBean.autentique}" />
+                    <h:commandButton value="Cadastrar" class="btn btn-indigo" action="#{loginBean.autentique}" />
                     <hr />
                     <fieldset class="form-check">
                       <input type="checkbox" class="form-check-input" id="checkbox1" />
@@ -194,6 +191,25 @@
             </div>
             <!--/.Card-->
 
+          </div>
+          <!--Grid column-->
+
+          <!--Grid column-->
+          <div class="col-md-6 mb-4 white-text text-center text-md-left">
+
+            <h1 class="display-4 font-weight-bold">Nossa meta</h1>
+
+            <hr class="hr-light" />
+
+            <p>
+              <strong>O Simple Events é o site de eventos líder global para empregos temporários, conectando empresas de
+                qualquer lugar a pessoas que buscam uma oportunidade ao redor do mundo.</strong>
+            </p>
+
+            <p class="mb-4 d-none d-md-block">
+              <strong>Publique seus eventos, encontre colaboradores, seja um colaborador. Tudo em um único
+                lugar.</strong>
+            </p>
           </div>
           <!--Grid column-->
 
@@ -316,43 +332,12 @@
     </div>
   </main>
   <!--Main layout-->
-
   <!--Footer-->
-  <footer class="page-footer text-center font-small mt-4 wow fadeIn">
+  <footer class="page-footer fixed text-center font-small mt-4 wow fadeIn">
 
     <!-- Social icons -->
     <div class="pb-4">
-      <a href="">
-        <i class="fab fa-facebook-f mr-3"></i>
-      </a>
-
-      <a href="">
-        <i class="fab fa-twitter mr-3"></i>
-      </a>
-
-      <a href="">
-        <i class="fab fa-youtube mr-3"></i>
-      </a>
-
-      <a href="">
-        <i class="fab fa-google-plus-g mr-3"></i>
-      </a>
-
-      <a href="">
-        <i class="fab fa-dribbble mr-3"></i>
-      </a>
-
-      <a href="">
-        <i class="fab fa-pinterest mr-3"></i>
-      </a>
-
-      <a href="https://github.com/mdbootstrap/bootstrap-material-design" target="_blank">
-        <i class="fab fa-github mr-3"></i>
-      </a>
-
-      <a href="http://codepen.io/mdbootstrap/" target="_blank">
-        <i class="fab fa-codepen mr-3"></i>
-      </a>
+      
     </div>
     <!-- Social icons -->
     <!--Copyright-->
@@ -367,8 +352,7 @@
 
   <!-- SCRIPTS -->
   <!-- JQuery -->
-  <h:outputScript library="javax.faces" name="jsf.js" target="head" />
-  <h:outputScript name="js/jquery-3.4.0.min.js" />  
+  <h:outputScript name="js/jquery-3.4.0.min.js" />
   <!-- Bootstrap tooltips -->
   <h:outputScript name="js/popper.min.js" />
   <!-- Bootstrap core JavaScript -->

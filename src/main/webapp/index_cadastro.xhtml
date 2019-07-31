@@ -129,6 +129,16 @@
                   <hr />
 
                   <div class="md-form">
+                    <h:selectOneMenu id="typeuser" value="#{userBean.typeUser}" class="browser-default custom-select">
+                      <f:selectItem noSelectionOption="true" itemLabel="Selecione o tipo de usuário" itemValue="#{null}">
+                      </f:selectItem>
+                      <f:selectItem itemValue="0" itemLabel="Físico"></f:selectItem>
+                      <f:selectItem itemValue="1" itemLabel="Jurídico"></f:selectItem>
+                      <f:selectItem itemValue="2" itemLabel="Administrador"></f:selectItem>
+                    </h:selectOneMenu>
+                  </div>
+
+                  <div class="md-form">
                     <i class="fas fa-user prefix grey-text"></i>
                     <h:inputText class="form-control" id="nome" required="true" value="#{user.nome}"
                       requiredMessage="insert login" />
@@ -149,16 +159,7 @@
                     <h:outputLabel for="date" value="Data de Nascimento" />
                   </div>
 
-                  <div class="md-form">
-                    <h:selectOneMenu id="typeuser" value="#{cadastroBean.typeUser}"
-                      class="browser-default custom-select">
-                      <f:ajax listener="#{cadastroBean.typeUserChange}" event="change" execute="@this"
-                        render="painelMsg" />
-                      <f:selectItems value="#{cadastroBean.typeUser.entrySet()}" var="entry" itemValue="#{entry.key}"
-                        itemLabel="#{entry.value}" />
-                    </h:selectOneMenu>
 
-                  </div>
 
                   <div class="md-form">
                     <i class="fas fa-envelope prefix grey-text"></i>
@@ -337,7 +338,7 @@
 
     <!-- Social icons -->
     <div class="pb-4">
-      
+
     </div>
     <!-- Social icons -->
     <!--Copyright-->

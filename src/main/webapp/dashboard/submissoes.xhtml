@@ -49,28 +49,28 @@
           </a>
           <!-- Listar todos os eventos -->
           <h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
-            action="dashboard_evento?faces-redirect=true">
+            action="/dashboard/eventos?faces-redirect=true">
             <i class="fas fa-calendar mr-3"></i>Eventos
           </h:commandLink>
 
           <!-- Listar apenas os eventos submetidos -->
-          <h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
-            action="dashboard_submissoes?faces-redirect=true">
+          <h:commandLink styleClass="list-group-item active waves-effect"
+            action="/dashboard/submissoes?faces-redirect=true">
             <i class="fas fa-check-square mr-3"></i>Submissões
           </h:commandLink>
           <!-- Criar um evento -->
-          <h:commandLink styleClass="list-group-item active waves-effect"
-            action="dashboard_criar_evento?faces-redirect=true">
+          <h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
+            action="/dashboard/evento?faces-redirect=true">
             <i class="fas fa-calendar-plus mr-3"></i>Criar Evento
           </h:commandLink>
           <!-- Criar um evento -->
           <h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
-            action="dashboard_criar_especialidade?faces-redirect=true">
+            action="/dashboard/especialidade?faces-redirect=true">
             <i class="fas fa-calendar-plus mr-3"></i>Criar Especialidade
           </h:commandLink>
           <!-- Ver perfil do usuário -->
           <h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
-            action="dashboard_perfil?faces-redirect=true">
+            action="/dashboard/perfil?faces-redirect=true">
             <i class="fas fa-user mr-3"></i>Perfil
           </h:commandLink>
         </div>
@@ -128,46 +128,35 @@
       <div class="row wow fadeIn">
 
         <!--Grid column-->
-        <div class="col-md-12 mb-2">
+        <div class="col-md-3 mb-2">
 
           <!--Card-->
           <div class="card">
+
+            <!--Card image-->
+            <div class="view overlay">
+              <img src="https://mdbootstrap.com/wp-content/uploads/2017/11/brandflow-tutorial-fb.jpg"
+                class="card-img-top" alt="" />
+              <a data-toggle="modal" data-target="#modalRegisterForm">
+                <div class="mask rgba-white-slight">
+
+                </div>
+              </a>
+            </div>
+
             <!--Card content-->
             <div class="card-body">
-              <!-- Form -->
-              <h:form id="login-form">
-                <!-- Heading -->
-                <h3 class="card-title">
-                  <strong>Sing in</strong>
-                </h3>
-                <hr />
-
-                <div class="md-form">
-                  <i class="fas fa-envelope prefix grey-text"></i>
-                  <h:inputText class="form-control" id="login" required="true" value="#{user.nome}"
-                    requiredMessage="insert login" />
-                  <h:outputLabel for="login" value="Email" />
-                </div>
-
-                <div class="md-form">
-                  <i class="fas fa-key prefix grey-text"></i>
-                  <h:inputSecret id="password" required="true" value="#{user.senha}" requiredMessage="insert password"
-                    class="form-control" />
-                  <label for="password">Senha</label>
-                </div>
-
-                <div class="text-center">
-                  <h:commandButton value="Login" class="btn btn-indigo" action="#{loginBean.autentique}" />
-                  <hr />
-                  <fieldset class="form-check">
-                    <input type="checkbox" class="form-check-input" id="checkbox1" />
-                    <label for="checkbox1" class="form-check-label dark-grey-text">Lembrar</label>
-                  </fieldset>
-                </div>
-
-              </h:form>
-              <!-- Form -->
+              <!--Title-->
+              <h4 class="card-title">Jampa Shows</h4>
+              <!--Text-->
+              <p class="card-text">Local: {{JoÃ£o Pessoa}}</p>
+              <p class="card-text">Data: {{25 de Agosto de 2019}}</p>
             </div>
+
+            <!-- Card footer Data de publicaÃ§Ã£o-->
+            <div class="card-footer text-muted text-center mt-4">2 days
+              ago</div>
+
           </div>
           <!--/.Card-->
 
@@ -175,7 +164,40 @@
         <!--Grid column-->
       </div>
       <!--Grid row-->
-      
+      <!-- Modal de submissão -->
+      <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <h:form id="login-form">
+              <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Cadastro</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body mx-3">
+                <div class="md-form mb-5">
+                  <i class="fas fa-user prefix grey-text"></i>
+                  <h:inputText class="form-control" id="nome" required="true" value="#{user.nome}"
+                    requiredMessage="insert login" />
+                  <h:outputLabel for="nome" value="Nome" />
+                </div>
+
+                <div class="md-form mb-5">
+                  <i class="fas fa-phone prefix grey-text"></i>
+                  <h:inputText class="form-control" id="phone" required="true" value="#{user.phone}"
+                    requiredMessage="insert phone" />
+                  <h:outputLabel for="phone" value="Telefone" />
+                </div>
+              </div>
+              <div class="modal-footer d-flex justify-content-center">
+                <h:commandButton value="Cadastrar" class="btn btn-indigo" action="#{loginBean.autentique}" />
+              </div>
+            </h:form>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
   <!--Main layout-->

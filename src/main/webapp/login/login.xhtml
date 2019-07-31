@@ -12,11 +12,11 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
   <!-- Bootstrap core CSS -->
-  <h:outputStylesheet name="css/bootstrap.min.css" />
+  <h:outputStylesheet name="index/css/bootstrap.min.css" />
   <!-- Material Design Bootstrap -->
-  <h:outputStylesheet name="css/mdb.min.css" />
+  <h:outputStylesheet name="index/css/mdb.min.css" />
   <!-- Your custom styles (optional) -->
-  <h:outputStylesheet name="css/style.min.css" />
+  <h:outputStylesheet name="index/css/style.min.css" />
   <style type="text/css">
     html,
     body,
@@ -61,7 +61,7 @@
 
       <!-- Brand -->
       <h:form>
-        <h:commandLink styleClass="navbar-brand" action="index_login?faces-redirect=true">
+        <h:commandLink styleClass="navbar-brand" action="/login/login?faces-redirect=true">
           <strong>Simple Events</strong>
         </h:commandLink>
       </h:form>
@@ -81,7 +81,7 @@
           </li>
           <h:form>
             <li class="nav-item ">
-              <h:commandLink styleClass="nav-link" action="index_cadastro?faces-redirect=true">
+              <h:commandLink styleClass="nav-link" action="/cadastro/cadastro?faces-redirect=true">
                 Cadastro
               </h:commandLink>
             </li>
@@ -332,13 +332,13 @@
   <!-- SCRIPTS -->
   <!-- JQuery -->
   <h:outputScript library="javax.faces" name="jsf.js" target="head" />
-  <h:outputScript name="js/jquery-3.4.0.min.js" />
+  <h:outputScript name="index/js/jquery-3.4.0.min.js" />
   <!-- Bootstrap tooltips -->
-  <h:outputScript name="js/popper.min.js" />
+  <h:outputScript name="index/js/popper.min.js" />
   <!-- Bootstrap core JavaScript -->
-  <h:outputScript name="js/bootstrap.min.js" />
+  <h:outputScript name="index/js/bootstrap.min.js" />
   <!-- MDB core JavaScript -->
-  <h:outputScript name="js/mdb.min.js" />
+  <h:outputScript name="index/js/mdb.min.js" />
   <!-- Initializations -->
   <script type="text/javascript">
     // Animations initialization

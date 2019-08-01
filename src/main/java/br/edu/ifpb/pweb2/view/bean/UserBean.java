@@ -36,7 +36,8 @@ private static final long serialVersionUID = 1L;
 	public String createUser() {
 		System.out.println("fachada "+fachada);
 		fachada.createUser(nome, phone, email, senha, date, typeUser);
-		return "login/login";
+		return "/login/login?faces-redirect=true";	
+		
 	}
 
 	public String getNome() {

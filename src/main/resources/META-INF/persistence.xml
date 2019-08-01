@@ -28,7 +28,7 @@
 				value="jdbc:postgresql://localhost:5432/simple-events-jsf" />
 			<property name="javax.persistence.jdbc.user" value="postgres" />
 			<property name="javax.persistence.jdbc.password"
-				value="123" />
+				value="" />
 
 			<!-- propriedades do hibernate -->
 			<property name="hibernate.dialect"

@@ -129,7 +129,7 @@
                   <hr />
 
                   <div class="md-form">
-                    <h:selectOneMenu id="typeuser" value="#{userBean.typeUser}" class="browser-default custom-select">
+                    <h:selectOneMenu id="typeuser" required="true" value="#{userBean.typeUser}" class="browser-default custom-select">
                       <f:selectItem noSelectionOption="true" itemLabel="Tipo de Usuário" itemValue="#{null}">
                       </f:selectItem>
                       <f:selectItem itemValue="FIS" itemLabel="Físico"></f:selectItem>

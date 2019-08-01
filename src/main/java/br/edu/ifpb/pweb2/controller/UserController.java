@@ -33,7 +33,7 @@ public class UserController implements Serializable {
 		user.setTelefone(phone);
 		user.setEmail(email);
 		user.setSenha(senha);
-		user.setDatanascimento(new Date(date));
+		//user.setDatanascimento(new Date("01/12/1993"));
 		userDAO.beginTransaction();
 		userDAO.insert(user);
 		userDAO.commit();

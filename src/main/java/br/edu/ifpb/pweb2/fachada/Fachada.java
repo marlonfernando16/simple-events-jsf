@@ -7,7 +7,9 @@ import javax.inject.Inject;
 
 import br.edu.ifpb.pweb2.controller.AdminController;
 import br.edu.ifpb.pweb2.controller.EmpresaController;
+import br.edu.ifpb.pweb2.controller.LoginController;
 import br.edu.ifpb.pweb2.controller.UserController;
+import br.edu.ifpb.pweb2.model.User;
 
 public class Fachada implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -18,11 +20,13 @@ public class Fachada implements Serializable {
 	private AdminController adminController;
 	@Inject
 	private EmpresaController empresaController;
+	@Inject
+	private LoginController loginController;
 	
 	@PostConstruct
 	private void init() {
 	}
-
+	/*controller User */
 	public void createUser(String nome, String phone, String email, String senha, String date, String typeUser) {
 		if (typeUser.equalsIgnoreCase("FIS")) {
 			userController.createUser(nome, phone, email, senha, date);
@@ -33,6 +37,10 @@ public class Fachada implements Serializable {
 			empresaController.createEmpresa(nome, phone, email, senha, date, endereco);
 		}
 
+	}
+	/*controller login */
+	public User loginIsValido(String usuario, String senha) {
+		return loginController.isValido(usuario, senha);
 	}
 
 

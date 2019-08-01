@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.edu.ifpb.pweb2.controller.LoginController;
+import br.edu.ifpb.pweb2.fachada.Fachada;
 import br.edu.ifpb.pweb2.model.User;
 
 @Named(value = "loginBean")
@@ -23,7 +24,7 @@ public class LoginBean extends GenericBean implements Serializable{
 	private User usuarioLogado;
 	
 	@Inject
-	private LoginController loginController;
+	Fachada fachada;
 
 
 	public String autentique() {
@@ -31,7 +32,7 @@ public class LoginBean extends GenericBean implements Serializable{
 		String mensagem = "Usuário ou senha inválidos!";
 		FacesMessage.Severity nivel = FacesMessage.SEVERITY_ERROR; 
 		FacesContext fc = FacesContext.getCurrentInstance();
-		if ((usuarioLogado = loginController.isValido(usuario, senha)) != null) {
+		if ((usuarioLogado = fachada.loginIsValido(usuario, senha)) != null) {
 			this.setValueOf("#{sessionScope.loginUser}", String.class, usuarioLogado.getEmail());
 			proxView = "/dashboard/perfil?faces-redirect=true";
 			mensagem = "Usuário válido!"; 

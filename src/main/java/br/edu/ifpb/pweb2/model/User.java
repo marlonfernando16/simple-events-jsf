@@ -12,16 +12,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
-
-//import org.springframework.context.annotation.Scope;
-//import org.springframework.format.annotation.DateTimeFormat;
-//import org.springframework.web.context.WebApplicationContext;
 
 @Entity
 @Table(name = "tb_usuario")
@@ -37,10 +34,6 @@ public class User implements Serializable {
 
 	@NotEmpty(message = "Nome e obrigatorio")
 	private String nome;
-
-//	@Pattern(
-//	regexp = "^\\([1-9]{2}\\) (?:[2-8]|9[1-9])[0-9]{3}\\-[0-9]{4}$", 
-//	message = "Informe um telefone [(83) 98892-1223]")
 	
 	private String telefone;
 
@@ -57,13 +50,12 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
 	private List<Evento> eventos = new ArrayList<>();
 
-	@OneToOne
+	@ManyToOne
 	private Candidato_Vaga candidato_vaga;
 
-	@OneToOne
+	@ManyToOne
 	private Avaliacao_Evento avaliacao_evento;
 
-	private boolean isAdmin = false;
 
 	public User() {};
 
@@ -147,13 +139,6 @@ public class User implements Serializable {
 		this.datanascimento = datanascimento;
 	}
 
-	public boolean isAdmin() {
-		return isAdmin;
-	}
-
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
-	}
 
 	@Override
 	public String toString() {

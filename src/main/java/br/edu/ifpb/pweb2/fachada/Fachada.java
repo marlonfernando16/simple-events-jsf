@@ -27,15 +27,16 @@ public class Fachada implements Serializable {
 	private void init() {
 	}
 	/*controller User */
-	public void createUser(String nome, String phone, String email, String senha, String date, String typeUser) {
+	public User createUser(String nome, String phone, String email, String senha, String date, String typeUser, String endereco) {
+		User user = null;
 		if (typeUser.equalsIgnoreCase("FIS")) {
-			userController.createUser(nome, phone, email, senha, date);
+			user = userController.createUser(nome, phone, email, senha, date);
 		} else if (typeUser.equalsIgnoreCase("ADM")) {
-			adminController.createAdmin(nome, phone, email, senha, date);
+			user = adminController.createAdmin(nome, phone, email, senha, date);
 		} else if (typeUser.equalsIgnoreCase("JUR")) {
-			String endereco = "Rua gov. jose gomes";
-			empresaController.createEmpresa(nome, phone, email, senha, date, endereco);
+			user = empresaController.createEmpresa(nome, phone, email, senha, date, endereco);
 		}
+		return user;
 
 	}
 	/*controller login */

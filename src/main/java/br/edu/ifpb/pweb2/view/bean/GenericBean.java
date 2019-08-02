@@ -99,6 +99,13 @@ public abstract class GenericBean {
         return ((HttpSession)facesContext.getExternalContext().getSession(false));
 	}
 	
+	public void setFlash(String nome, Object valor) {
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().put(nome, valor);
+	}
+	
+	public Object getFlash(String nome) {
+		return FacesContext.getCurrentInstance().getExternalContext().getFlash().get(nome);
+	}
 	
 	public void pesquisar(ActionEvent e) {}
 

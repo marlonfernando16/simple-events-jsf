@@ -23,7 +23,8 @@ public class UserDAO extends GenericDAOJPAImpl<User, Long>  {
 		User u = null;
 		try {
 			u = (User) q.getSingleResult();
-		}catch (NoResultException e) {		
+		}catch (NoResultException e) {	
+			return null;
 		}
 		return u; 
 	}

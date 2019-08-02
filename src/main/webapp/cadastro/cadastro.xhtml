@@ -169,11 +169,18 @@
                     <h:outputLabel for="email" value="Email" />
                   </div>
 
-                  <div class="md-form">
+                  <div class="md-form" id="password">
                     <i class="fas fa-key prefix grey-text"></i>
                     <h:inputSecret id="password" required="true" value="#{userBean.senha}" requiredMessage="insert password"
                       class="form-control" />
                     <h:outputLabel for="password" value="Senha" />
+                  </div>
+                  
+                  <div class="md-form d-none" id="address">
+                    <i class="fas fa-home prefix grey-text"></i>
+                    <h:inputSecret id="address" required="true" value="" requiredMessage="insert password"
+                      class="form-control" />
+                    <h:outputLabel for="address" value="Endereço" />
                   </div>
 
                   <div class="text-center">
@@ -365,14 +372,20 @@
   <script type="text/javascript">
   	
     // Animations initialization
-    /*
+
+    //adiciona campo endereco se o user for 
     console.log("aiii");
-	var select = document.querySelector("#login-form\\:typeuser");
-    select.eventListenner('change', ()=>{
-    	console.log("oi");
-    })
-    */
-  </script>
+    var input_adm = $("#address");
+	$('#login-form\\:typeuser').change(function() {
+		var option = $('#login-form\\:typeuser option:selected');
+		if(option.val() == "JUR"){	
+			input_adm.removeClass('d-none');
+		 } else {
+			 input_adm.addClass('d-none');
+		 }
+	});
+			
+  </script>	
 </h:body>
 
 </html>

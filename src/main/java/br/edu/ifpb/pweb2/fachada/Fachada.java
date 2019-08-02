@@ -1,13 +1,16 @@
 package br.edu.ifpb.pweb2.fachada;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import br.edu.ifpb.pweb2.controller.AdminController;
 import br.edu.ifpb.pweb2.controller.EmpresaController;
+import br.edu.ifpb.pweb2.controller.EspecialidadeController;
 import br.edu.ifpb.pweb2.controller.UserController;
+import br.edu.ifpb.pweb2.model.Especialidade;
 
 public class Fachada implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -18,6 +21,8 @@ public class Fachada implements Serializable {
 	private AdminController adminController;
 	@Inject
 	private EmpresaController empresaController;
+	@Inject
+	private EspecialidadeController especialidadeController;
 	
 	@PostConstruct
 	private void init() {
@@ -33,6 +38,16 @@ public class Fachada implements Serializable {
 			empresaController.createEmpresa(nome, phone, email, senha, date, endereco);
 		}
 
+	}
+
+	public void createEspecialidade(Especialidade especialidade) {
+		if(especialidade != null) {
+			especialidadeController.createEspecialidade(especialidade);
+		}
+	}
+	
+	public List<Especialidade>findAllEspecialidades(){
+		return especialidadeController.findAllEspecialidades();
 	}
 
 

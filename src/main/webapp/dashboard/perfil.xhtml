@@ -6,8 +6,9 @@
   xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge" />
   <title>Dashboard</title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
@@ -51,6 +52,11 @@
           <h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
             action="/dashboard/eventos?faces-redirect=true">
             <i class="fas fa-calendar mr-3"></i>Eventos
+          </h:commandLink>
+          <!-- Listar todas as especialidades -->
+          <h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
+            action="/dashboard/especialidades?faces-redirect=true">
+            <i class="fas fa-calendar mr-3"></i>Especialidades
           </h:commandLink>
 
           <!-- Listar apenas os eventos submetidos -->
@@ -129,6 +135,8 @@
 
         <!--Grid column-->
         <div class="col-md-3 mb-2">
+        
+        <p:messages></p:messages>
 
           <!--Card-->
           <div class="card">
@@ -138,7 +146,7 @@
               <img src="https://mdbootstrap.com/wp-content/uploads/2017/11/brandflow-tutorial-fb.jpg"
                 class="card-img-top" alt="" />
             </div>
-
+			
             <!--Card content-->
             <div class="card-body">
               <!--Title-->

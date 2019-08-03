@@ -51,14 +51,16 @@ public class Fachada implements Serializable {
 		return loginController.isValido(usuario, senha);
 	}
 
-	public void createEspecialidade(Especialidade especialidade) {
-		if(especialidade != null) {
-			especialidadeController.createEspecialidade(especialidade);
-		}
+	public Especialidade createEspecialidade(Especialidade especialidade) {
+		return especialidadeController.createEspecialidade(especialidade);
+		
 	}
 	
 	public List<Especialidade>findAllEspecialidades(){
 		return especialidadeController.findAllEspecialidades();
+	}
+	public void deleteEspecialidade(Long id) {
+		especialidadeController.deleteEspecialidade(id);
 	}
 
 

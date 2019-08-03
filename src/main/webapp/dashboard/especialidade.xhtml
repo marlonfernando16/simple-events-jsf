@@ -52,7 +52,11 @@
             action="/dashboard/eventos?faces-redirect=true">
             <i class="fas fa-calendar mr-3"></i>Eventos
           </h:commandLink>
-
+	     <!-- Listar todas as especialidades -->
+          <h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
+            action="/dashboard/especialidades?faces-redirect=true">
+            <i class="fas fa-calendar mr-3"></i>Especialidades
+          </h:commandLink>
           <!-- Listar apenas os eventos submetidos -->
           <h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
             action="/dashboard/submissoes?faces-redirect=true">
@@ -124,6 +128,7 @@
   <!--Main layout-->
   <main class="pt-5 mx-lg-5">
     <div class="container-fluid mt-5">
+     
       <!--Grid row-->
       <div class="row wow fadeIn">
 
@@ -138,6 +143,7 @@
               <h:form id="login-form">
                 <!-- Heading -->
                 <h3 class="card-title">
+                <p:messages></p:messages>
                   <strong>Cadastro de especialidade</strong>
                 </h3>
                 <hr />

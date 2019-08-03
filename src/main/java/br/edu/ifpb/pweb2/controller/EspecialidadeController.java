@@ -20,20 +20,26 @@ public class EspecialidadeController {
 		List<Especialidade> especialidades = especialidadeDAO.findAll();
 		return especialidades;
 	}
-	
-	
+
 	@Transactional
-	public void createEspecialidade(Especialidade especialidade)  {
+	public Especialidade createEspecialidade(Especialidade especialidade)  {
 		Especialidade esp = especialidadeDAO.findByName(especialidade.getNome());
 		if(esp != null ) {
-			System.out.println("ja existe"+esp.getNome());
+			return null;
 		}else {
 			especialidadeDAO.beginTransaction();
 			especialidadeDAO.insert(especialidade);
 			especialidadeDAO.commit();
-		}
+			return especialidade;
+		}	
+	}
 
-		
+	@Transactional
+	public void deleteEspecialidade(Long id) {
+		Especialidade e = especialidadeDAO.find(id);
+		especialidadeDAO.beginTransaction();
+		especialidadeDAO.delete(e);
+		especialidadeDAO.commit();
 	}
 
 }

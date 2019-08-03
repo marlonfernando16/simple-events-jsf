@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import br.edu.ifpb.pweb2.dao.EmpresaDAO;
 import br.edu.ifpb.pweb2.dao.Transactional;
 import br.edu.ifpb.pweb2.dao.UserDAO;
+import br.edu.ifpb.pweb2.model.Admin;
 import br.edu.ifpb.pweb2.model.Empresa;
 import br.edu.ifpb.pweb2.model.User;
 
@@ -21,6 +22,10 @@ public class EmpresaController implements Serializable  {
 	UserDAO userDAO;
 	
 	EmpresaController(){};
+	
+	public Empresa find(long id) {
+		return empresaDAO.find(id);
+	}
 	
 	@Transactional
 	public Empresa createEmpresa(String nome, String phone,String email,String senha,String date, String endereco) {

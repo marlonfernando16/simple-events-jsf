@@ -20,13 +20,16 @@ public class AdminController implements Serializable {
 	
 	AdminController(){};
 	
+	public Admin find(long id) {
+		return adminDAO.find(id);
+	}
+	
 	@Transactional
 	public Admin createAdmin(String nome, String phone,String email,String senha,String date) {
 		User usuario = adminDAO.findByLogin(email);
 		if(usuario != null) {
 			return null;
 		}
-		System.out.println("iiiiiiiiiii");
 		Admin admin = new Admin();
 		admin.setNome(nome);
 		admin.setTelefone(phone);
@@ -39,5 +42,8 @@ public class AdminController implements Serializable {
 		System.out.println("ahhhhhh");
 		return admin;
 	}
-
+	
+	
 }
+
+

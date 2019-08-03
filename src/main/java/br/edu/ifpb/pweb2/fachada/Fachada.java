@@ -13,6 +13,8 @@ import br.edu.ifpb.pweb2.controller.UserController;
 import br.edu.ifpb.pweb2.model.User;
 import br.edu.ifpb.pweb2.controller.EspecialidadeController;
 import br.edu.ifpb.pweb2.controller.UserController;
+import br.edu.ifpb.pweb2.model.Admin;
+import br.edu.ifpb.pweb2.model.Empresa;
 import br.edu.ifpb.pweb2.model.Especialidade;
 
 
@@ -51,10 +53,29 @@ public class Fachada implements Serializable {
 	public User loginIsValido(String usuario, String senha) {
 		return loginController.isValido(usuario, senha);
 	}
+	
+	public boolean userIsAdmin(long idUser) {
+		Admin admin = adminController.find(idUser);
+		if(admin != null) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public boolean userIsEmpresa(long idUser) {
+		Empresa empresa = empresaController.find(idUser);
+		if(empresa != null) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	/*controller Especialidade */
 
 	public Especialidade createEspecialidade(Especialidade especialidade) {
 		return especialidadeController.createEspecialidade(especialidade);
-		
 	}
 	
 	public List<Especialidade>findAllEspecialidades(){

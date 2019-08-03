@@ -6,7 +6,8 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:c="http://java.sun.com/jsf/core">
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:i="http://xmlns.jcp.org/jsp/jstl/core">
 
 <h:head>
 	<meta name="viewport"
@@ -58,12 +59,14 @@
 				action="/dashboard/eventos?faces-redirect=true">
 				<i class="fas fa-calendar mr-3"></i>Eventos
           </h:commandLink>
-			<!-- Listar todas as especialidades -->
-			<h:commandLink
-				styleClass="list-group-item list-group-item-action active waves-effect"
-				action="/dashboard/especialidades?faces-redirect=true">
-				<i class="fas fa-calendar mr-3"></i>Especialidades
-          </h:commandLink>
+          <i:if test="#{loginBean.admin || loginBean.empresa}">
+				<!-- Listar todas as especialidades -->
+				<h:commandLink
+					styleClass="list-group-item list-group-item-action active waves-effect"
+					action="/dashboard/especialidades?faces-redirect=true">
+					<i class="fas fa-calendar mr-3"></i>Especialidades
+	            </h:commandLink>
+	     </i:if>
 			<!-- Listar apenas os eventos submetidos -->
 			<h:commandLink
 				styleClass="list-group-item list-group-item-action waves-effect"
@@ -76,11 +79,13 @@
 				action="/dashboard/evento?faces-redirect=true">
 				<i class="fas fa-calendar-plus mr-3"></i>Criar Evento
           </h:commandLink>
-			<!-- Criar um evento -->
-			<h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
-				action="/dashboard/especialidade?faces-redirect=true">
-				<i class="fas fa-calendar-plus mr-3"></i>Criar Especialidade
-          </h:commandLink>
+          <i:if test="#{loginBean.admin || loginBean.empresa}">
+				<!-- Criar um evento -->
+				<h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
+					action="/dashboard/especialidade?faces-redirect=true">
+					<i class="fas fa-calendar-plus mr-3"></i>Criar Especialidade
+	          </h:commandLink>
+	     </i:if>
 			<!-- Ver perfil do usuário -->
 			<h:commandLink
 				styleClass="list-group-item list-group-item-action waves-effect"

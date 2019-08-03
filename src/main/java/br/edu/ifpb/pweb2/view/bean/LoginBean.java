@@ -41,6 +41,14 @@ public class LoginBean extends GenericBean implements Serializable{
 		return proxView;
 	}
 	
+	public boolean isAdmin() {
+		return fachada.userIsAdmin(usuarioLogado.getId());
+	}
+	
+	public boolean isEmpresa() {
+		return fachada.userIsEmpresa(usuarioLogado.getId());
+	}
+	
 	public String logout() {
 		this.invalidateSession();
 		return "/login/login?faces-redirect=true";

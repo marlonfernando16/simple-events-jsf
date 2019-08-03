@@ -16,11 +16,11 @@ public class LoginController implements Serializable {
 	public User isValido(String usuario, String senha) {
 
 		User user = userDAO.findByLogin(usuario);
-		if (user == null || !senha.equals(user.getSenha())) {
-			user = null;
+		if (user != null && senha.equals(user.getSenha())) {
+			return user;
 		}
 
-		return user;
+		return null;
 	}
 }
 

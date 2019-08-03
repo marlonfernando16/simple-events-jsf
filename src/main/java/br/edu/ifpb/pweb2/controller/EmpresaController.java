@@ -23,7 +23,12 @@ public class EmpresaController implements Serializable  {
 	EmpresaController(){};
 	
 	@Transactional
-	public void createEmpresa(String nome, String phone,String email,String senha,String date, String endereco) {
+	public Empresa createEmpresa(String nome, String phone,String email,String senha,String date, String endereco) {
+		User usuario = userDAO.findByLogin(email);
+		if(usuario != null) {
+			return null;
+		}
+		
 		User user = new User();
 		user.setNome(nome);
 		user.setTelefone(phone);
@@ -38,6 +43,7 @@ public class EmpresaController implements Serializable  {
 		empresaDAO.beginTransaction();
 		empresaDAO.insert(empresa);
 		empresaDAO.commit();
+		return empresa;
 	}
 
 }

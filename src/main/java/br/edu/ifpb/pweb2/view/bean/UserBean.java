@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.edu.ifpb.pweb2.fachada.Fachada;
+import br.edu.ifpb.pweb2.model.User;
 
 @Named(value="userBean")
 @SessionScoped
@@ -26,6 +27,8 @@ private static final long serialVersionUID = 1L;
 
 	private String date;
 	
+	private String endereco;
+	
 	private String typeUser;
 	
 	@PostConstruct
@@ -34,10 +37,25 @@ private static final long serialVersionUID = 1L;
 	}
 	
 	public String createUser() {
-		System.out.println("fachada "+fachada);
-		fachada.createUser(nome, phone, email, senha, date, typeUser);
-		return "/login/login?faces-redirect=true";	
+		User user;
+		System.out.println("fachada "+fachada + "endereco"+endereco);
+		user = fachada.createUser(nome, phone, email, senha, date, typeUser,endereco);
+		if(user != null) {
+			return "/login/login?faces-redirect=true";
+		}else {
+			return "/cadatro/cadastro?faces-redirect=true";
+
+		}
+			
 		
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
 	public String getNome() {

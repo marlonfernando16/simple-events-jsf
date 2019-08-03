@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+  xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Dashboard</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
+  <!-- Bootstrap core CSS -->
+  <!-- Bootstrap core CSS -->
+  <h:outputStylesheet name="dashboard/css/bootstrap.min.css" />
+  <!-- Material Design Bootstrap -->
+  <h:outputStylesheet name="dashboard/css/mdb.min.css" />
+  <!-- Your custom styles (optional) -->
+  <h:outputStylesheet name="dashboard/css/style.min.css" />
+  <style>
+    .map-container {
+      overflow: hidden;
+      padding-bottom: 56.25%;
+      position: relative;
+      height: 0;
+    }
+
+    .map-container iframe {
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
+  </style>
+</h:head>
+
+<h:body class="grey lighten-3">
+
+  <head>
+    <!--Main Navigation-->
+    <!-- Sidebar -->
+    <div class="sidebar-fixed position-fixed">
+      <h:form>
+        <div class="list-group list-group-flush">
+          <a class="logo-wrapper waves-effect">
+            <img src="" class="img-fluid" alt="Coloque a logo aqui" />
+          </a>
+          <!-- Listar todos os eventos -->
+          <h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
+            action="/dashboard/eventos?faces-redirect=true">
+            <i class="fas fa-calendar mr-3"></i>Eventos
+          </h:commandLink>
+		  <!-- Listar todas as especialidades -->
+          <h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
+            action="/dashboard/especialidades?faces-redirect=true">
+            <i class="fas fa-calendar mr-3"></i>Especialidades
+          </h:commandLink>
+          <!-- Listar apenas os eventos submetidos -->
+          <h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
+            action="/dashboard/submissoes?faces-redirect=true">
+            <i class="fas fa-check-square mr-3"></i>Submissões
+          </h:commandLink>
+          <!-- Criar um evento -->
+          <h:commandLink styleClass="list-group-item active waves-effect"
+            action="/dashboard/evento?faces-redirect=true">
+            <i class="fas fa-calendar-plus mr-3"></i>Criar Evento
+          </h:commandLink>
+          <!-- Criar um evento -->
+          <h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
+            action="/dashboard/especialidade?faces-redirect=true">
+            <i class="fas fa-calendar-plus mr-3"></i>Criar Especialidade
+          </h:commandLink>
+          <!-- Ver perfil do usuário -->
+          <h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
+            action="/dashboard/perfil?faces-redirect=true">
+            <i class="fas fa-user mr-3"></i>Perfil
+          </h:commandLink>
+        </div>
+      </h:form>
+    </div>
+    <!-- Sidebar -->
+
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+      <div class="container-fluid">
+        <!-- Collapse -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+          <!-- Left -->
+          <ul class="navbar-nav mr-auto">
+          </ul>
+
+          <!-- Right -->
+          <ul class="navbar-nav nav-flex-icons">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell"></i>
+              </a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="#">Menssagem</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link border border-light rounded">
+                <i class="fas fa-user-circle mr-2"></i>{{user.nome}}
+              </a>
+            </li>
+          </ul>
+
+        </div>
+
+      </div>
+    </nav>
+    <!-- Navbar -->
+    <!--Main Navigation-->
+  </head>
+
+
+  <!--Main layout-->
+  <main class="pt-5 mx-lg-5">
+    <div class="container-fluid mt-5">
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-12 mb-2">
+
+          <!--Card-->
+          <div class="card">
+            <!--Card content-->
+            <div class="card-body">
+              <!-- Form -->
+              <h:form id="login-form">
+                <!-- Heading -->
+                <h3 class="card-title">
+                  <strong>Sing in</strong>
+                </h3>
+                <hr />
+
+                <div class="md-form">
+                  <i class="fas fa-envelope prefix grey-text"></i>
+                  <h:inputText class="form-control" id="login" required="true" value="#{user.nome}"
+                    requiredMessage="insert login" />
+                  <h:outputLabel for="login" value="Email" />
+                </div>
+
+                <div class="md-form">
+                  <i class="fas fa-key prefix grey-text"></i>
+                  <h:inputSecret id="password" required="true" value="#{user.senha}" requiredMessage="insert password"
+                    class="form-control" />
+                  <label for="password">Senha</label>
+                </div>
+
+                <div class="text-center">
+                  <h:commandButton value="Login" class="btn btn-indigo" action="#{loginBean.autentique}" />
+                  <hr />
+                  <fieldset class="form-check">
+                    <input type="checkbox" class="form-check-input" id="checkbox1" />
+                    <label for="checkbox1" class="form-check-label dark-grey-text">Lembrar</label>
+                  </fieldset>
+                </div>
+
+              </h:form>
+              <!-- Form -->
+            </div>
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+      </div>
+      <!--Grid row-->
+      
+    </div>
+  </main>
+  <!--Main layout-->
+  <!--Footer-->
+  <footer class="page-footer fixed-bottom text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
+    <!--Copyright-->
+    <div class="footer-copyright py-3">
+      © 2019 Copyright:
+      <a href=""> EquipeTOP.com </a>
+    </div>
+    <!--/.Copyright-->
+
+  </footer>
+  <!--/.Footer-->
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <h:outputScript library="javax.faces" name="jsf.js" target="head" />
+  <h:outputScript name="dashboard/js/jquery-3.4.0.min.js" />
+  <!-- Bootstrap tooltips -->
+  <h:outputScript name="dashboard/js/popper.min.js" />
+  <!-- Bootstrap core JavaScript -->
+  <h:outputScript name="dashboard/js/bootstrap.min.js" />
+  <!-- MDB core JavaScript -->
+  <h:outputScript name="dashboard/js/mdb.min.js" />
+  <!-- Initializations -->
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+  </script>
+</h:body>
+
+</html>

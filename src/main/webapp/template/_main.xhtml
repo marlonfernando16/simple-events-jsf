@@ -1,0 +1,110 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:component>
+	<!--Main layout-->
+	<main>
+		<div class="container">
+
+			<!--Section: Main info-->
+			<section class="mt-5 wow fadeIn">
+				<!--Grid row-->
+				<div class="row">
+
+					<!--Grid column-->
+					<div class="col-md-6 mb-4">
+
+						<img src="http://turismoemfoco.com.br/v1/wp-content/uploads/2019/07/Tom.jpg"
+							class="img-fluid z-depth-1-half" alt="" />
+
+					</div>
+					<!--Grid column-->
+
+					<!--Grid column-->
+					<div class="col-md-6 mb-4">
+
+						<!-- Main heading -->
+						<h3 class="h3 mb-3">Aqui será o título do último show
+							cadastrado</h3>
+						<p>Aqui sera um resumo descritovo do show ou evento</p>
+						<!-- Main heading -->
+
+						<hr />
+						<p>
+							<strong>Dia:</strong> 21 de Setembro de 2019 <br /> <strong>Hora:</strong>
+							22h30min <br /> <strong>Vagas:</strong> 10 <br /> <strong>Disponível
+								até: </strong> 10 de Setembro de 2019
+						</p>
+
+						<h:form>
+							<h:commandLink styleClass="btn btn-indigo btn-md" id="candidatar"
+								action="#{candidatarBean.buttonAction}">
+								<i class="fas fa-user-tag"></i> Candidatar
+							</h:commandLink>
+						</h:form>
+					</div>
+					<!--Grid column-->
+
+				</div>
+				<!--Grid row-->
+			</section>
+			<!--Section: Main info-->
+
+			<hr class="my-5" />
+
+			<!--Section: Main features & Quick Start-->
+			<section>
+
+				<h3 class="h3 text-center mb-5" id="Eventos">Eventos</h3>
+
+				<!--Grid row-->
+				<div class="row wow fadeIn">
+
+					<!--Grid column-->
+					<div class="col-lg-5 col-xl-4 mb-4">
+						<!--Featured image-->
+						<div class="view overlay rounded z-depth-1-half">
+							<div class="view overlay">
+								<div class="embed-responsive embed-responsive-16by9">
+									<iframe class="embed-responsive-item"
+										src="https://www.youtube.com/embed/cXTThxoywNQ" allowfullscreen="true"></iframe>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--Grid column-->
+
+					<!--Grid column-->
+					<div class="col-lg-7 col-xl-7 ml-xl-4 mb-4">
+						<h3 class="mb-3 font-weight-bold dark-grey-text">
+							<strong>Primeiro Evento</strong>
+						</h3>
+						<p class="grey-text">Lorem ipsum dolor sit amet, consectetur
+							adipiscing elit. Maecenas vitae tristique risus, vel accumsan nisl.
+							In aliquet efficitur eleifend. Sed rhoncus velit ex, non egestas.</p>
+						<p>
+							<strong>Dia:</strong> 21 de Setembro de 2019 <br /> <strong>Hora:</strong>
+							22h30min <br /> <strong>Vagas:</strong> 10 <br /> <strong>Disponível
+								até: </strong> 10 de Setembro de 2019
+						</p>
+						<h:form>
+							<h:commandLink styleClass="btn btn-indigo btn-md" id="candidatar"
+								action="#{candidatarBean.buttonAction}">
+								<i class="fas fa-user-tag"></i> Candidatar
+							</h:commandLink>
+						</h:form>
+					</div>
+					<!--Grid column-->
+
+				</div>
+				<!--Grid row-->
+			</section>
+			<!--Section: Main features & Quick Start-->
+		</div>
+	</main>
+	<!--Main layout-->
+</ui:component>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:component>
+	<!-- Navbar -->
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+		<div class="container">
+
+			<!-- Collapse -->
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<!-- Brand -->
+			<h:form id="form_brand">
+				<h:commandLink styleClass="navbar-brand" action="/pages/login/login?faces-redirect=true">
+					<strong>Simple Events</strong>
+				</h:commandLink>
+			</h:form>
+
+			<!-- Links -->
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+				<!-- Left -->
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item"><a class="nav-link" href="#Eventos">Eventos</a>
+					</li>
+					<h:form id="form_links_left">
+						<li class="nav-item">
+							<h:commandLink styleClass="nav-link" action="/pages/cadastro/cadastro?faces-redirect=true">
+								Cadastro
+							</h:commandLink> <span class="sr-only">(current)</span>
+						</li>
+					</h:form>
+				</ul>
+
+				<!-- Right -->
+				<h:panelGroup rendered="#{loginBean.usuarioLogado != null}">
+					<ul class="navbar-nav nav-flex-icons">
+						<h:form id="form_links_right">
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false">
+									#{loginBean.usuarioLogado.nome} (#{loginBean.usuarioLogado.perfil})
+								</a>
+								<div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+									<h:commandLink action="#{loginBean.logout}"><i class="glyphicon glyphicon-log-out"> </i>
+										Sair
+									</h:commandLink>
+								</div>
+							</li>
+						</h:form>
+					</ul>
+
+				</h:panelGroup>
+
+			</div>
+
+		</div>
+	</nav> <!-- Navbar -->
+</ui:component>
+
+</html>

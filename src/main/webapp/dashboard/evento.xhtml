@@ -24,7 +24,6 @@
 	<h:outputStylesheet name="dashboard/css/mdb.min.css" />
 	<!-- Your custom styles (optional) -->
 	<h:outputStylesheet name="dashboard/css/style.min.css" />
-	
 	<style>
 .map-container {
 	overflow: hidden;
@@ -210,7 +209,8 @@ strong #center-title {
                 				</h:column>
 								<h:column>
 									<c:facet name="header"><strong>Quantidade de vagas</strong></c:facet>
-									<p:inputNumber class="quantidadevagas" id="quantidadevagas" name="quantidadevagas" value="#{1}" disabled="true">  </p:inputNumber>
+									<h:inputText class="quantidadevagas d-none" id="quantidadevagas" name="quantidadevagas" value="#{1}" disabled="true"/>
+									
                					 </h:column>
 							</h:dataTable>
 
@@ -268,15 +268,17 @@ strong #center-title {
 
 		let especialidades = document.querySelectorAll('.especialidades');
 		let quantidadevagas = document.querySelectorAll('.quantidadevagas');
-		console.log(especialidades)
-		console.log(quantidadevagas[0])
+		console.log($('.especialidades'))
+		
 		especialidades.forEach((value, indice)=> {
 			value.addEventListener('change',function(){
 				if(this.checked) {
-			        quantidadevagas[indice].removeAttr("disabled");
-			        console.log(quantidadevagas[indice])
+					console.log(quantidadevagas[indice])
+			        $('.quantidadevagas').eq(indice).removeClass('d-none');
+					$('.quantidadevagas').eq(indice).prop("disabled", false);
 			    }else {
-			    	quantidadevagas[indice].disabled = true
+			        $('.quantidadevagas').eq(indice).addClass('d-none');
+					$('.quantidadevagas').eq(indice).prop("disabled", true);
 			    }
 			})
 	})

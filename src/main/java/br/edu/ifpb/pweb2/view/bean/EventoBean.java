@@ -21,6 +21,8 @@ public class EventoBean implements Serializable{
 
 	private Evento evento;
 	private List<Evento> eventos;
+	private int[] quantidadevagas;
+	private int[] especialidades;
 
 	@Inject 
 	private Fachada fachada;

@@ -33,7 +33,7 @@ public class LoginBean extends GenericBean implements Serializable{
 		FacesContext fc = FacesContext.getCurrentInstance();
 		if ((usuarioLogado = fachada.loginIsValido(usuario, senha)) != null) {
 			this.setValueOf("#{sessionScope.loginUser}", String.class, usuarioLogado.getEmail());
-			proxView = "/dashboard/perfil?faces-redirect=true";
+			proxView = "/dashboard/eventos?faces-redirect=true";
 			mensagem = "Usuário válido!";
 		}
 		this.addErrorMessage(mensagem);

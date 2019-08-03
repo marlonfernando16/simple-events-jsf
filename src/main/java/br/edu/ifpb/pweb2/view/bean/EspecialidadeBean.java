@@ -12,7 +12,6 @@ import javax.inject.Named;
 
 import br.edu.ifpb.pweb2.fachada.Fachada;
 import br.edu.ifpb.pweb2.model.Especialidade;
-import br.edu.ifpb.pweb2.model.User;
 
 @Named
 @SessionScoped

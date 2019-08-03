@@ -23,7 +23,9 @@ import javax.validation.constraints.NotNull;
 public class Evento extends EventoSubject {
 	
 
-
+	@NotEmpty(message = "Descricao e obrigatoria")
+	private String nome;
+	
 	@NotEmpty(message = "Descricao e obrigatoria")
 	private String descricao;
 
@@ -110,7 +112,15 @@ public class Evento extends EventoSubject {
 	public void setLocal(String local) {
 		this.local = local;
 	}
+	
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
 
 	@Override

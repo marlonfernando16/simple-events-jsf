@@ -12,8 +12,9 @@ import br.edu.ifpb.pweb2.controller.LoginController;
 import br.edu.ifpb.pweb2.controller.UserController;
 import br.edu.ifpb.pweb2.model.User;
 import br.edu.ifpb.pweb2.controller.EspecialidadeController;
-import br.edu.ifpb.pweb2.controller.UserController;
+import br.edu.ifpb.pweb2.controller.EventoController;
 import br.edu.ifpb.pweb2.model.Especialidade;
+import br.edu.ifpb.pweb2.model.Evento;
 
 
 public class Fachada implements Serializable {
@@ -29,6 +30,8 @@ public class Fachada implements Serializable {
 	private LoginController loginController;
 	@Inject
 	private EspecialidadeController especialidadeController;
+	@Inject
+	private EventoController eventoController;
 
 	
 	@PostConstruct
@@ -52,6 +55,7 @@ public class Fachada implements Serializable {
 		return loginController.isValido(usuario, senha);
 	}
 
+	/*controller especialidade*/
 	public Especialidade createEspecialidade(Especialidade especialidade) {
 		return especialidadeController.createEspecialidade(especialidade);
 		
@@ -63,6 +67,14 @@ public class Fachada implements Serializable {
 	public void deleteEspecialidade(Long id) {
 		especialidadeController.deleteEspecialidade(id);
 	}
-
+	
+	/*controller evento */
+	public 	Evento createEvento(Evento evento) {
+		return eventoController.createEvento(evento);
+	}
+	
+	public List<Evento>findAllEventos(){
+		return eventoController.findAllEspecialidades();
+	}
 
 }

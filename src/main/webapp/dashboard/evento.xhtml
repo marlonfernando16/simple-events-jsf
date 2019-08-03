@@ -33,6 +33,10 @@
       width: 100%;
       position: absolute;
     }
+    
+    strong #center-title{
+    	text-align: center;
+    }
   </style>
 </h:head>
 
@@ -120,7 +124,7 @@
 
       </div>
     </nav>
-    <!-- Navbar -->
+    <!-- NavbSign ar -->
     <!--Main Navigation-->
   </head>
 
@@ -141,27 +145,43 @@
               <!-- Form -->
               <h:form id="login-form">
                 <!-- Heading -->
-                <h3 class="card-title">
-                  <strong>Sing in</strong>
+                <h3 class="card-title d-flex">
+                  <strong class="text-center">
+                  	  Cadastro de Evento
+                  </strong>
                 </h3>
                 <hr />
 
                 <div class="md-form">
-                  <i class="fas fa-envelope prefix grey-text"></i>
-                  <h:inputText class="form-control" id="login" required="true" value="#{user.nome}"
+                  <i class="fas fa-address-card prefix grey-text"></i>
+                  <h:inputText class="form-control" id="nome" required="true" value="#{eventoBean.nome}"
                     requiredMessage="insert login" />
-                  <h:outputLabel for="login" value="Email" />
+                  <h:outputLabel for="nome" value="Nome" />
                 </div>
 
                 <div class="md-form">
-                  <i class="fas fa-key prefix grey-text"></i>
-                  <h:inputSecret id="password" required="true" value="#{user.senha}" requiredMessage="insert password"
+                  <i class="far fa-comments prefix grey-text"></i>
+                  <h:inputText id="descricao" required="true" value="#{eventoBean.descricao}" requiredMessage="insert descricao"
                     class="form-control" />
-                  <label for="password">Senha</label>
+                  <h:outputLabel for="descricao" value="descricao" />
+                </div>
+                
+                <div class="md-form">
+                  <i class="far fa-calendar-alt prefix grey-text"></i>
+                  <h:inputText id="data" required="true" value="#{eventoBean.data}" requiredMessage="insert data"
+                    class="form-control" />
+                  <label for="data">data</label>
+                </div>
+                
+                <div class="md-form">
+                  <i class="fas fa-map-marker-alt prefix grey-text"></i>
+                  <h:inputText id="local" required="true" value="#{eventoBean.local}" requiredMessage="insert local"
+                    class="form-control" />
+                  <label for="local">local</label>
                 </div>
 
                 <div class="text-center">
-                  <h:commandButton value="Login" class="btn btn-indigo" action="#{loginBean.autentique}" />
+                  <h:commandButton value="Login" class="btn btn-indigo" action="#{eventoBean.createEvento()}" />
                   <hr />
                   <fieldset class="form-check">
                     <input type="checkbox" class="form-check-input" id="checkbox1" />

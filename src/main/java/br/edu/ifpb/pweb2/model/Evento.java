@@ -21,7 +21,12 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "tb_evento")
 public class Evento extends EventoSubject {
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	private Long id;
 	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "evento", cascade = CascadeType.ALL)
+	private List<Vaga> vagas = new ArrayList<>();
 
 	@NotEmpty(message = "Descricao e obrigatoria")
 	private String nome;
@@ -36,6 +41,8 @@ public class Evento extends EventoSubject {
 	
 	@NotEmpty(message = "Local e obrigatorio")
 	private String local;
+	
+
 
 	@ManyToOne
 	private User owner;
@@ -59,9 +66,6 @@ public class Evento extends EventoSubject {
 		return finalizado;
 	}
 
-	public void setFinalizado(boolean finalizado) {
-		this.finalizado = finalizado;
-	}
 	
 	public void setAvaliacao_eventos(List<Avaliacao_Evento> avaliacao_eventos) {
 		this.avaliacao_eventos = avaliacao_eventos;
@@ -121,12 +125,14 @@ public class Evento extends EventoSubject {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	public void add(Vaga vaga) {
+		vagas.add(vaga);
+	}
 
 	@Override
 	public String toString() {
-		return "Evento [id=" + super.getId() + "nome "+nome+" descricao=" + descricao + ", data=" + data + ", local=" + local + ", owner="
-				+ owner + ", vagas=" + ", avaliacao_eventos=" + avaliacao_eventos +"finalizado"+finalizado+ "]";
+		return "Evento [id=" + id + "nome "+nome+" descricao=" + descricao + ", data=" + data + ", local=" + local + ", owner="
+				+ owner + ", vagas=" +  ", avaliacao_eventos=" + avaliacao_eventos +"finalizado"+finalizado+ "]";
 	}
 	/*
 	public double getMediaAvaliacao() {
@@ -137,5 +143,35 @@ public class Evento extends EventoSubject {
 		double media = sum / this.avaliacao_eventos.size();
 		return (double) Math.round(media * 100) / 100;
 	}*/
+
+	@Override
+	public void attach(VagasObserver observer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void detach(int indice) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setState(EventoSubject evento) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void notifyObservers() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Evento getState() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

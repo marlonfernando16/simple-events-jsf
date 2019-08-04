@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -14,7 +15,7 @@ import br.edu.ifpb.pweb2.fachada.Fachada;
 import br.edu.ifpb.pweb2.model.Especialidade;
 
 @Named
-@SessionScoped
+@RequestScoped
 public class EspecialidadeBean extends GenericBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

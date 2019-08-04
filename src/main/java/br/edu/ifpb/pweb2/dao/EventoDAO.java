@@ -24,7 +24,7 @@ private static Logger logger = Logger.getLogger(EspecialidadeDAO.class);
 	@SuppressWarnings("unchecked")
 	public Evento findByName(String nameEvento) {
 		Query q = entityManager.createQuery("from Evento e where e.nome = :nameEvento");
-		q.setParameter("nameEsp", nameEvento);
+		q.setParameter("nameEvento", nameEvento);
 		Evento evento = null;
 		try {
 			evento = (Evento) q.getSingleResult();

@@ -5,6 +5,8 @@ import java.util.Arrays;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -60,11 +62,14 @@ public class EventoBean extends GenericBean implements Serializable{
 	
 
 	public String createEvento() {
-		System.out.println("oiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
-		System.out.println("evento "+evento+" qtd-vagas ");
-		for(String s : quantidadevagas) {
-			System.out.println(s);
+		FacesMessage.Severity nivel = FacesMessage.SEVERITY_ERROR; 
+		FacesContext fc = FacesContext.getCurrentInstance();
+		Evento ev = fachada.createEvento(evento, quantidadevagas);
+		if(ev == null) {
+			this.addErrorMessage("já existe um evento com esse nome");
+			return null;
 		}
+		this.addSuccessMessage("Evento cadastrado com sucesso !");
 		return "/dashboard/perfil?faces-redirect=true";
 
 	}

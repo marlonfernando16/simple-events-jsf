@@ -3,7 +3,9 @@ package br.edu.ifpb.pweb2.view.bean;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -15,17 +17,32 @@ import br.edu.ifpb.pweb2.model.Evento;
 
 
 @Named
-@RequestScoped
-public class EventoBean implements Serializable{
+@SessionScoped
+public class EventoBean extends GenericBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Evento evento;
-	private List<Evento> eventos;
+	//private List<Evento> eventos;
 	private int[] quantidadevagas;
 	private int[] especialidades;
 
 	@Inject 
 	private Fachada fachada;
+	
+	@PostConstruct
+	private void init() {
+		System.out.println("iiiiiiiiii");
+		Evento evento = (Evento) this.getFlash("evento");
+		if (evento != null) {
+			this.evento = evento;
+		} else {
+			System.out.println("aaaaaaaaaaaaaaaaa");
+			//this.eventos = fachada.findAllEventos();
+			System.out.println("eventos"+this.evento);
+			this.evento = new Evento();
+		}
+		
+	}
 
 	public Evento getEvento() {
 		return evento;
@@ -35,20 +52,37 @@ public class EventoBean implements Serializable{
 		this.evento = evento;
 	}
 	
+
+
+	public int[] getQuantidadevagas() {
+		return quantidadevagas;
+	}
+
+	public void setQuantidadevagas(int[] quantidadevagas) {
+		this.quantidadevagas = quantidadevagas;
+	}
+
+	public int[] getEspecialidades() {
+		return especialidades;
+	}
+
+	public void setEspecialidades(int[] especialidades) {
+		this.especialidades = especialidades;
+	}
+
+	public Fachada getFachada() {
+		return fachada;
+	}
+
+	public void setFachada(Fachada fachada) {
+		this.fachada = fachada;
+	}
+
 	public String createEvento() {
-		FacesMessage.Severity nivel = FacesMessage.SEVERITY_ERROR; 
-		FacesContext fc = FacesContext.getCurrentInstance();
-		Evento event = fachada.createEvento(evento);
-		this.eventos = fachada.findAllEventos();
-		if (event!= null) {
-			System.out.println("especialidade cadastrada");
-			//this.addSuccessMessage("Evento cadastrada com sucesso");
-			return "/dashboard/perfil?faces-redirect=true";
-		}else {
-			System.out.println("ja tem ");
-			//this.addErrorMessage("Evento ja cadastrada");
-			return null;
-		}
+		System.out.println("oiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+		//System.out.println("evento "+evento+" qtd-vagas "+quantidadevagas+"especialidades "+especialidades);
+		return "/dashboard/perfil?faces-redirect=true";
+
 	}
 	
 	

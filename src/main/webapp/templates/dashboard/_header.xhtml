@@ -22,19 +22,33 @@
 				</ul>
 
 				<!-- Right -->
-				<ul class="navbar-nav nav-flex-icons">
-					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<i class="fas fa-bell"></i>
-						</a>
-						<div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="#">Menssagem</a>
-						</div>
-					</li>
-					<li class="nav-item"><a href="" class="nav-link border border-light rounded"> <i
-								class="fas fa-user-circle mr-2"></i>{{user.nome}}
-						</a></li>
-				</ul>
+				<h:panelGroup rendered="#{loginBean.usuarioLogado != null}">
+					<ul class="navbar-nav nav-flex-icons">
+						<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="fas fa-bell"></i>
+							</a>
+							<div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+								<a class="dropdown-item" href="#">Menssagem</a>
+							</div>
+						</li>
+						<h:form id="form_links_right">
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false">
+									#{loginBean.usuarioLogado.nome}
+								</a>
+								<div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+									<h:commandLink action="#{loginBean.logout}"><i class="glyphicon glyphicon-log-out">
+										</i>
+										Sair
+									</h:commandLink>
+								</div>
+							</li>
+						</h:form>
+					</ul>
+
+				</h:panelGroup>
 
 			</div>
 

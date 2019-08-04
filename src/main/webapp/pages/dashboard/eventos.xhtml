@@ -113,41 +113,43 @@
 
 					<!--Grid row-->
 					<div class="row wow fadeIn">
+						<ui:repeat value="#{eventoBean.findAllEventos()}" var="evento" varStatus="loop">
+							<!--Grid column-->
+							<div class="col-md-3 mb-2">
 
-						<!--Grid column-->
-						<div class="col-md-3 mb-2">
+								<!--Card-->
+								<div class="card">
 
-							<!--Card-->
-							<div class="card">
+									<!--Card image-->
+									<div class="view overlay">
+										<img src="https://mdbootstrap.com/wp-content/uploads/2017/11/brandflow-tutorial-fb.jpg"
+											class="card-img-top" alt="" />
+										<a data-toggle="modal" data-target="#modal_description_event">
+											<div class="mask rgba-white-slight">
 
-								<!--Card image-->
-								<div class="view overlay">
-									<img src="https://mdbootstrap.com/wp-content/uploads/2017/11/brandflow-tutorial-fb.jpg"
-										class="card-img-top" alt="" />
-									<a data-toggle="modal" data-target="#modal_description_event">
-										<div class="mask rgba-white-slight">
+											</div>
+										</a>
+									</div>
 
-										</div>
-									</a>
+									<!--Card content-->
+									<div class="card-body">
+										<!--Title-->
+										<h4 class="card-title">#{evento.nome}</h4>
+										<!--Text-->
+										<p class="card-text">Descricao: #{evento.descricao}</p>
+										<p class="card-text">Local: #{evento.local}</p>
+										<p class="card-text">Data: #{evento.data}</p>
+									</div>
+
+									<!-- Card footer Data de publicaÃ§Ã£o-->
+									<div class="card-footer text-muted text-center mt-4">2 days
+										ago</div>
+
 								</div>
-
-								<!--Card content-->
-								<div class="card-body">
-									<!--Title-->
-									<h4 class="card-title">Jampa Shows</h4>
-									<!--Text-->
-									<p class="card-text">Local: {{JoÃ£o Pessoa}}</p>
-									<p class="card-text">Data: {{25 de Agosto de 2019}}</p>
-								</div>
-
-								<!-- Card footer Data de publicaÃ§Ã£o-->
-								<div class="card-footer text-muted text-center mt-4">2 days
-									ago</div>
+								<!--/.Card-->
 
 							</div>
-							<!--/.Card-->
-
-						</div>
+						</ui:repeat>
 						<!--Grid column-->
 					</div>
 					<!--Grid row-->

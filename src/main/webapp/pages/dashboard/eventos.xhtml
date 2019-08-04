@@ -2,7 +2,8 @@
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:i="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:c="http://java.sun.com/jsf/core">
 
 <h:body class="grey lighten-3">
 
@@ -51,7 +52,7 @@
 								<div class="view overlay">
 									<img src="https://mdbootstrap.com/wp-content/uploads/2017/11/brandflow-tutorial-fb.jpg"
 										class="card-img-top" alt="" />
-									<a data-toggle="modal" data-target="#modalRegisterForm">
+									<a data-toggle="modal" data-target="#modal_description_event">
 										<div class="mask rgba-white-slight">
 
 										</div>
@@ -79,38 +80,72 @@
 					</div>
 					<!--Grid row-->
 					<!-- Modal de submissão -->
-					<div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog"
+					<div class="modal fade" id="modal_description_event" tabindex="-1" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog" role="document">
+						<div class="modal-dialog modal-notify modal-info" role="document">
+							<!--Content-->
 							<div class="modal-content">
-								<h:form id="submit-form">
-									<div class="modal-header text-center">
-										<h4 class="modal-title w-100 font-weight-bold">Cadastro</h4>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body mx-3">
-										<div class="md-form mb-5">
-											<i class="fas fa-user prefix grey-text"></i>
-											<h:inputText class="form-control" id="nome" required="true"
-												value="#{user.nome}" requiredMessage="insert login" />
-											<h:outputLabel for="nome" value="Nome" />
-										</div>
+								<!--Header-->
+								<div class="modal-header">
+									<p class="heading lead">Show de Humor #{eventoBean.evento.nome}</p>
 
-										<div class="md-form mb-5">
-											<i class="fas fa-phone prefix grey-text"></i>
-											<h:inputText class="form-control" id="phone" required="true"
-												value="#{user.phone}" requiredMessage="insert phone" />
-											<h:outputLabel for="phone" value="Telefone" />
-										</div>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true" class="white-text">&times;</span>
+									</button>
+								</div>
+
+								<!--Body-->
+								<div class="modal-body">
+									<div>
+										<h3>Descrição</h3><br />
+										<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+											Lorem Ipsum has been the
+											industry's standard dummy text ever since the 1500s, when an unknown printer
+											took a galley of type and
+											scrambled it to make a type specimen book. It has survived not only five
+											centuries, but also the leap
+											into electronic typesetting, remaining essentially unchanged.
+											#{eventoBean.evento.descricao}</p>
+										<h3>Data</h3><br />
+										<p>10/07/2019 #{eventoBean.evento.data}</p>
+										<h3>Local</h3><br />
+										<p>Praia de Cabo Branco #{eventoBean.evento.local}</p>
+										<h3>Responsável</h3><br />
+										<p>John Oliver #{eventoBean.evento.owner}</p>
 									</div>
-									<div class="modal-footer d-flex justify-content-center">
-										<h:commandButton value="Cadastrar" class="btn btn-indigo"
-											action="#{loginBean.autentique}" />
-									</div>
-								</h:form>
+									<i:if test="#{loginBean.admin || loginBean.empresa}">
+										<hr />
+										<h3>Candidatos</h3><br />
+										<h:dataTable value="#{candidatoBean.candidatos}" var="candidatos" class="table">
+											<h:column>
+												<c:facet name="header">Nome</c:facet>#{candidatoBean.candidato.nome}
+											</h:column>
+											<h:column>
+												<c:facet name="header">Vaga</c:facet>#{candidatoBean.candidato.vaga}
+											</h:column>
+											<h:column>
+												<c:facet name="header">Deferir</c:facet>
+												<h:commandLink value="Deferir"
+													action="#{especialidadeBean.deleteEspecialidade(especialidade.id)}" />
+											</h:column>
+											<h:column>
+												<c:facet name="header">Indeferir</c:facet>
+												<h:commandLink value="Apagar"
+													action="#{especialidadeBean.deleteEspecialidade(especialidade.id)}" />
+											</h:column>
+										</h:dataTable>
+									</i:if>
+								</div>
+
+								<!--Footer-->
+								<div class="modal-footer justify-content-center">
+									<h:form id="form_submeter">
+										<h:commandButton value="Inscrever" class="btn btn-info" />
+										<a type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</a>
+									</h:form>
+								</div>
 							</div>
+							<!--/.Content-->
 						</div>
 					</div>
 				</div>

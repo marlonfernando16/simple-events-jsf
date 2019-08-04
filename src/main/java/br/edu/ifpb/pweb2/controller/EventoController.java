@@ -27,7 +27,7 @@ public class EventoController {
 		}	
 	}
 	
-	public List<Evento> findAllEspecialidades() {
+	public List<Evento> findAllEventos() {
 		List<Evento> evento = eventoDAO.findAll();
 		return evento;
 	}

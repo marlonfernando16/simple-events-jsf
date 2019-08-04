@@ -2,6 +2,7 @@ package br.edu.ifpb.pweb2.view.bean;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -74,5 +75,11 @@ public class EventoBean extends GenericBean implements Serializable{
 
 	}
 	
+	public List<Evento> findAllEventos() {
+		FacesMessage.Severity nivel = FacesMessage.SEVERITY_ERROR; 
+		FacesContext fc = FacesContext.getCurrentInstance();
+		List<Evento> eventos = fachada.findAllEventos();
+		return eventos;
+	}
 	
 }

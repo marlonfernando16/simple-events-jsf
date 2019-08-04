@@ -123,7 +123,7 @@ public class Fachada implements Serializable {
 	}
 	
 	public List<Evento>findAllEventos(){
-		return eventoController.findAllEspecialidades();
+		return eventoController.findAllEventos();
 	}
 
 }

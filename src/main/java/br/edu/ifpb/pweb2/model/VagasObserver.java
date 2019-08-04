@@ -1,34 +1,37 @@
 package br.edu.ifpb.pweb2.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-@Entity
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
+@MappedSuperclass
 public abstract class VagasObserver {	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@ManyToOne(fetch=FetchType.EAGER)
-	protected EventoSubject evento;
+
+    
+    
+ 
+    public abstract EventoSubject getEvento();
+
+
+
+	public abstract void setEvento(Evento evento);
+
+
+
+	public abstract void update();
+
 	
 	public VagasObserver() {}
 	 
-    public VagasObserver(EventoSubject evento) {
-        this.evento= evento;
-    }
     
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
- 
-    public abstract void update();
+	
 
 }

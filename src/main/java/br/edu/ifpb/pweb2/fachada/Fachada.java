@@ -4,13 +4,16 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import br.edu.ifpb.pweb2.controller.AdminController;
 import br.edu.ifpb.pweb2.controller.EmpresaController;
 import br.edu.ifpb.pweb2.controller.LoginController;
 import br.edu.ifpb.pweb2.controller.UserController;
+import br.edu.ifpb.pweb2.controller.VagaController;
 import br.edu.ifpb.pweb2.model.User;
+import br.edu.ifpb.pweb2.model.Vaga;
 import br.edu.ifpb.pweb2.controller.EspecialidadeController;
 import br.edu.ifpb.pweb2.controller.UserController;
 import br.edu.ifpb.pweb2.model.Admin;
@@ -18,6 +21,7 @@ import br.edu.ifpb.pweb2.model.Empresa;
 import br.edu.ifpb.pweb2.controller.EventoController;
 import br.edu.ifpb.pweb2.model.Especialidade;
 import br.edu.ifpb.pweb2.model.Evento;
+import br.edu.ifpb.pweb2.model.EventoSubject;
 
 
 public class Fachada implements Serializable {
@@ -35,6 +39,8 @@ public class Fachada implements Serializable {
 	private EspecialidadeController especialidadeController;
 	@Inject
 	private EventoController eventoController;
+	@Inject
+	private VagaController vagaController;
 
 	
 	@PostConstruct
@@ -91,8 +97,29 @@ public class Fachada implements Serializable {
 	}
 	
 	/*controller evento */
-	public 	Evento createEvento(Evento evento) {
-		return eventoController.createEvento(evento);
+	public 	Evento createEvento(Evento evento, String[]quantidadevagas) {
+		List<Especialidade> especialidades = this.findAllEspecialidades();
+		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+		System.out.println("user logged"+user);
+		evento.setOwner(user);
+		Evento ev = eventoController.createEvento(evento);
+		if(ev == null) {
+			return null;
+		}
+		int i = 0;
+		for(String s : quantidadevagas) {
+			if(s!= "" && s!=null) {
+				Vaga vaga = new Vaga();
+				vaga.setEspecialidade(especialidades.get(i));
+				vaga.setQtd_vagas(Integer.parseInt(s));
+				evento.add(vaga);
+				vaga.setEvento(evento);
+				vagaController.createVaga(vaga);
+			}
+			i++;
+		}
+		System.out.println(evento);
+		return evento;
 	}
 	
 	public List<Evento>findAllEventos(){

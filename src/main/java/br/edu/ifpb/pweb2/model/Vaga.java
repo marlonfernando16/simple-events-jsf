@@ -18,15 +18,17 @@ import javax.persistence.Table;
 @Table(name = "tb_vaga")
 public class Vaga extends VagasObserver {
 	
-	public Vaga(EventoSubject evento) {
-		super(evento);
-		
-	}
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	private Long id;
+	
 	public Vaga() {}
 	
-
+	@ManyToOne(fetch=FetchType.EAGER)
+	protected Evento evento;
 	
 	private int qtd_vagas;
+	
 	
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "vaga", cascade = CascadeType.ALL)
@@ -72,7 +74,7 @@ public class Vaga extends VagasObserver {
 
 	@Override
 	public String toString() {
-		return "Vaga [id=" + super.getId() + ", evento=" + evento.getState().getDescricao() + ", qtd_vagas=" + qtd_vagas + ", especialidade="
+		return "Vaga [id=" + id + ", evento=" + ", qtd_vagas=" + qtd_vagas + ", especialidade="
 				+ especialidade.getNome() + "]";
 	}
 
@@ -81,5 +83,17 @@ public class Vaga extends VagasObserver {
 		System.out.println("mudou kanalia...");
 		
 	}
+
+	@Override
+	public EventoSubject getEvento() {
+		return evento;
+	}
+
+	@Override
+	public void setEvento(Evento evento) {
+		this.evento = evento;
+		
+	}
+
 
 }

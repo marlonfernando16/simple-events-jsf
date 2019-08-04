@@ -9,51 +9,23 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-@Entity
-public class EventoSubject  {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "evento",targetEntity = EventoSubject.class, cascade = CascadeType.ALL)
-    private List<VagasObserver> observers;
-    @OneToOne
-    protected Evento evento;
+@MappedSuperclass
+public abstract class EventoSubject  {
  
-    public EventoSubject() {
-        observers = new ArrayList<VagasObserver>();
-    }
- 
-    public void attach(VagasObserver observer) {
-        observers.add(observer);
-    }
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
- 
-    public void detach(int indice) {
-        observers.remove(indice);
-    }
+    public abstract void attach(VagasObserver observer);
     
-    public void setState(Evento evento) {
-        this.evento = evento;
-        notifyObservers();
-    }
+    public abstract void detach(int indice);
+    
+    public abstract void setState(EventoSubject evento);
      
-    private void notifyObservers() {
-        for (VagasObserver observer : observers) {
-            observer.update();
-        }
-    }
+    public abstract void notifyObservers();
      
-    public Evento getState() {
-        return evento;
-    }
+    public abstract Evento getState();
+     
+
 
 }

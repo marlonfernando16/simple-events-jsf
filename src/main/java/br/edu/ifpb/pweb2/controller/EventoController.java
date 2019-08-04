@@ -16,8 +16,8 @@ public class EventoController {
 	
 	@Transactional
 	public Evento createEvento(Evento evento) {
-		Evento esp = eventoDAO.findByName(evento.getNome());
-		if(esp != null ) {
+		Evento eventotest = eventoDAO.findByName(evento.getNome());
+		if(eventotest != null ) {
 			return null;
 		}else {
 			eventoDAO.beginTransaction();

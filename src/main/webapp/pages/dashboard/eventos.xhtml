@@ -1,0 +1,158 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:i="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:c="http://java.sun.com/jsf/core">
+
+<h:body class="grey lighten-3">
+
+	<ui:composition template="../../templates/dashboard/_template.xhtml">
+		<ui:define name="tmain">
+			<!--Main layout-->
+			<main class="pt-5 mx-lg-5">
+				<div class="container-fluid mt-5">
+					<!-- Heading -->
+					<div class="card mb-4 wow fadeIn">
+
+						<!--Card content-->
+						<div class="card-body d-sm-flex justify-content-between">
+
+							<h4 class="mb-2 mb-sm-0 pt-1">
+								<!-- <a href="" target="_blank">Home</a>
+				  <span>/</span> -->
+								<span>Eventos</span>
+							</h4>
+
+							<form class="d-flex justify-content-center">
+								<!-- Default input -->
+								<input type="search" placeholder="Type your query" aria-label="Search"
+									class="form-control" />
+								<button class="btn btn-primary btn-sm my-0 p" type="submit">
+									<i class="fas fa-search"></i>
+								</button>
+
+							</form>
+
+						</div>
+
+					</div>
+					<!-- Heading -->
+
+					<!--Grid row-->
+					<div class="row wow fadeIn">
+
+						<!--Grid column-->
+						<div class="col-md-3 mb-2">
+
+							<!--Card-->
+							<div class="card">
+
+								<!--Card image-->
+								<div class="view overlay">
+									<img src="https://mdbootstrap.com/wp-content/uploads/2017/11/brandflow-tutorial-fb.jpg"
+										class="card-img-top" alt="" />
+									<a data-toggle="modal" data-target="#modal_description_event">
+										<div class="mask rgba-white-slight">
+
+										</div>
+									</a>
+								</div>
+
+								<!--Card content-->
+								<div class="card-body">
+									<!--Title-->
+									<h4 class="card-title">Jampa Shows</h4>
+									<!--Text-->
+									<p class="card-text">Local: {{JoÃ£o Pessoa}}</p>
+									<p class="card-text">Data: {{25 de Agosto de 2019}}</p>
+								</div>
+
+								<!-- Card footer Data de publicaÃ§Ã£o-->
+								<div class="card-footer text-muted text-center mt-4">2 days
+									ago</div>
+
+							</div>
+							<!--/.Card-->
+
+						</div>
+						<!--Grid column-->
+					</div>
+					<!--Grid row-->
+					<!-- Modal de submissão -->
+					<div class="modal fade" id="modal_description_event" tabindex="-1" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-notify modal-info" role="document">
+							<!--Content-->
+							<div class="modal-content">
+								<!--Header-->
+								<div class="modal-header">
+									<p class="heading lead">Show de Humor #{eventoBean.evento.nome}</p>
+
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true" class="white-text">&times;</span>
+									</button>
+								</div>
+
+								<!--Body-->
+								<div class="modal-body">
+									<div>
+										<h3>Descrição</h3><br />
+										<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+											Lorem Ipsum has been the
+											industry's standard dummy text ever since the 1500s, when an unknown printer
+											took a galley of type and
+											scrambled it to make a type specimen book. It has survived not only five
+											centuries, but also the leap
+											into electronic typesetting, remaining essentially unchanged.
+											#{eventoBean.evento.descricao}</p>
+										<h3>Data</h3><br />
+										<p>10/07/2019 #{eventoBean.evento.data}</p>
+										<h3>Local</h3><br />
+										<p>Praia de Cabo Branco #{eventoBean.evento.local}</p>
+										<h3>Responsável</h3><br />
+										<p>John Oliver #{eventoBean.evento.owner}</p>
+									</div>
+									<i:if test="#{loginBean.admin || loginBean.empresa}">
+										<hr />
+										<h3>Candidatos</h3><br />
+										<h:dataTable value="#{candidatoBean.candidatos}" var="candidatos" class="table">
+											<h:column>
+												<c:facet name="header">Nome</c:facet>#{candidatoBean.candidato.nome}
+											</h:column>
+											<h:column>
+												<c:facet name="header">Vaga</c:facet>#{candidatoBean.candidato.vaga}
+											</h:column>
+											<h:column>
+												<c:facet name="header">Deferir</c:facet>
+												<h:commandLink value="Deferir"
+													action="#{especialidadeBean.deleteEspecialidade(especialidade.id)}" />
+											</h:column>
+											<h:column>
+												<c:facet name="header">Indeferir</c:facet>
+												<h:commandLink value="Apagar"
+													action="#{especialidadeBean.deleteEspecialidade(especialidade.id)}" />
+											</h:column>
+										</h:dataTable>
+									</i:if>
+								</div>
+
+								<!--Footer-->
+								<div class="modal-footer justify-content-center">
+									<h:form id="form_submeter">
+										<h:commandButton value="Inscrever" class="btn btn-info" />
+										<a type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</a>
+									</h:form>
+								</div>
+							</div>
+							<!--/.Content-->
+						</div>
+					</div>
+				</div>
+			</main>
+			<!--Main layout-->
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

@@ -41,9 +41,9 @@ private static final long serialVersionUID = 1L;
 		System.out.println("fachada "+fachada + "endereco"+endereco);
 		user = fachada.createUser(nome, phone, email, senha, date, typeUser,endereco);
 		if(user != null) {
-			return "/login/login?faces-redirect=true";
+			return "/pages/login/login?faces-redirect=true";
 		}else {
-			return "/cadatro/cadastro?faces-redirect=true";
+			return "/pages/cadatro/cadastro?faces-redirect=true";
 
 		}
 			

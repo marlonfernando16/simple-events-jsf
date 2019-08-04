@@ -1,0 +1,94 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<title>
+		<ui:insert name="ttitle">Simple Events</ui:insert>
+	</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
+	<!-- Bootstrap core CSS -->
+	<h:outputStylesheet library="index" name="css/bootstrap.min.css" target="head" />
+	<!-- Material Design Bootstrap -->
+	<h:outputStylesheet library="index" name="css/mdb.min.css" target="head" />
+	<!-- Your custom styles (optional) -->
+	<h:outputStylesheet library="index" name="css/style.min.css" target="head" />
+	
+	<style type="text/css">
+		html,
+		body,
+		header,
+		.view {
+			height: 100%;
+		}
+
+		@media (max-width : 740px) {
+
+			html,
+			body,
+			header,
+			.view {
+				height: 1000px;
+			}
+		}
+
+		@media (min-width : 800px) and (max-width: 850px) {
+
+			html,
+			body,
+			header,
+			.view {
+				height: 650px;
+			}
+		}
+
+		@media (min-width : 800px) and (max-width: 850px) {
+			.navbar:not (.top-nav-collapse) {
+				background:
+
+
+
+					#1C2331 ! important;
+			}
+		}
+	</style>
+</h:head>
+
+<h:body>
+	<ui:insert name="theader">
+		<ui:include src="_header.xhtml" />
+	</ui:insert>
+
+
+	<ui:insert name="tbody">
+		<ui:insert name="tpage_intro">
+			Conteudo da page intro vazio
+		</ui:insert>
+		<ui:insert name="tmain">
+			<ui:include src="_main.xhtml" />
+		</ui:insert>
+	</ui:insert>
+
+	<ui:insert name="tfooter">
+		<ui:include src="_footer.xhtml" />
+	</ui:insert>
+	<!-- SCRIPTS -->
+	<!-- Java Faces -->
+	<h:outputScript library="javax.faces" name="jsf.js" />
+	<!-- JQuery -->
+	<h:outputScript library="index" name="js/jquery-3.4.0.min.js" />
+	<!-- Bootstrap tooltips -->
+	<h:outputScript library="index" name="js/popper.min.js" />
+	<!-- Bootstrap core JavaScript -->
+	<h:outputScript library="index" name="js/bootstrap.min.js" />
+	<!-- MDB core JavaScript -->
+	<h:outputScript library="index" name="js/mdb.min.js" />
+	<!-- Initializations -->
+	<script type="text/javascript">
+		// Animations initialization
+		new WOW().init();
+	</script>
+</h:body>
+
+</html>

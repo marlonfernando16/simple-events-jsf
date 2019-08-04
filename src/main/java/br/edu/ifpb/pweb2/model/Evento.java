@@ -125,10 +125,10 @@ public class Evento extends EventoSubject {
 
 	@Override
 	public String toString() {
-		return "Evento [id=" + super.getId() + ", descricao=" + descricao + ", data=" + data + ", local=" + local + ", owner="
-				+ owner + ", vagas=" + ", avaliacao_eventos=" + avaliacao_eventos +"finalizado"+finalizado+"media"+getMediaAvaliacao()+ "]";
+		return "Evento [id=" + super.getId() + "nome "+nome+" descricao=" + descricao + ", data=" + data + ", local=" + local + ", owner="
+				+ owner + ", vagas=" + ", avaliacao_eventos=" + avaliacao_eventos +"finalizado"+finalizado+ "]";
 	}
-	
+	/*
 	public double getMediaAvaliacao() {
 		int sum = 0;
 		for (Avaliacao_Evento av:  this.avaliacao_eventos) {
@@ -136,6 +136,6 @@ public class Evento extends EventoSubject {
 		}
 		double media = sum / this.avaliacao_eventos.size();
 		return (double) Math.round(media * 100) / 100;
-	}
+	}*/
 
 }

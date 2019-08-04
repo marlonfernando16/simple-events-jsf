@@ -1,17 +1,23 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:i="http://xmlns.jcp.org/jsp/jstl/core" xmlns:c="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:i="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta http-equiv="x-ua-compatible" content="ie=edge" />
 	<title>Dashboard</title>
 	<!-- Font Awesome -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
 	<!-- Bootstrap core CSS -->
 	<!-- Bootstrap core CSS -->
 	<h:outputStylesheet name="dashboard/css/bootstrap.min.css" />
@@ -20,222 +26,221 @@
 	<!-- Your custom styles (optional) -->
 	<h:outputStylesheet name="dashboard/css/style.min.css" />
 	<style>
-		.map-container {
-			overflow: hidden;
-			padding-bottom: 56.25%;
-			position: relative;
-			height: 0;
-		}
+.map-container {
+	overflow: hidden;
+	padding-bottom: 56.25%;
+	position: relative;
+	height: 0;
+}
 
-		.map-container iframe {
-			left: 0;
-			top: 0;
-			height: 100%;
-			width: 100%;
-			position: absolute;
-		}
+.map-container iframe {
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+}
 
-		strong #center-title {
-			text-align: center;
-		}
-	</style>
+strong #center-title {
+	text-align: center;
+}
+</style>
 </h:head>
 
 <h:body class="grey lighten-3">
 
-	<header>
-		<!--Main Navigation-->
-		<!-- Sidebar -->
-		<div class="sidebar-fixed position-fixed">
-			<h:form>
-				<div class="list-group list-group-flush">
-					<a class="logo-wrapper waves-effect"> <img src="" class="img-fluid" alt="Coloque a logo aqui" />
-					</a>
-					<!-- Listar todos os eventos -->
-					<h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
-						action="/dashboard/eventos?faces-redirect=true">
-						<i class="fas fa-calendar mr-3"></i>Eventos
+	<header> <!--Main Navigation--> <!-- Sidebar -->
+	<div class="sidebar-fixed position-fixed">
+		<h:form>
+			<div class="list-group list-group-flush">
+				<a class="logo-wrapper waves-effect"> <img src=""
+					class="img-fluid" alt="Coloque a logo aqui" />
+				</a>
+				<!-- Listar todos os eventos -->
+				<h:commandLink
+					styleClass="list-group-item list-group-item-action waves-effect"
+					action="/dashboard/eventos?faces-redirect=true">
+					<i class="fas fa-calendar mr-3"></i>Eventos
 					</h:commandLink>
-					<i:if test="#{loginBean.admin || loginBean.empresa}">
-						<!-- Listar todas as especialidades -->
-						<h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
-							action="/dashboard/especialidades?faces-redirect=true">
-							<i class="fas fa-calendar mr-3"></i>Especialidades
+				<i:if test="#{loginBean.admin || loginBean.empresa}">
+					<!-- Listar todas as especialidades -->
+					<h:commandLink
+						styleClass="list-group-item list-group-item-action waves-effect"
+						action="/dashboard/especialidades?faces-redirect=true">
+						<i class="fas fa-calendar mr-3"></i>Especialidades
 						</h:commandLink>
-					</i:if>
-					<!-- Listar apenas os eventos submetidos -->
-					<h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
-						action="/dashboard/submissoes?faces-redirect=true">
-						<i class="fas fa-check-square mr-3"></i>Submissões
+				</i:if>
+				<!-- Listar apenas os eventos submetidos -->
+				<h:commandLink
+					styleClass="list-group-item list-group-item-action waves-effect"
+					action="/dashboard/submissoes?faces-redirect=true">
+					<i class="fas fa-check-square mr-3"></i>Submissões
 					</h:commandLink>
-					<!-- Criar um evento -->
-					<h:commandLink styleClass="list-group-item active waves-effect"
-						action="/dashboard/evento?faces-redirect=true">
-						<i class="fas fa-calendar-plus mr-3"></i>Criar Evento
+				<!-- Criar um evento -->
+				<h:commandLink styleClass="list-group-item active waves-effect"
+					action="/dashboard/evento?faces-redirect=true">
+					<i class="fas fa-calendar-plus mr-3"></i>Criar Evento
 					</h:commandLink>
-					<i:if test="#{loginBean.admin || loginBean.empresa}">
-						<!-- Criar um especialidade-->
-						<h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
-							action="/dashboard/especialidade?faces-redirect=true">
-							<i class="fas fa-calendar-plus mr-3"></i>Criar Especialidade
+				<i:if test="#{loginBean.admin || loginBean.empresa}">
+					<!-- Criar um especialidade-->
+					<h:commandLink
+						styleClass="list-group-item list-group-item-action waves-effect"
+						action="/dashboard/especialidade?faces-redirect=true">
+						<i class="fas fa-calendar-plus mr-3"></i>Criar Especialidade
 						</h:commandLink>
-					</i:if>
-					<!-- Ver perfil do usuário -->
-					<h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
-						action="/dashboard/perfil?faces-redirect=true">
-						<i class="fas fa-user mr-3"></i>Perfil
+				</i:if>
+				<!-- Ver perfil do usuário -->
+				<h:commandLink
+					styleClass="list-group-item list-group-item-action waves-effect"
+					action="/dashboard/perfil?faces-redirect=true">
+					<i class="fas fa-user mr-3"></i>Perfil
 					</h:commandLink>
-				</div>
-			</h:form>
-		</div>
-		<!-- Sidebar -->
-
-		<!-- Navbar -->
-		<nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
-			<div class="container-fluid">
-				<!-- Collapse -->
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-
-				<!-- Links -->
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-					<!-- Left -->
-					<ul class="navbar-nav mr-auto">
-					</ul>
-
-					<!-- Right -->
-					<ul class="navbar-nav nav-flex-icons">
-						<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
-								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-bell"></i>
-							</a>
-							<div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-								<a class="dropdown-item" href="#">Menssagem</a>
-							</div>
-						</li>
-						<li class="nav-item"><a href="" class="nav-link border border-light rounded"> <i
-									class="fas fa-user-circle mr-2"></i>#{sessionScope.loginUser}
-							</a></li>
-					</ul>
-
-				</div>
-
 			</div>
-		</nav>
-		<!-- NavbSign ar -->
-	</header>
+		</h:form>
+	</div>
+	<!-- Sidebar --> <!-- Navbar --> <nav
+		class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+	<div class="container-fluid">
+		<!-- Collapse -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<!-- Links -->
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+			<!-- Left -->
+			<ul class="navbar-nav mr-auto">
+			</ul>
+
+			<!-- Right -->
+			<ul class="navbar-nav nav-flex-icons">
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="fas fa-bell"></i>
+				</a>
+					<div class="dropdown-menu dropdown-primary"
+						aria-labelledby="navbarDropdownMenuLink">
+						<a class="dropdown-item" href="#">Menssagem</a>
+					</div></li>
+				<li class="nav-item"><a href=""
+					class="nav-link border border-light rounded"> <i
+						class="fas fa-user-circle mr-2"></i>#{sessionScope.loginUser}
+				</a></li>
+			</ul>
+
+		</div>
+
+	</div>
+	</nav> <!-- NavbSign ar --> </header>
 	<!--Main Navigation-->
 
 
 	<!--Main layout-->
 	<main class="pt-5 mx-lg-5">
-		<div class="container-fluid mt-5">
-			<!--Grid row-->
-			<div class="row wow fadeIn">
+	<div class="container-fluid mt-5">
+		<!--Grid row-->
+		<div class="row wow fadeIn">
 
-				<!--Grid column-->
-				<div class="col-md-12 mb-2">
+			<!--Grid column-->
+			<div class="col-md-12 mb-2">
 
-					<!--Card-->
-					<div class="card">
-						<!--Card content-->
-						<div class="card-body">
-							<!-- Form -->
-							<h:form id="evento_form">
-								<!-- Heading -->
-								<h3 class="card-title d-flex">
+				<!--Card-->
+				<div class="card">
+					<!--Card content-->
+					<div class="card-body">
+						<!-- Form -->
+						<h:form id="evento_form">
+							<!-- Heading -->
+							<h3 class="card-title d-flex">
 
-									<strong class="text-center"> Cadastro de Evento </strong>
-								</h3>
-								<p:messages></p:messages>
+								<strong class="text-center"> Cadastro de Evento </strong>
+							</h3>
+							<p:messages></p:messages>
+							<hr />
+
+							<div class="md-form">
+								<i class="fas fa-address-card prefix grey-text"></i>
+								<h:inputText class="form-control" id="nome" required="true"
+									value="#{eventoBean.evento.nome}"
+									requiredMessage="insert login" />
+								<h:outputLabel for="nome" value="Nome" />
+							</div>
+
+							<div class="md-form">
+								<i class="far fa-comments prefix grey-text"></i>
+								<h:inputText id="descricao" required="true"
+									value="#{eventoBean.evento.descricao}"
+									requiredMessage="insert descricao" class="form-control" />
+								<h:outputLabel for="descricao" value="descricao" />
+							</div>
+
+							<div class="md-form">
+								<i class="far fa-calendar-alt prefix grey-text"></i>
+								<h:inputText id="data" required="true"
+									value="#{eventoBean.evento.data}" requiredMessage="insert data"
+									class="form-control">
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:inputText>
+								<label for="data">data</label>
+							</div>
+
+							<div class="md-form">
+								<i class="fas fa-map-marker-alt prefix grey-text"></i>
+								<h:inputText id="local" required="true"
+									value="#{eventoBean.evento.local}"
+									requiredMessage="insert local" class="form-control" />
+								<label for="local">local</label>
+							</div>
+
+							<ui:repeat value="#{especialidadeBean.especialidades}"
+								varStatus="loop">
+								<h:panelGrid columns="2" style="margin-bottom:10px"
+									cellpadding="5">
+									<input type="checkbox" name="especialidades"
+										class="especialidades" id="checkbox1" />
+										<label for="checkbox1" class="form-check-label dark-grey-text">
+										#{especialidadeBean.especialidades[loop.index].nome}</label>
+									<h:inputText class="quantidadevagas d-none"
+										value="#{eventoBean.quantidadevagas[loop.index]}" />
+								</h:panelGrid>
+							</ui:repeat>
+
+							<div class="text-center">
+								<h:commandButton value="Cadastrar" class="btn btn-indigo"
+									action="#{eventoBean.createEvento}" />
 								<hr />
-
-								<div class="md-form">
-									<i class="fas fa-address-card prefix grey-text"></i>
-									<h:inputText class="form-control" id="nome" required="true"
-										value="#{eventoBean.evento.nome}" requiredMessage="insert login" />
-									<h:outputLabel for="nome" value="Nome" />
-								</div>
-
-								<div class="md-form">
-									<i class="far fa-comments prefix grey-text"></i>
-									<h:inputText id="descricao" required="true" value="#{eventoBean.evento.descricao}"
-										requiredMessage="insert descricao" class="form-control" />
-									<h:outputLabel for="descricao" value="descricao" />
-								</div>
-
-								<div class="md-form">
-									<i class="far fa-calendar-alt prefix grey-text"></i>
-									<h:inputText id="data" required="true" value="#{eventoBean.evento.data}"
-										requiredMessage="insert data" class="form-control">
-										<f:convertDateTime pattern="dd/MM/yyyy"/>
-									</h:inputText>
-									<label for="data">data</label>
-								</div>
-
-								<div class="md-form">
-									<i class="fas fa-map-marker-alt prefix grey-text"></i>
-									<h:inputText id="local" required="true" value="#{eventoBean.evento.local}"
-										requiredMessage="insert local" class="form-control" />
-									<label for="local">local</label>
-								</div>
-								<h:dataTable value="#{especialidadeBean.especialidades}" var="especialidade"
-									class="table">
-									<h:column>
-										<c:facet name="header"></c:facet>
-										<input type="checkbox" name="especialidades" class="especialidades"
-											value="especialidade.id" id="checkbox1" />
-									</h:column>
-									<h:column>
-										<c:facet name="header">
-											<strong>Especialidade</strong>
-										</c:facet>#{especialidade.nome}
-									</h:column>
-									<h:column>
-										<c:facet name="header">
-											<strong>Quantidade de vagas</strong>
-										</c:facet>
-										<h:inputText class="quantidadevagas d-none" id="quantidadevagas"
-											name="quantidadevagas" value="#{1}" disabled="true" />
-
-									</h:column>
-								</h:dataTable>
-
-								<div class="text-center">
-									<h:commandButton value="Cadastrar" class="btn btn-indigo"
-										action="#{eventoBean.createEvento}" />
-									<hr />
-									<fieldset class="form-check">
-										<input type="checkbox" class="form-check-input" id="checkbox1" />
-										<label for="checkbox1" class="form-check-label dark-grey-text">Lembrar</label>
-									</fieldset>
-								</div>
-							</h:form>
-							<!-- Form -->
-						</div>
+								<fieldset class="form-check">
+									<input type="checkbox" class="form-check-input" id="checkbox1" />
+									<label for="checkbox1" class="form-check-label dark-grey-text">Lembrar</label>
+								</fieldset>
+							</div>
+						</h:form>
+						<!-- Form -->
 					</div>
-					<!--/.Card-->
-
 				</div>
-				<!--Grid column-->
-			</div>
-			<!--Grid row-->
+				<!--/.Card-->
 
+			</div>
+			<!--Grid column-->
 		</div>
+		<!--Grid row-->
+
+	</div>
 	</main>
 	<!--Main layout-->
 	<!--Footer-->
-	<footer class="page-footer fixed-bottom text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
-		<!--Copyright-->
-		<div class="footer-copyright py-3">
-			© 2019 Copyright: <a href=""> EquipeTOP.com </a>
-		</div>
-		<!--/.Copyright-->
-	</footer>
+	<footer
+		class="page-footer fixed-bottom text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
+	<!--Copyright-->
+	<div class="footer-copyright py-3">
+		© 2019 Copyright: <a href=""> EquipeTOP.com </a>
+	</div>
+	<!--/.Copyright--> </footer>
 	<!--/.Footer-->
 
 	<!-- SCRIPTS -->

@@ -14,7 +14,7 @@
 	<h:outputStylesheet library="index" name="css/mdb.min.css" target="head" />
 	<!-- Your custom styles (optional) -->
 	<h:outputStylesheet library="index" name="css/style.min.css" target="head" />
-	
+
 	<style type="text/css">
 		html,
 		body,
@@ -88,6 +88,15 @@
 	<script type="text/javascript">
 		// Animations initialization
 		new WOW().init();
+		var input_adm = $("#address");
+		$('#login-form\\:typeuser').change(function () {
+			var option = $('#login-form\\:typeuser option:selected');
+			if (option.val() == "JUR") {
+				input_adm.removeClass('d-none');
+			} else {
+				input_adm.addClass('d-none');
+			}
+		});
 	</script>
 </h:body>
 

@@ -1,0 +1,88 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:component>
+	<!-- Navbar -->
+	<nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+		<div class="container-fluid">
+
+			<!-- Collapse -->
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<!-- Links -->
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+				<!-- Left -->
+				<ul class="navbar-nav mr-auto">
+				</ul>
+
+				<!-- Right -->
+				<ul class="navbar-nav nav-flex-icons">
+					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fas fa-bell"></i>
+						</a>
+						<div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" href="#">Menssagem</a>
+						</div>
+					</li>
+					<li class="nav-item"><a href="" class="nav-link border border-light rounded"> <i
+								class="fas fa-user-circle mr-2"></i>{{user.nome}}
+						</a></li>
+				</ul>
+
+			</div>
+
+		</div>
+	</nav>
+	<!-- Navbar -->
+	<!-- Sidebar -->
+	<div class="sidebar-fixed position-fixed">
+		<h:form>
+			<div class="list-group list-group-flush">
+				<a class="logo-wrapper waves-effect">
+					<h:graphicImage library="dashboard" name="img/logo.jpg" />
+				</a>
+				<!-- Listar todos os eventos -->
+				<h:commandLink styleClass="list-group-item active waves-effect"
+					action="/dashboard/eventos?faces-redirect=true">
+					<i class="fas fa-calendar mr-3"></i>Eventos
+				</h:commandLink>
+				<!-- Listar todas as especialidades -->
+				<h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
+					action="/dashboard/especialidades?faces-redirect=true">
+					<i class="fas fa-calendar mr-3"></i>Especialidades
+				</h:commandLink>
+				<!-- Listar apenas os eventos submetidos -->
+				<h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
+					action="/dashboard/submissoes?faces-redirect=true">
+					<i class="fas fa-check-square mr-3"></i>Submissões
+				</h:commandLink>
+				<!-- Criar um evento -->
+				<h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
+					action="/dashboard/evento?faces-redirect=true">
+					<i class="fas fa-calendar-plus mr-3"></i>Criar Evento
+				</h:commandLink>
+				<!-- Criar um evento -->
+				<h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
+					action="/dashboard/especialidade?faces-redirect=true">
+					<i class="fas fa-calendar-plus mr-3"></i>Criar Especialidade
+				</h:commandLink>
+				<!-- Ver perfil do usuário -->
+				<h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
+					action="/dashboard/perfil?faces-redirect=true">
+					<i class="fas fa-user mr-3"></i>Perfil
+				</h:commandLink>
+			</div>
+		</h:form>
+	</div>
+	<!-- Sidebar -->
+
+</ui:component>
+
+</html>

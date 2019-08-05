@@ -238,7 +238,7 @@
                 <h3>Criado por:</h3><br />                
                 <p>#{evento.owner.nome}</p>
               </div>
-              <i:if test="#{loginBean.admin || loginBean.empresa}">
+              <h:panelGroup rendered="#{sessionScope.user.email ne evento.owner.email}">
                 <hr />
                 <h3>Vagas</h3><br />
                 <h:dataTable value="#{evento.vagas}" var="vaga" class="table">
@@ -256,7 +256,7 @@
                   </h:column>
                   -->
                 </h:dataTable>
-              </i:if>
+              </h:panelGroup>
             </div>
 		
             <!--Footer-->

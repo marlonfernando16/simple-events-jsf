@@ -25,10 +25,6 @@ public class EventoBean extends GenericBean implements Serializable{
 	//private List<Evento> eventos;
 	private String[] quantidadevagas;
 
-
-
-
-
 	@Inject 
 	private Fachada fachada;
 	

@@ -216,6 +216,7 @@
         aria-hidden="true">
         <div class="modal-dialog modal-notify modal-info" role="document">
           <!--Content-->
+          <h:form id="form_submeter">
           <div class="modal-content">
             <!--Header-->
             <div class="modal-header">
@@ -238,35 +239,27 @@
                 <h3>Criado por:</h3><br />                
                 <p>#{evento.owner.nome}</p>
               </div>
+
               <h:panelGroup rendered="#{sessionScope.user.email ne evento.owner.email}">
                 <hr />
+
                 <h3>Vagas</h3><br />
-                <h:dataTable value="#{evento.vagas}" var="vaga" class="table">
-                  <h:column>
-                    <c:facet name="header">Vaga</c:facet>
-                    #{vaga.especialidade.nome}
-                  </h:column>
-                  <h:column>
-                    <c:facet name="header">Quantidade</c:facet>#{vaga.qtd_vagas}
-                  </h:column>
-                  <!--  
-                  <h:column>
-                    <c:facet name="header">Indeferir</c:facet>
-                    <h:commandLink value="Apagar" action="#{especialidadeBean.deleteEspecialidade(especialidade.id)}" />
-                  </h:column>
-                  -->
-                </h:dataTable>
+                <p:selectManyCheckbox id="checkboxTest" value="#{candidatoVagaBean.vagas}">
+
+    				<f:selectItems value="#{evento.vagas}" var="vaga" itemLabel="#{vaga.especialidade.nome}" itemValue="#{vaga}" />
+
+				</p:selectManyCheckbox>
+              
               </h:panelGroup>
             </div>
 		
             <!--Footer-->
             <div class="modal-footer justify-content-center">
-              <h:form id="form_submeter">
-                <h:commandButton value="Inscrever" class="btn btn-info" />
+                <h:commandButton value="Inscrever" class="btn btn-info" action="#{candidatoVagaBean.candidatar}"   />
                 <a type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</a>
-              </h:form>
             </div>
           </div>
+          </h:form>
           <!--/.Content-->
         </div>
       </div>

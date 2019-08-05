@@ -71,7 +71,9 @@ public class Vaga extends VagasObserver {
 		this.candidato_vaga.add(i,candidato);
 	}
 	
-
+	public long getId() {
+		return id;
+	}
 	@Override
 	public String toString() {
 		return "Vaga [id=" + id + ", evento=" + ", qtd_vagas=" + qtd_vagas + ", especialidade="

@@ -165,6 +165,7 @@
       <div class="row wow fadeIn">
 
   	 <ui:repeat value="#{eventoBean.findAllEventos()}" var="evento" varStatus="loop">
+        
         <!--Grid column-->
         <div class="col-md-3 mb-2">
 
@@ -175,7 +176,7 @@
             <div class="view overlay">
               <img src="https://mdbootstrap.com/wp-content/uploads/2017/11/brandflow-tutorial-fb.jpg"
                 class="card-img-top" alt="" />
-              <a data-toggle="modal" data-target="#modal_description_event">
+              <a data-toggle="modal" data-target="#modal_description_event#{evento.id}">
                 <div class="mask rgba-white-slight">
 
                 </div>	
@@ -198,21 +199,18 @@
 
           </div>
           <!--/.Card-->
-
-        </div>
-     </ui:repeat>
-        <!--Grid column-->
-      </div>
-      <!--Grid row-->
+		</div>
+        
+        <!--Grid row-->
       <!-- Modal de submissão -->
-      <div class="modal fade" id="modal_description_event" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      <div class="modal fade" id="modal_description_event#{evento.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-notify modal-info" role="document">
           <!--Content-->
           <div class="modal-content">
             <!--Header-->
             <div class="modal-header">
-              <p class="heading lead">Show de Humor #{eventoBean.evento.nome}</p>
+              <p class="heading lead">#{evento.nome}</p>
 
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true" class="white-text">&times;</span>
@@ -221,41 +219,37 @@
 
             <!--Body-->
             <div class="modal-body">
-              <div>
+               <div> 
                 <h3>Descrição</h3><br />
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                  scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
-                  into electronic typesetting, remaining essentially unchanged. #{eventoBean.evento.descricao}</p>
+                <p>#{evento.descricao}</p>
                 <h3>Data</h3><br />
-                <p>10/07/2019 #{eventoBean.evento.data}</p>
+                <p>#{evento.data}</p>
                 <h3>Local</h3><br />
-                <p>Praia de Cabo Branco #{eventoBean.evento.local}</p>
-                <h3>Responsável</h3><br />
-                <p>John Oliver #{eventoBean.evento.owner}</p>
+                <p>#{evento.local}</p>
+                <h3>Criado por:</h3><br />                
+                <p>#{evento.owner.nome}</p>
               </div>
               <i:if test="#{loginBean.admin || loginBean.empresa}">
                 <hr />
-                <h3>Candidatos</h3><br />
-                <h:dataTable value="#{candidatoBean.candidatos}" var="candidatos" class="table">
+                <h3>Vagas</h3><br />
+                <h:dataTable value="#{evento.vagas}" var="vaga" class="table">
                   <h:column>
-                    <c:facet name="header">Nome</c:facet>#{candidatoBean.candidato.nome}
+                    <c:facet name="header">Vaga</c:facet>
+                    #{vaga.especialidade.nome}
                   </h:column>
                   <h:column>
-                    <c:facet name="header">Vaga</c:facet>#{candidatoBean.candidato.vaga}
+                    <c:facet name="header">Quantidade</c:facet>#{vaga.qtd_vagas}
                   </h:column>
-                  <h:column>
-                    <c:facet name="header">Deferir</c:facet>
-                    <h:commandLink value="Deferir" action="#{especialidadeBean.deleteEspecialidade(especialidade.id)}" />
-                  </h:column>
+                  <!--  
                   <h:column>
                     <c:facet name="header">Indeferir</c:facet>
                     <h:commandLink value="Apagar" action="#{especialidadeBean.deleteEspecialidade(especialidade.id)}" />
                   </h:column>
+                  -->
                 </h:dataTable>
               </i:if>
             </div>
-
+		
             <!--Footer-->
             <div class="modal-footer justify-content-center">
               <h:form id="form_submeter">
@@ -267,6 +261,10 @@
           <!--/.Content-->
         </div>
       </div>
+     </ui:repeat>
+        <!--Grid column-->
+      </div>
+      
     </div>
   </main>
   <!--Main layout-->

@@ -90,6 +90,14 @@ public class Evento extends EventoSubject {
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 
 
@@ -120,6 +128,18 @@ public class Evento extends EventoSubject {
 
 	public String getNome() {
 		return nome;
+	}
+
+	public List<Vaga> getVagas() {
+		return vagas;
+	}
+
+	public void setVagas(List<Vaga> vagas) {
+		this.vagas = vagas;
+	}
+
+	public void setFinalizado(boolean finalizado) {
+		this.finalizado = finalizado;
 	}
 
 	public void setNome(String nome) {

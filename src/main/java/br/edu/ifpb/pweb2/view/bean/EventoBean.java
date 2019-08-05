@@ -82,4 +82,5 @@ public class EventoBean extends GenericBean implements Serializable{
 		return eventos;
 	}
 	
+	
 }

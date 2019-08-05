@@ -40,5 +40,17 @@ private static Logger logger = Logger.getLogger(EspecialidadeDAO.class);
 		return q.getResultList();
 	}
 	
+	public List<Especialidade> findEspecialidadesByEvento(Long idevento) {
+		Query query = entityManager.createQuery("select e from Especialidade e LEFT JOIN e.vagas v  LEFT JOIN v.evento ev  where ev.id = :idevento", Especialidade.class);
+		query.setParameter("idevento", idevento);
+		try {
+			List<Especialidade> especialidades = (List<Especialidade>)query.getResultList();
+			return especialidades;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	
 	
 }

@@ -40,8 +40,8 @@
 
                     <div class="md-form">
                       <i class="far fa-comments prefix grey-text"></i>
-                      <h:inputText id="descricao" required="true" value="#{eventoBean.evento.descricao}"
-                        requiredMessage="insert descricao" class="form-control" />
+                      <h:inputTextarea id="descricao" required="true" value="#{eventoBean.evento.descricao}"
+                        requiredMessage="insert descricao" class="form-control" a:maxlength="255" />
                       <h:outputLabel for="descricao" value="descricao" />
                     </div>
 

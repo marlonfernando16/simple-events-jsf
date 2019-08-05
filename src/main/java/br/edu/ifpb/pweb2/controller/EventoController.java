@@ -31,4 +31,12 @@ public class EventoController {
 		List<Evento> evento = eventoDAO.findAll();
 		return evento;
 	}
+	
+	@Transactional
+	public void deleteEvento(Long id) {
+		Evento e = eventoDAO.find(id);
+		eventoDAO.beginTransaction();
+		eventoDAO.delete(e);
+		eventoDAO.commit();
+	}
 }

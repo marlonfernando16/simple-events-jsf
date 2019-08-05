@@ -61,42 +61,44 @@
 
 				<!--Grid row-->
 				<div class="row wow fadeIn">
-
-					<!--Grid column-->
-					<div class="col-lg-5 col-xl-4 mb-4">
-						<!--Featured image-->
-						<div class="view overlay rounded z-depth-1-half">
-							<div class="view overlay">
-								<div class="embed-responsive embed-responsive-16by9">
-									<iframe class="embed-responsive-item"
-										src="https://www.youtube.com/embed/cXTThxoywNQ" allowfullscreen="true"></iframe>
+					<ui:repeat value="#{eventoBean.findAllEventos()}" var="evento" varStatus="loop">
+						<!--Grid column-->
+						<div class="col-lg-5 col-xl-4 mb-4">
+							<!--Featured image-->
+							<div class="view overlay rounded z-depth-1-half">
+								<div class="view overlay">
+									<div class="embed-responsive embed-responsive-16by9">
+										<iframe class="embed-responsive-item"
+											src="https://www.youtube.com/embed/cXTThxoywNQ"
+											allowfullscreen="true"></iframe>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<!--Grid column-->
+						<!--Grid column-->
+						<!--Grid column-->
+						<div class="col-lg-7 col-xl-7 ml-xl-4 mb-4">
+							<h3 class="mb-3 font-weight-bold dark-grey-text">
+								<strong>#{evento.nome}</strong>
+							</h3>
+							<p class="grey-text">#{evento.descricao}</p>
+							<p>
+								#{evento.data}
+							</p>
+							<h:form>
+								<h:commandLink styleClass="btn btn-indigo btn-md"
+									action="/pages/dashboard/eventos?faces-redirect=true" rendered="#{loginBean.usuarioLogado ne null}">
+									<i class="fas fa-user-tag"></i> Candidatar
+								</h:commandLink>
+								<h:commandLink styleClass="btn btn-indigo btn-md"
+									action="/pages/cadastro/cadastro?faces-redirect=true" rendered="#{loginBean.usuarioLogado eq null}">
+									<i class="fas fa-user-tag"></i> Candidatar
+								</h:commandLink>
+							</h:form>
+						</div>
+						<!--Grid column-->
+					</ui:repeat>
 
-					<!--Grid column-->
-					<div class="col-lg-7 col-xl-7 ml-xl-4 mb-4">
-						<h3 class="mb-3 font-weight-bold dark-grey-text">
-							<strong>Primeiro Evento</strong>
-						</h3>
-						<p class="grey-text">Lorem ipsum dolor sit amet, consectetur
-							adipiscing elit. Maecenas vitae tristique risus, vel accumsan nisl.
-							In aliquet efficitur eleifend. Sed rhoncus velit ex, non egestas.</p>
-						<p>
-							<strong>Dia:</strong> 21 de Setembro de 2019 <br /> <strong>Hora:</strong>
-							22h30min <br /> <strong>Vagas:</strong> 10 <br /> <strong>Disponível
-								até: </strong> 10 de Setembro de 2019
-						</p>
-						<h:form>
-							<h:commandLink styleClass="btn btn-indigo btn-md" id="candidatar"
-								action="#{candidatarBean.buttonAction}">
-								<i class="fas fa-user-tag"></i> Candidatar
-							</h:commandLink>
-						</h:form>
-					</div>
-					<!--Grid column-->
 
 				</div>
 				<!--Grid row-->

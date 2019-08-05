@@ -65,9 +65,10 @@
 
 										<div class="md-form">
 											<i class="far fa-comments prefix grey-text"></i>
-											<h:inputText id="descricao" required="true"
+											<h:inputTextarea id="descricao" required="true"
 												value="#{eventoBean.evento.descricao}"
-												requiredMessage="insert descricao" class="form-control" />
+												requiredMessage="insert descricao" class="form-control"
+												a:maxlength="255" />
 											<h:outputLabel for="descricao" value="descricao" />
 										</div>
 
@@ -85,6 +86,12 @@
 											<h:inputText id="local" required="true" value="#{eventoBean.evento.local}"
 												requiredMessage="insert local" class="form-control" />
 											<label for="local">local</label>
+										</div>
+										<div class="md-form">
+											<i class="fas fa-images prefix grey-text"></i>
+											<h:inputText id="imagem" required="true" value="#{eventoBean.evento.imagem}"
+												class="form-control" />
+											<label for="local">URL da imagem (1200x630)</label>
 										</div>
 
 										<hr />
@@ -122,9 +129,8 @@
 
 									<!--Card image-->
 									<div class="view overlay">
-										<img src="https://mdbootstrap.com/wp-content/uploads/2017/11/brandflow-tutorial-fb.jpg"
-											class="card-img-top" alt="" />
-										<a data-toggle="modal" data-target="#modal_description_event">
+										<img src="#{evento.imagem}" class="card-img-top" alt="imagem do evento" />
+										<a data-toggle="modal" data-target="#modal_description_event#{evento.id}">
 											<div class="mask rgba-white-slight">
 
 											</div>
@@ -133,12 +139,14 @@
 
 									<!--Card content-->
 									<div class="card-body">
-										<!--Title-->
-										<h4 class="card-title">#{evento.nome}</h4>
-										<!--Text-->
-										<p class="card-text">Descricao: #{evento.descricao}</p>
-										<p class="card-text">Local: #{evento.local}</p>
-										<p class="card-text">Data: #{evento.data}</p>
+										<a data-toggle="modal" data-target="#modal_description_event#{evento.id}">
+											<!--Title-->
+											<h4 class="card-title">#{evento.nome}</h4>
+											<!--Text-->
+											<p class="card-text">Descricao: #{evento.descricao}</p>
+											<p class="card-text">Local: #{evento.local}</p>
+											<p class="card-text">Data: #{evento.data}</p>
+										</a>
 									</div>
 
 									<!-- Card footer Data de publicaÃ§Ã£o-->
@@ -153,78 +161,101 @@
 						<!--Grid column-->
 					</div>
 					<!--Grid row-->
-					<!-- Modal de submissão -->
-					<div class="modal fade" id="modal_description_event" tabindex="-1" role="dialog"
-						aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog modal-notify modal-info" role="document">
-							<!--Content-->
-							<h:form id="form_submeter">
-								<div class="modal-content">
-									<!--Header-->
-									<div class="modal-header">
-										<p class="heading lead">Show de Humor #{eventoBean.evento.nome}</p>
+					<ui:repeat value="#{eventoBean.findAllEventos()}" var="evento" varStatus="loop">
+						<!-- Modal de submissão -->
+						<div class="modal fade" id="modal_description_event#{evento.id}" tabindex="-1" role="dialog"
+							aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-notify modal-info" role="document">
+								<!--Content-->
+								<h:form id="form_submeter">
+									<div class="modal-content">
+										<!--Header-->
+										<div class="modal-header">
+											<p class="heading lead">#{evento.nome}</p>
 
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true" class="white-text">&times;</span>
-										</button>
-									</div>
-
-									<!--Body-->
-									<div class="modal-body">
-										<div>
-											<h3>Descrição</h3><br />
-											<p>Lorem Ipsum is simply dummy text of the printing and typesetting
-												industry.
-												Lorem Ipsum has been the
-												industry's standard dummy text ever since the 1500s, when an unknown
-												printer
-												took a galley of type and
-												scrambled it to make a type specimen book. It has survived not only five
-												centuries, but also the leap
-												into electronic typesetting, remaining essentially unchanged.
-												#{eventoBean.evento.descricao}</p>
-											<h3>Data</h3><br />
-											<p>10/07/2019 #{eventoBean.evento.data}</p>
-											<h3>Local</h3><br />
-											<p>Praia de Cabo Branco #{eventoBean.evento.local}</p>
-											<h3>Responsável</h3><br />
-											<p>John Oliver #{eventoBean.evento.owner}</p>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true" class="white-text">&times;</span>
+											</button>
 										</div>
-										<i:if test="#{loginBean.admin || loginBean.empresa}">
-											<hr />
-											<h3>Candidatos</h3><br />
-											<h:dataTable value="#{candidatoBean.candidatos}" var="candidatos"
-												class="table">
-												<h:column>
-													<c:facet name="header">Nome</c:facet>#{candidatoBean.candidato.nome}
-												</h:column>
-												<h:column>
-													<c:facet name="header">Vaga</c:facet>#{candidatoBean.candidato.vaga}
-												</h:column>
-												<h:column>
-													<c:facet name="header">Deferir</c:facet>
-													<h:commandLink value="Deferir"
-														action="#{especialidadeBean.deleteEspecialidade(especialidade.id)}" />
-												</h:column>
-												<h:column>
-													<c:facet name="header">Indeferir</c:facet>
-													<h:commandLink value="Apagar"
-														action="#{especialidadeBean.deleteEspecialidade(especialidade.id)}" />
-												</h:column>
-											</h:dataTable>
-										</i:if>
-									</div>
 
-									<!--Footer-->
-									<div class="modal-footer justify-content-center">
-										<h:commandButton value="Inscrever" class="btn btn-info" />
-										<a type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</a>
+										<!--Body-->
+										<div class="modal-body">
+											<div class="text-left">
+												<h3>Descrição</h3><br />
+												<p class="text-justify">
+													#{evento.descricao}
+												</p>
+												<h3>Data</h3><br />
+												<p>#{evento.data}</p>
+												<h3>Local</h3><br />
+												<p>#{evento.local}</p>
+												<h3>Responsável</h3><br />
+												<p>#{evento.owner.nome}</p>
+											</div>
+											<h:panelGroup rendered="#{sessionScope.user.email eq evento.owner.email}">
+												<hr />
+												<h3>Candidatos</h3><br />
+												<h:dataTable value="#{candidatoBean.candidatos}" var="candidatos"
+													class="table">
+													<h:column>
+														<c:facet name="header">Nome</c:facet>
+														#{candidatoBean.candidato.nome}
+													</h:column>
+													<h:column>
+														<c:facet name="header">Vaga</c:facet>
+														#{candidatoBean.candidato.vaga}
+													</h:column>
+													<h:column>
+														<c:facet name="header">Deferir</c:facet>
+														<h:commandLink styleClass="btn btn-info btn-sm my-0 p"
+															action="#{eventoBean.deferir(vaga.especialidade, evento)}">
+															<i class="fas fa-check"></i>
+														</h:commandLink>
+													</h:column>
+													<h:column>
+														<c:facet name="header">Indeferir</c:facet>
+														<h:commandLink styleClass="btn btn-danger btn-sm my-0 p"
+															action="#{eventoBean.indeferir(vaga.especialidade, evento)}">
+															<i class="fas fa-ban"></i>
+														</h:commandLink>
+													</h:column>
+												</h:dataTable>
+											</h:panelGroup>
+											<h:panelGroup rendered="#{sessionScope.user.email ne evento.owner.email}">
+												<hr />
+												<h3>Vagas</h3><br />
+												<h:dataTable value="#{evento.vagas}" var="vaga" class="table">
+													<h:column>
+														<c:facet name="header">Vaga</c:facet>
+														#{vaga.especialidade.nome}
+													</h:column>
+													<h:column>
+														<c:facet name="header">Quantidade</c:facet>#{vaga.qtd_vagas}
+													</h:column>
+													<h:column>
+														<c:facet name="header">Inscrever</c:facet>
+														<h:commandLink styleClass="btn btn-info btn-sm my-0 p"
+															action="#{eventoBean.inscrever(vaga.especialidade, evento)}">
+															<i class="fas fa-check"></i>
+														</h:commandLink>
+													</h:column>
+												</h:dataTable>
+											</h:panelGroup>
+										</div>
+
+										<!--Footer-->
+										<div class="modal-footer justify-content-center">
+											<h:commandButton value="Deletar Evento" class="btn btn-danger"
+												rendered="#{sessionScope.user.email eq evento.owner.email}" action="#{eventoBean.deleteEvento(evento.id)}" />
+											<h:commandButton value="Cancelar Inscrição" class="btn btn-danger"
+												rendered="#{sessionScope.user.email ne evento.owner.email}" />
+										</div>
 									</div>
-								</div>
-								<!--/.Content-->
-							</h:form>
+									<!--/.Content-->
+								</h:form>
+							</div>
 						</div>
-					</div>
+					</ui:repeat>
 				</div>
 			</main>
 			<!--Main layout-->

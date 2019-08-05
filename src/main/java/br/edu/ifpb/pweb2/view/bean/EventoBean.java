@@ -82,5 +82,14 @@ public class EventoBean extends GenericBean implements Serializable{
 		return eventos;
 	}
 	
+	public String deleteEvento(Long id) {
+		fachada.deleteEvento(id);
+		return "/pages/dashboard/eventos?faces-redirect=true";
+	}
+	
+	public String findMyEventos(Long id) {
+		System.out.println(id);
+		return null;
+	}
 	
 }

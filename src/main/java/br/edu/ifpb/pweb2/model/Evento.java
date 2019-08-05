@@ -28,7 +28,7 @@ public class Evento extends EventoSubject {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "evento", cascade = CascadeType.ALL)
 	private List<Vaga> vagas = new ArrayList<>();
 
-	@NotEmpty(message = "Descricao e obrigatoria")
+	@NotEmpty(message = "Nome e obrigatorio")
 	private String nome;
 	
 	@NotEmpty(message = "Descricao e obrigatoria")
@@ -42,7 +42,7 @@ public class Evento extends EventoSubject {
 	@NotEmpty(message = "Local e obrigatorio")
 	private String local;
 	
-
+	private String imagem;
 
 	@ManyToOne
 	private User owner;
@@ -152,7 +152,7 @@ public class Evento extends EventoSubject {
 	@Override
 	public String toString() {
 		return "Evento [id=" + id + "nome "+nome+" descricao=" + descricao + ", data=" + data + ", local=" + local + ", owner="
-				+ owner + ", vagas=" +  ", avaliacao_eventos=" + avaliacao_eventos +"finalizado"+finalizado+ "]";
+				+ owner + ", vagas=" +  ", avaliacao_eventos=" + avaliacao_eventos +"finalizado="+finalizado+"imagem="+imagem +"]";
 	}
 	/*
 	public double getMediaAvaliacao() {
@@ -192,6 +192,14 @@ public class Evento extends EventoSubject {
 	public Evento getState() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 
 }

@@ -125,5 +125,8 @@ public class Fachada implements Serializable {
 	public List<Evento>findAllEventos(){
 		return eventoController.findAllEventos();
 	}
-
+	public void deleteEvento(Long id) {
+		eventoController.deleteEvento(id);
+	}
+	
 }

@@ -12,80 +12,116 @@
       <!--Main layout-->
       <main class="pt-5 mx-lg-5">
         <div class="container-fluid mt-5">
+          <!-- Heading -->
+          <div class="card mb-4 wow fadeIn">
+
+            <!--Card content-->
+            <div class="card-body d-sm-flex justify-content-between">
+
+              <h4 class="mb-2 mb-sm-0 pt-1">
+                <span>Submissões</span>
+              </h4>
+
+              <form class="d-flex justify-content-center">
+                <!-- Default input -->
+                <input type="search" placeholder="Type your query" aria-label="Search" class="form-control" />
+                <button class="btn btn-primary btn-sm my-0 p" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+              </form>
+
+            </div>
+
+
+          </div>
+          <!-- Heading -->
           <!--Grid row-->
           <div class="row wow fadeIn">
-    
-            <!--Grid column-->
-            <div class="col-md-3 mb-2">
-    
-              <!--Card-->
-              <div class="card">
-    
-                <!--Card image-->
-                <div class="view overlay">
-                  <img src="https://mdbootstrap.com/wp-content/uploads/2017/11/brandflow-tutorial-fb.jpg"
-                    class="card-img-top" alt="" />
-                  <a data-toggle="modal" data-target="#modalRegisterForm">
-                    <div class="mask rgba-white-slight">
-    
-                    </div>
-                  </a>
+            <ui:repeat value="#{eventoBean.findMyEventos(sessionScope.user.id)}" var="evento" varStatus="loop">
+              <!--Grid column-->
+              <div class="col-md-3 mb-2">
+
+                <!--Card-->
+                <div class="card">
+
+                  <!--Card image-->
+                  <div class="view overlay">
+                    <img src="#{evento.imagem}" class="card-img-top" alt="imagem do evento" />
+                    <a data-toggle="modal" data-target="#modal_description_event#{evento.id}">
+                      <div class="mask rgba-white-slight">
+
+                      </div>
+                    </a>
+                  </div>
+
+                  <!--Card content-->
+                  <div class="card-body">
+                    <a data-toggle="modal" data-target="#modal_description_event#{evento.id}">
+                      <!--Title-->
+                      <h4 class="card-title">#{evento.nome}</h4>
+                      <!--Text-->
+                      <p class="card-text">Descricao: #{evento.descricao}</p>
+                      <p class="card-text">Local: #{evento.local}</p>
+                      <p class="card-text">Data: #{evento.data}</p>
+                    </a>
+                  </div>
+
+                  <!-- Card footer Data de publicaÃ§Ã£o-->
+                  <div class="card-footer text-muted text-center mt-4">2 days
+                    ago</div>
+
                 </div>
-    
-                <!--Card content-->
-                <div class="card-body">
-                  <!--Title-->
-                  <h4 class="card-title">Jampa Shows</h4>
-                  <!--Text-->
-                  <p class="card-text">Local: {{JoÃ£o Pessoa}}</p>
-                  <p class="card-text">Data: {{25 de Agosto de 2019}}</p>
-                </div>
-    
-                <!-- Card footer Data de publicaÃ§Ã£o-->
-                <div class="card-footer text-muted text-center mt-4">2 days
-                  ago</div>
-    
+                <!--/.Card-->
+
               </div>
-              <!--/.Card-->
-    
-            </div>
+            </ui:repeat>
             <!--Grid column-->
           </div>
           <!--Grid row-->
-          <!-- Modal de submissão -->
-          <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <h:form id="login-form">
-                  <div class="modal-header text-center">
-                    <h4 class="modal-title w-100 font-weight-bold">Cadastro</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body mx-3">
-                    <div class="md-form mb-5">
-                      <i class="fas fa-user prefix grey-text"></i>
-                      <h:inputText class="form-control" id="nome" required="true" value="#{user.nome}"
-                        requiredMessage="insert login" />
-                      <h:outputLabel for="nome" value="Nome" />
+          <ui:repeat value="#{eventoBean.findMyEventos(sessionScope.user.id)}" var="evento" varStatus="loop">
+            <!-- Modal de submissão -->
+            <div class="modal fade" id="modal_description_event#{evento.id}" tabindex="-1" role="dialog"
+              aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-notify modal-info" role="document">
+                <!--Content-->
+                <h:form id="form_submeter">
+                  <div class="modal-content">
+                    <!--Header-->
+                    <div class="modal-header">
+                      <p class="heading lead">#{evento.nome}</p>
+
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text">&times;</span>
+                      </button>
                     </div>
-    
-                    <div class="md-form mb-5">
-                      <i class="fas fa-phone prefix grey-text"></i>
-                      <h:inputText class="form-control" id="phone" required="true" value="#{user.phone}"
-                        requiredMessage="insert phone" />
-                      <h:outputLabel for="phone" value="Telefone" />
+
+                    <!--Body-->
+                    <div class="modal-body">
+                      <div class="text-left">
+                        <h3>Descrição</h3><br />
+                        <p class="text-justify">
+                          #{evento.descricao}
+                        </p>
+                        <h3>Data</h3><br />
+                        <p>#{evento.data}</p>
+                        <h3>Local</h3><br />
+                        <p>#{evento.local}</p>
+                        <h3>Responsável</h3><br />
+                        <p>#{evento.owner.nome}</p>
+                      </div>
+                    </div>
+
+                    <!--Footer-->
+                    <div class="modal-footer justify-content-center">
+                      <h:commandButton value="Cancelar Inscrição" class="btn btn-danger"
+                        rendered="#{sessionScope.user.email ne evento.owner.email}" />
                     </div>
                   </div>
-                  <div class="modal-footer d-flex justify-content-center">
-                    <h:commandButton value="Cadastrar" class="btn btn-indigo" action="#{loginBean.autentique}" />
-                  </div>
+                  <!--/.Content-->
                 </h:form>
               </div>
             </div>
-          </div>
+          </ui:repeat>
         </div>
       </main>
       <!--Main layout-->

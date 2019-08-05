@@ -3,8 +3,7 @@
   PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
   xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:f="http://xmlns.jcp.org/jsf/core"
-  xmlns:p="http://primefaces.org/ui" xmlns:i="http://xmlns.jcp.org/jsp/jstl/core"
-  xmlns:c="http://java.sun.com/jsf/core"
+  xmlns:p="http://primefaces.org/ui" xmlns:i="http://xmlns.jcp.org/jsp/jstl/core" xmlns:c="http://java.sun.com/jsf/core"
   xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
@@ -35,14 +34,17 @@
       width: 100%;
       position: absolute;
     }
+
     .modal-backdrop {
-    	z-index: -1;
+      z-index: -1;
     }
-    .navbar{
-    	z-index: -2;
+
+    .navbar {
+      z-index: -2;
     }
+
     footer.page-footer .footer-copyright {
-    	z-index: -2!important;
+      z-index: -2 !important;
     }
   </style>
 </h:head>
@@ -173,113 +175,114 @@
       <!--Grid row-->
       <div class="row wow fadeIn">
 
-  	 <ui:repeat value="#{eventoBean.findAllEventos()}" var="evento" varStatus="loop">
-        
-        <!--Grid column-->
-        <div class="col-md-3 mb-2">
+        <ui:repeat value="#{eventoBean.findAllEventos()}" var="evento" varStatus="loop">
 
-          <!--Card-->
-          <div class="card">
+          <!--Grid column-->
+          <div class="col-md-3 mb-2">
 
-            <!--Card image-->
-            <div class="view overlay">
-              <img src="https://mdbootstrap.com/wp-content/uploads/2017/11/brandflow-tutorial-fb.jpg"
-                class="card-img-top" alt="" />
-              <a data-toggle="modal" data-target="#modal_description_event#{evento.id}">
-                <div class="mask rgba-white-slight">
+            <!--Card-->
+            <div class="card">
 
-                </div>	
-              </a>
-            </div>
+              <!--Card image-->
+              <div class="view overlay">
+                <img src="https://mdbootstrap.com/wp-content/uploads/2017/11/brandflow-tutorial-fb.jpg"
+                  class="card-img-top" alt="" />
+                <a data-toggle="modal" data-target="#modal_description_event#{evento.id}">
+                  <div class="mask rgba-white-slight">
 
-            <!--Card content-->
-            <div class="card-body">
-              <!--Title-->
-              <h4 class="card-title">#{evento.nome}</h4>
-              <!--Text-->
-              <p class="card-text">Descricao: #{evento.descricao}</p>
-              <p class="card-text">Local: #{evento.local}</p>
-              <p class="card-text">Data: #{evento.data}</p>
-            </div>
-
-            <!-- Card footer Data de publicaÃ§Ã£o-->
-            <div class="card-footer text-muted text-center mt-4">2 days
-              ago</div>
-
-          </div>
-          <!--/.Card-->
-		</div>
-        
-        <!--Grid row-->
-      <!-- Modal de submissão -->
-      <div class="modal fade" id="modal_description_event#{evento.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-notify modal-info" role="document">
-          <!--Content-->
-          <div class="modal-content">
-            <!--Header-->
-            <div class="modal-header">
-              <p class="heading lead">#{evento.nome}</p>
-
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true" class="white-text">&times;</span>
-              </button>
-            </div>
-
-            <!--Body-->
-            <div class="modal-body">
-               <div> 
-                <h3>Descrição</h3><br />
-                <p>#{evento.descricao}</p>
-                <h3>Data</h3><br />
-                <p>#{evento.data}</p>
-                <h3>Local</h3><br />
-                <p>#{evento.local}</p>
-                <h3>Criado por:</h3><br />                
-                <p>#{evento.owner.nome}</p>
+                  </div>
+                </a>
               </div>
-              <h:panelGroup rendered="#{sessionScope.user.email ne evento.owner.email}">
-                <hr />
-                <h3>Vagas</h3><br />
-                <h:dataTable value="#{evento.vagas}" var="vaga" class="table">
-                  <h:column>
-                    <c:facet name="header">Vaga</c:facet>
-                    #{vaga.especialidade.nome}
-                  </h:column>
-                  <h:column>
-                    <c:facet name="header">Quantidade</c:facet>#{vaga.qtd_vagas}
-                  </h:column>
-                  <!--  
+
+              <!--Card content-->
+              <div class="card-body">
+                <!--Title-->
+                <h4 class="card-title">#{evento.nome}</h4>
+                <!--Text-->
+                <p class="card-text">Descricao: #{evento.descricao}</p>
+                <p class="card-text">Local: #{evento.local}</p>
+                <p class="card-text">Data: #{evento.data}</p>
+              </div>
+
+              <!-- Card footer Data de publicaÃ§Ã£o-->
+              <div class="card-footer text-muted text-center mt-4">2 days
+                ago</div>
+
+            </div>
+            <!--/.Card-->
+          </div>
+
+          <!--Grid row-->
+          <!-- Modal de submissão -->
+          <div class="modal fade" id="modal_description_event#{evento.id}" tabindex="-1" role="dialog"
+            aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-notify modal-info" role="document">
+              <!--Content-->
+              <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                  <p class="heading lead">#{evento.nome}</p>
+
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                  </button>
+                </div>
+
+                <!--Body-->
+                <div class="modal-body">
+                  <div>
+                    <h3>Descrição</h3><br />
+                    <p>#{evento.descricao}</p>
+                    <h3>Data</h3><br />
+                    <p>#{evento.data}</p>
+                    <h3>Local</h3><br />
+                    <p>#{evento.local}</p>
+                    <h3>Criado por:</h3><br />
+                    <p>#{evento.owner.nome}</p>
+                  </div>
+                  <h:panelGroup rendered="#{sessionScope.user.email ne evento.owner.email}">
+                    <hr />
+                    <h3>Vagas</h3><br />
+                    <h:dataTable value="#{evento.vagas}" var="vaga" class="table">
+                      <h:column>
+                        <c:facet name="header">Vaga</c:facet>
+                        #{vaga.especialidade.nome}
+                      </h:column>
+                      <h:column>
+                        <c:facet name="header">Quantidade</c:facet>#{vaga.qtd_vagas}
+                      </h:column>
+                      <!--  
                   <h:column>
                     <c:facet name="header">Indeferir</c:facet>
                     <h:commandLink value="Apagar" action="#{especialidadeBean.deleteEspecialidade(especialidade.id)}" />
                   </h:column>
                   -->
-                </h:dataTable>
-              </h:panelGroup>
-            </div>
-		
-            <!--Footer-->
-            <div class="modal-footer justify-content-center">
-              <h:form id="form_submeter">
-                <h:commandButton value="Inscrever" class="btn btn-info" />
-                <a type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</a>
-              </h:form>
+                    </h:dataTable>
+                  </h:panelGroup>
+                </div>
+
+                <!--Footer-->
+                <div class="modal-footer justify-content-center">
+                  <h:form id="form_submeter">
+                    <h:commandButton value="Inscrever" class="btn btn-info" />
+                    <a type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</a>
+                  </h:form>
+                </div>
+              </div>
+              <!--/.Content-->
             </div>
           </div>
-          <!--/.Content-->
-        </div>
-      </div>
-     </ui:repeat>
+        </ui:repeat>
         <!--Grid column-->
       </div>
-      
+
     </div>
   </main>
   <!--Main layout-->
 
   <!--Footer-->
-  <footer class="page-footer fixed-bottom text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn" style="z-index: -2;">
+  <footer class="page-footer fixed-bottom text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn"
+    style="z-index: -2;">
     <!--Copyright-->
     <div class="footer-copyright py-3">
       © 2019 Copyright:

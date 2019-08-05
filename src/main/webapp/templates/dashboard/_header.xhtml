@@ -59,9 +59,9 @@
 	<div class="sidebar-fixed position-fixed">
 		<h:form>
 			<div class="list-group list-group-flush">
-				<a class="logo-wrapper waves-effect">
+				<h:commandLink class="logo-wrapper waves-effect" action="/pages/login/login?faces-redirect=true">
 					<h:graphicImage library="dashboard" name="img/logo.jpg" />
-				</a>
+				</h:commandLink>
 				<!-- Listar todos os eventos -->
 				<h:commandLink styleClass="list-group-item active waves-effect"
 					action="/pages/dashboard/eventos?faces-redirect=true">
@@ -69,7 +69,8 @@
 				</h:commandLink>
 				<!-- Listar todas as especialidades -->
 				<h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
-					action="/pages/dashboard/especialidades?faces-redirect=true">
+					action="/pages/dashboard/especialidades?faces-redirect=true"
+					rendered="#{loginBean.admin || loginBean.empresa}">
 					<i class="fas fa-calendar mr-3"></i>Especialidades
 				</h:commandLink>
 				<!-- Listar apenas os eventos submetidos -->
@@ -79,7 +80,8 @@
 				</h:commandLink>
 				<!-- Ver perfil do usuário -->
 				<h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
-					action="/pages/dashboard/perfil?faces-redirect=true">
+					action="/pages/dashboard/perfil?faces-redirect=true"
+					rendered="#{loginBean.admin || loginBean.empresa}">
 					<i class="fas fa-user mr-3"></i>Perfil
 				</h:commandLink>
 			</div>

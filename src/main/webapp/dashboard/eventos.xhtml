@@ -35,6 +35,15 @@
       width: 100%;
       position: absolute;
     }
+    .modal-backdrop {
+    	z-index: -1;
+    }
+    .navbar{
+    	z-index: -2;
+    }
+    footer.page-footer .footer-copyright {
+    	z-index: -2!important;
+    }
   </style>
 </h:head>
 
@@ -270,7 +279,7 @@
   <!--Main layout-->
 
   <!--Footer-->
-  <footer class="page-footer fixed-bottom text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
+  <footer class="page-footer fixed-bottom text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn" style="z-index: -2;">
     <!--Copyright-->
     <div class="footer-copyright py-3">
       © 2019 Copyright:

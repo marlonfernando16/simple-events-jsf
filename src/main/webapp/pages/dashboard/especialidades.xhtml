@@ -27,54 +27,14 @@
 									<i class="fas fa-search"></i>
 								</button>
 								<button type="button" class="btn btn-primary btn-sm my-0 p" data-toggle="modal"
-									data-target="#basicExampleModal">
+									data-target="#especialidadeModal">
 									<i class="fas fa-plus"></i>
 								</button>
 							</form>
 						</div>
 					</div>
 					<!-- Heading -->
-					<!-- Modal -->
-					<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog"
-						aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<h:form id="especialidade_form">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">Cadastro de Especialidade</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body">
-										<!-- Form -->
-										<p:messages></p:messages>
-										<div class="md-form">
-											<i class="fas fa-address-card prefix grey-text"></i>
-											<h:inputText class="form-control" id="nome" required="true"
-												value="#{especialidadeBean.especialidade.nome}"
-												requiredMessage="insira o nome da especialidade" />
-											<h:outputLabel for="nome" value="Nome" />
-										</div>
-										<div class="md-form">
-											<i class="fas fa-align-right prefix grey-text"></i>
-											<h:inputText id="descricao" required="true"
-												value="#{especialidadeBean.especialidade.descricao}"
-												requiredMessage="insert password" class="form-control" />
-											<h:outputLabel for="descricao" value="descricao" />
-										</div>
 
-
-										<!-- Form -->
-									</div>
-									<div class="modal-footer">
-										<h:commandButton value="Cadastrar" styleClass="btn btn-primary"
-											action="#{especialidadeBean.createEspecialidade}" />
-									</div>
-								</div>
-							</h:form>
-						</div>
-					</div>
 					<!--Grid row-->
 					<div class="row wow fadeIn">
 
@@ -96,14 +56,14 @@
 											</h:column>
 											<h:column>
 												<c:facet name="header">Edit</c:facet>
-												<h:commandLink
-													action="#{especialidadeBean.editEspecialidade(especialidade.id)}">
+												<h:commandLink styleClass="btn btn-primary btn-sm my-0 p"
+													action="#{especialidadeBean.editEspecialidade(especialidade)}">
 													<i class="fas fa-edit"></i>
 												</h:commandLink>
 											</h:column>
 											<h:column>
 												<c:facet name="header">Delete</c:facet>
-												<h:commandLink
+												<h:commandLink styleClass="btn btn-primary btn-sm my-0 p"
 													action="#{especialidadeBean.deleteEspecialidade(especialidade.id)}">
 													<i class="fas fa-trash-alt"></i>
 												</h:commandLink>
@@ -117,6 +77,48 @@
 						<!--Grid column-->
 					</div>
 					<!--Grid row-->
+					<!-- Modal -->
+					<h:form id="especialidade_form">
+						<div class="modal fade" id="especialidadeModal" tabindex="-1" role="dialog"
+							aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Cadastro de
+											Especialidade</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<!-- Form -->
+										<p:messages></p:messages>
+										<div class="md-form">
+											<i class="fas fa-address-card prefix grey-text"></i>
+											<h:inputText class="form-control" id="nome" required="true"
+												value="#{especialidade.nome}"
+												requiredMessage="insira o nome da especialidade" />
+											<h:outputLabel for="nome" value="Nome" />
+										</div>
+										<div class="md-form">
+											<i class="fas fa-align-right prefix grey-text"></i>
+											<h:inputText id="descricao" required="true"
+												value="#{especialidade.descricao}" requiredMessage="insert password"
+												class="form-control" />
+											<h:outputLabel for="descricao" value="descricao" />
+										</div>
+
+
+										<!-- Form -->
+									</div>
+									<div class="modal-footer">
+										<h:commandButton value="Cadastrar" styleClass="btn btn-primary"
+											action="#{especialidadeBean.createEspecialidade}" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</h:form>
 				</div>
 			</main>
 			<!--Main layout-->

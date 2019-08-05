@@ -27,17 +27,10 @@ public class CandidatoVagaBean extends GenericBean implements Serializable {
 	@Inject 
 	private Fachada fachada;
 	
-
-	public List<String> getVagas() {
-		return vagas;
-	}
-	
 	public void add(String vaga) {
 		this.vagas.add(vaga);
 	}
-	public void setVagas(List<String> vagas) {
-		this.vagas = vagas;
-	}
+
 
 	public String candidatar() {
 		System.out.println("vagaseiiiii ");
@@ -45,7 +38,13 @@ public class CandidatoVagaBean extends GenericBean implements Serializable {
 			System.out.println(s);
 		}
 		return null;
-
 	}
 
+	public List<String> getVagas() {
+		return vagas;
+	}
+	
+	public void setVagas(List<String> vagas) {
+		this.vagas = vagas;
+	}
 }

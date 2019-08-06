@@ -86,8 +86,7 @@ public class Vaga extends VagasObserver {
 		
 	}
 
-	@Override
-	public EventoSubject getEvento() {
+	public Evento getEvento() {
 		return evento;
 	}
 

@@ -27,6 +27,17 @@ public class EventoController {
 		}	
 	}
 	
+	@Transactional
+	public Evento updateEvento(Evento evento) {
+			eventoDAO.beginTransaction();
+			eventoDAO.update(evento);
+			eventoDAO.commit();
+			return evento;
+			
+	}
+	
+	
+	
 	public List<Evento> findAllEventos() {
 		List<Evento> evento = eventoDAO.findAll();
 		return evento;
@@ -39,4 +50,5 @@ public class EventoController {
 		eventoDAO.delete(e);
 		eventoDAO.commit();
 	}
+	
 }

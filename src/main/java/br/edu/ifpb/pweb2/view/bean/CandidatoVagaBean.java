@@ -20,15 +20,15 @@ public class CandidatoVagaBean extends GenericBean implements Serializable {
 	
 	List<String> vagas;
 	
-	boolean[] candidatos;
-	
-	
-	public boolean[] getCandidatos() {
+	String[] candidatos;
+
+
+	public String[] getCandidatos() {
 		return candidatos;
 	}
 
 
-	public void setCandidatos(boolean[] candidatos) {
+	public void setCandidatos(String[] candidatos) {
 		this.candidatos = candidatos;
 	}
 
@@ -36,7 +36,7 @@ public class CandidatoVagaBean extends GenericBean implements Serializable {
 	@PostConstruct
 	private void init() {
 		vagas = new ArrayList<String>();
-		candidatos = new boolean[100];
+		candidatos = new String[100];
 	}
 	
 	@Inject 
@@ -57,10 +57,11 @@ public class CandidatoVagaBean extends GenericBean implements Serializable {
 	}
 	
 	public String finalizar() {
-		System.out.println("aiiiiiiiiiii");
-		for(boolean c: candidatos) {
-			System.out.println(c);
+		if(fachada.finalizarEvento(candidatos)) {
+			this.addSuccessMessage("evento finalizado");
+			return "/dashboard/eventos?redirect=true";
 		}
+		
 		return null;
 	}
 		

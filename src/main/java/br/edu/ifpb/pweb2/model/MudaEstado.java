@@ -4,9 +4,9 @@ public class MudaEstado implements MudarEstadoStrategy {
 
 	@Override
 	public void setState(boolean isempresa, State state, CandidatoVaga candidato ) {
-			if(state.equals("DEFERIDO")) {
+			if(state == State.APROVADO) {
 				candidato.setState(alterarAprovado(isempresa));
-			}else if(state.equals("NAO_DEFERIDO")) {			   
+			}else if(state == State.NAO_APROVADO) {			   
 				candidato.setState(alterarNaoAprovado(isempresa));
 			}else {
 				candidato.setState(State.NAO_AVALIADO);

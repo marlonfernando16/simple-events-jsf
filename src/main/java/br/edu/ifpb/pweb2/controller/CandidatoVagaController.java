@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import br.edu.ifpb.pweb2.dao.CandidatoVagaDAO;
 import br.edu.ifpb.pweb2.dao.Transactional;
 import br.edu.ifpb.pweb2.model.CandidatoVaga;
+import br.edu.ifpb.pweb2.model.Vaga;
 
 
 public class CandidatoVagaController implements Serializable {
@@ -21,5 +22,17 @@ public class CandidatoVagaController implements Serializable {
 			candidatoVagaDAO.insert(candidatoVaga);
 			candidatoVagaDAO.commit();
 			return candidatoVaga;	
+	}
+	
+	@Transactional
+	public CandidatoVaga updateCandidatoVaga(CandidatoVaga candidatoVaga)  {
+			candidatoVagaDAO.beginTransaction();
+			candidatoVagaDAO.update(candidatoVaga);
+			candidatoVagaDAO.commit();
+			return candidatoVaga;	
+	}
+	
+	public CandidatoVaga find(long id) {
+		return candidatoVagaDAO.find(id);
 	}
 }

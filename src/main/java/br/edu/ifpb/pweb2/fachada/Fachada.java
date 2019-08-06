@@ -45,6 +45,8 @@ public class Fachada implements Serializable {
 	private VagaController vagaController;
 	@Inject
 	private CandidatoVagaController candidatoVagaController;
+	@Inject 
+	MudaEstado mudaEstado;
 
 	
 	@PostConstruct
@@ -135,18 +137,42 @@ public class Fachada implements Serializable {
 	
 	public boolean candidatar(List<String> vagas) {
 		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-		MudaEstado mv = new MudaEstado();
+		
 		for(String idvagaS: vagas) {
 			long idvaga = Long.parseLong(idvagaS);
 			Vaga vaga = vagaController.find(idvaga);
 			CandidatoVaga cv= new CandidatoVaga();
 			cv.setCandidato(user);
-			mv.setState(false, State.NAO_AVALIADO, cv);
+			mudaEstado.setState(false, State.NAO_AVALIADO, cv);
 			cv.setVaga(vaga);
 			candidatoVagaController.createCandidatoVaga(cv);
 			
 		}
 		return true;
+	}
+	
+	public boolean finalizarEvento(String[] candidatovagaIds) {
+		Evento evento = null;
+		for(String cvid: candidatovagaIds) {
+			long id = Long.parseLong(cvid);
+			CandidatoVaga cv = candidatoVagaController.find(id);
+			evento = cv.getVaga().getEvento();
+			mudaEstado.setState(false, State.APROVADO, cv);
+			candidatoVagaController.updateCandidatoVaga(cv);
+		}
+		for (Vaga vaga : evento.getVagas()){
+			for(CandidatoVaga cv : vaga.getCandidatovaga()) {
+				if(cv.getState()== State.NAO_AVALIADO) {
+					mudaEstado.setState(false, State.NAO_APROVADO, cv);
+					candidatoVagaController.updateCandidatoVaga(cv);
+				}
+			}
+		}
+		evento.setFinalizado(true);
+		evento.notifyObservers();
+		eventoController.updateEvento(evento);
+		return true;
+		
 	}
 	
 }

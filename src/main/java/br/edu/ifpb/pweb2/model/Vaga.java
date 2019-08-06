@@ -32,7 +32,7 @@ public class Vaga extends VagasObserver {
 	
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "vaga", cascade = CascadeType.ALL)
-	private List<Candidato_Vaga> candidato_vaga = new ArrayList<>();
+	private List<CandidatoVaga> candidato_vaga = new ArrayList<>();
 	
 	@OneToOne
 	private Especialidade especialidade;
@@ -59,15 +59,15 @@ public class Vaga extends VagasObserver {
 		this.qtd_vagas = qtd_vagas;
 	}
 
-	public List<Candidato_Vaga> getCandidato_vaga() {
+	public List<CandidatoVaga> getCandidato_vaga() {
 		return candidato_vaga;
 	}
 
-	public void setCandidato_vaga(ArrayList<Candidato_Vaga> candidato_vaga) {
+	public void setCandidato_vaga(ArrayList<CandidatoVaga> candidato_vaga) {
 		this.candidato_vaga = candidato_vaga;
 	}
 	
-	public void setCandidato(int i,Candidato_Vaga candidato) {
+	public void setCandidato(int i,CandidatoVaga candidato) {
 		this.candidato_vaga.add(i,candidato);
 	}
 	

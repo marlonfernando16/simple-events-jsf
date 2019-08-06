@@ -17,6 +17,10 @@ public class VagaController implements Serializable {
 	
 	VagaController(){};
 	
+	public Vaga find(long id) {
+		return vagaDAO.find(id);
+	}
+	
 	@Transactional
 	public Vaga createVaga(Vaga vaga)  {
 		vagaDAO.beginTransaction();

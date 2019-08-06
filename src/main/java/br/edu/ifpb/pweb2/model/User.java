@@ -51,7 +51,7 @@ public class User implements Serializable {
 	private List<Evento> eventos = new ArrayList<>();
 
 	@ManyToOne
-	private Candidato_Vaga candidato_vaga;
+	private CandidatoVaga candidato_vaga;
 
 	@ManyToOne
 	private Avaliacao_Evento avaliacao_evento;
@@ -67,11 +67,11 @@ public class User implements Serializable {
 		this.avaliacao_evento = avaliacao_evento;
 	}
 
-	public Candidato_Vaga getCandidato_vaga() {
+	public CandidatoVaga getCandidato_vaga() {
 		return candidato_vaga;
 	}
 
-	public void setCandidato_vaga(Candidato_Vaga candidato_vaga) {
+	public void setCandidato_vaga(CandidatoVaga candidato_vaga) {
 		this.candidato_vaga = candidato_vaga;
 	}
 

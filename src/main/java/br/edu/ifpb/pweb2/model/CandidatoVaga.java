@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_candidato_vaga")
-public class Candidato_Vaga {
+public class CandidatoVaga {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class Candidato_Vaga {
 	@OneToOne
 	private User candidato;
 
-	public Candidato_Vaga() {};
+	public CandidatoVaga() {};
 
 	public Vaga getVaga() {
 		return vaga;

@@ -33,12 +33,15 @@ public class CandidatoVagaBean extends GenericBean implements Serializable {
 
 
 	public String candidatar() {
-		System.out.println("vagaseiiiii ");
-		for (String s : vagas) {
-			System.out.println(s);
+		if(fachada.candidatar(vagas)) {
+			this.addSuccessMessage("candidatura efetuada com suceso");
+			return "/dashboard/eventos?redirect=true";
 		}
-		return null;
+			this.addErrorMessage("não foi possível efetuar sua candidatura");
+			return null;
 	}
+		
+	
 
 	public List<String> getVagas() {
 		return vagas;

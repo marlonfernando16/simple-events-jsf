@@ -174,8 +174,8 @@
 
       <!--Grid row-->
       <div class="row wow fadeIn">
-
-        <ui:repeat value="#{eventoBean.findAllEventos()}" var="evento" varStatus="loop">
+		
+        <i:forEach items="#{eventoBean.findAllEventos()}" var="evento">
 
           <!--Grid column-->
           <div class="col-md-3 mb-2">
@@ -217,12 +217,13 @@
           <div class="modal fade" id="modal_description_event#{evento.id}" tabindex="-1" role="dialog"
             aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-notify modal-info" role="document">
-              <h:form id="form_submeter">
+             
+              <h:form id="modal_description_event#{evento.id}" tabindex="-1">
                 <!--Content-->
                 <div class="modal-content">
                   <!--Header-->
                   <div class="modal-header">
-                    <p class="heading lead">#{evento.nome}</p>
+                    <p class="heading lead">#{evento.nome} </p>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true" class="white-text">&times;</span>
@@ -246,7 +247,7 @@
                       <h3>Vagas</h3><br />
                       <p:selectManyCheckbox id="checkboxTest" value="#{candidatoVagaBean.vagas}">
                         <f:selectItems value="#{evento.vagas}" var="vaga" itemLabel="#{vaga.especialidade.nome}"
-                          itemValue="#{vaga}" />
+                          itemValue="#{vaga.id}" />
                       </p:selectManyCheckbox>
                     </h:panelGroup>
                   </div>
@@ -261,7 +262,9 @@
               </h:form>
             </div>
           </div>
-        </ui:repeat>
+          
+        </i:forEach>
+        
         <!--Grid column-->
       </div>
 

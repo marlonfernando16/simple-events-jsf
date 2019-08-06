@@ -8,20 +8,22 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import br.edu.ifpb.pweb2.controller.AdminController;
+import br.edu.ifpb.pweb2.controller.CandidatoVagaController;
 import br.edu.ifpb.pweb2.controller.EmpresaController;
+import br.edu.ifpb.pweb2.controller.EspecialidadeController;
+import br.edu.ifpb.pweb2.controller.EventoController;
 import br.edu.ifpb.pweb2.controller.LoginController;
 import br.edu.ifpb.pweb2.controller.UserController;
 import br.edu.ifpb.pweb2.controller.VagaController;
-import br.edu.ifpb.pweb2.model.User;
-import br.edu.ifpb.pweb2.model.Vaga;
-import br.edu.ifpb.pweb2.controller.EspecialidadeController;
-import br.edu.ifpb.pweb2.controller.UserController;
 import br.edu.ifpb.pweb2.model.Admin;
+import br.edu.ifpb.pweb2.model.CandidatoVaga;
 import br.edu.ifpb.pweb2.model.Empresa;
-import br.edu.ifpb.pweb2.controller.EventoController;
 import br.edu.ifpb.pweb2.model.Especialidade;
 import br.edu.ifpb.pweb2.model.Evento;
-import br.edu.ifpb.pweb2.model.EventoSubject;
+import br.edu.ifpb.pweb2.model.MudaEstado;
+import br.edu.ifpb.pweb2.model.State;
+import br.edu.ifpb.pweb2.model.User;
+import br.edu.ifpb.pweb2.model.Vaga;
 
 
 public class Fachada implements Serializable {
@@ -41,6 +43,8 @@ public class Fachada implements Serializable {
 	private EventoController eventoController;
 	@Inject
 	private VagaController vagaController;
+	@Inject
+	private CandidatoVagaController candidatoVagaController;
 
 	
 	@PostConstruct
@@ -127,6 +131,22 @@ public class Fachada implements Serializable {
 	}
 	public void deleteEvento(Long id) {
 		eventoController.deleteEvento(id);
+	}
+	
+	public boolean candidatar(List<String> vagas) {
+		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+		MudaEstado mv = new MudaEstado();
+		for(String idvagaS: vagas) {
+			long idvaga = Long.parseLong(idvagaS);
+			Vaga vaga = vagaController.find(idvaga);
+			CandidatoVaga cv= new CandidatoVaga();
+			cv.setCandidato(user);
+			mv.setState(false, State.NAO_AVALIADO, cv);
+			cv.setVaga(vaga);
+			candidatoVagaController.createCandidatoVaga(cv);
+			
+		}
+		return true;
 	}
 	
 }

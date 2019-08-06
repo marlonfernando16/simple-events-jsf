@@ -12,7 +12,7 @@
 		<!-- entidade mapeada -->
 		<class>br.edu.ifpb.pweb2.model.Admin</class>
 		<class>br.edu.ifpb.pweb2.model.Avaliacao_Evento</class>
-		<class>br.edu.ifpb.pweb2.model.Candidato_Vaga</class>
+		<class>br.edu.ifpb.pweb2.model.CandidatoVaga</class>
 		<class>br.edu.ifpb.pweb2.model.Empresa</class>
 		<class>br.edu.ifpb.pweb2.model.Especialidade</class>
 		<class>br.edu.ifpb.pweb2.model.Evento</class>

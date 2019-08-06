@@ -59,11 +59,11 @@ public class Vaga extends VagasObserver {
 		this.qtd_vagas = qtd_vagas;
 	}
 
-	public List<CandidatoVaga> getCandidato_vaga() {
+	public List<CandidatoVaga> getCandidatovaga() {
 		return candidato_vaga;
 	}
 
-	public void setCandidato_vaga(ArrayList<CandidatoVaga> candidato_vaga) {
+	public void setCandidatovaga(ArrayList<CandidatoVaga> candidato_vaga) {
 		this.candidato_vaga = candidato_vaga;
 	}
 	

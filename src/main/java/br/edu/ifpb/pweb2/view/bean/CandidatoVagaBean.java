@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.edu.ifpb.pweb2.fachada.Fachada;
+import br.edu.ifpb.pweb2.model.Especialidade;
 import br.edu.ifpb.pweb2.model.Evento;
 import br.edu.ifpb.pweb2.model.Vaga;
 @Named
@@ -19,9 +20,23 @@ public class CandidatoVagaBean extends GenericBean implements Serializable {
 	
 	List<String> vagas;
 	
+	boolean[] candidatos;
+	
+	
+	public boolean[] getCandidatos() {
+		return candidatos;
+	}
+
+
+	public void setCandidatos(boolean[] candidatos) {
+		this.candidatos = candidatos;
+	}
+
+
 	@PostConstruct
 	private void init() {
 		vagas = new ArrayList<String>();
+		candidatos = new boolean[100];
 	}
 	
 	@Inject 
@@ -39,6 +54,14 @@ public class CandidatoVagaBean extends GenericBean implements Serializable {
 		}
 			this.addErrorMessage("não foi possível efetuar sua candidatura");
 			return null;
+	}
+	
+	public String finalizar() {
+		System.out.println("aiiiiiiiiiii");
+		for(boolean c: candidatos) {
+			System.out.println(c);
+		}
+		return null;
 	}
 		
 	

@@ -103,7 +103,9 @@
 													<label for="checkbox1" class="form-check-label dark-grey-text">
 														#{especialidadeBean.especialidades[loop.index].nome}</label>
 													<h:inputText class="quantidadevagas d-none"
-														value="#{eventoBean.quantidadevagas[loop.index]}" />
+														value="#{eventoBean.quantidadevagas[loop.index]}">
+														<f:convertNumber />
+													</h:inputText>
 												</h:panelGrid>
 											</ui:repeat>
 										</fieldset>
@@ -219,28 +221,45 @@
 												<hr />
 												<h3>Candidatos</h3><br />
 												<i:forEach var="vaga" items="#{evento.vagas}">
-													<h:dataTable value="#{vaga.candidato_vaga}" var="candi"
-														class="table">
-														<h:column>
-															<c:facet name="header">Nome</c:facet>
-															#{candi.candidato.nome}
-														</h:column>
-														<h:column>
-															<c:facet name="header">Vaga</c:facet>
-															#{candi.vaga.especialidade.nome}
-														</h:column>
-														<h:column>
-															<c:facet name="header">Deferir</c:facet>
-															<h:selectBooleanCheckbox
-																value="#{candidatoVagaBean.checked[candi.candidato.id]}" />
-														</h:column>
-													</h:dataTable>
+													<i:forEach var="candi" items="#{vaga.candidato_vaga}">
+														<!-- Collapse buttons -->
+														<div>
+															<a class="text-left" data-toggle="collapse"
+																href="#collapseExample#{candi.id}" aria-expanded="false"
+																aria-controls="collapseExample">
+																#{candi.candidato.nome}
+															</a>
+														</div>
+														<!-- / Collapse buttons -->
+
+														<!-- Collapsible element -->
+														<div class="collapse" id="collapseExample#{candi.id}">
+															<div class="mt-3">
+																<h:dataTable value="#{candidatoVagaBean.checked}"
+																	class="table">
+																	<h:column>
+																		<c:facet name="header">Vaga</c:facet>
+																		#{candi.vaga.especialidade.nome}
+																	</h:column>
+																	<h:column>
+																		<c:facet name="header">Deferir</c:facet>
+
+																		<h:selectBooleanCheckbox
+																			value="#{candidatoVagaBean.checked[candi.id]}" />
+																	</h:column>
+																</h:dataTable>
+															</div>
+														</div>
+														<!-- / Collapsible element -->
+													</i:forEach>
 												</i:forEach>
+
 											</h:panelGroup>
 											<h:panelGroup
 												rendered="#{sessionScope.user.email ne evento.owner.email and evento.finalizado == false}">
 												<hr />
 												<h3>Vagas</h3><br />
+
 												<h:dataTable value="#{evento.vagas}" var="vaga" class="table">
 													<h:column>
 														<c:facet name="header">Vaga</c:facet>
@@ -255,6 +274,28 @@
 															value="#{candidatoVagaBean.checked[vaga.id]}" />
 													</h:column>
 												</h:dataTable>
+											</h:panelGroup>
+											<h:panelGroup
+												rendered="#{sessionScope.user.email ne evento.owner.email and evento.finalizado == true}">
+												<hr />
+												<h3>Candidatos</h3><br />
+												<i:forEach var="vaga" items="#{evento.vagas}">
+													<h:dataTable value="#{vaga.candidato_vaga}" var="candi"
+														class="table">
+														<h:column>
+															<c:facet name="header">Nome</c:facet>
+															#{candi.candidato.nome}
+														</h:column>
+														<h:column>
+															<c:facet name="header">Vaga</c:facet>
+															#{candi.vaga.especialidade.nome}
+														</h:column>
+														<h:column>
+															<c:facet name="header">Status</c:facet>
+															#{candi.state}
+														</h:column>
+													</h:dataTable>
+												</i:forEach>
 											</h:panelGroup>
 										</div>
 

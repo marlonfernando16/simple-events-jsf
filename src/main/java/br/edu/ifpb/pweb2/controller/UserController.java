@@ -1,6 +1,7 @@
 package br.edu.ifpb.pweb2.controller;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -23,7 +24,7 @@ public class UserController implements Serializable {
 	}
 	
 	@Transactional
-	public User createUser(String nome, String phone,String email,String senha,String date) {
+	public User createUser(String nome, String phone,String email,String senha,Date date) {
 		User usuario = userDAO.findByLogin(email);
 		if(usuario != null) {
 			return null;
@@ -33,7 +34,7 @@ public class UserController implements Serializable {
 		user.setTelefone(phone);
 		user.setEmail(email);
 		user.setSenha(senha);
-		//user.setDatanascimento(new Date("01/12/1993"));
+		user.setDatanascimento(date);
 		userDAO.beginTransaction();
 		userDAO.insert(user);
 		userDAO.commit();

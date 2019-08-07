@@ -8,9 +8,7 @@ import javax.inject.Inject;
 import br.edu.ifpb.pweb2.dao.AdminDAO;
 import br.edu.ifpb.pweb2.dao.Transactional;
 import br.edu.ifpb.pweb2.model.Admin;
-import br.edu.ifpb.pweb2.model.Empresa;
 import br.edu.ifpb.pweb2.model.User;
-import br.edu.ifpb.pweb2.model.Admin;
 
 public class AdminController implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -25,7 +23,7 @@ public class AdminController implements Serializable {
 	}
 	
 	@Transactional
-	public Admin createAdmin(String nome, String phone,String email,String senha,String date) {
+	public Admin createAdmin(String nome, String phone,String email,String senha,Date date) {
 		User usuario = adminDAO.findByLogin(email);
 		if(usuario != null) {
 			return null;
@@ -35,7 +33,7 @@ public class AdminController implements Serializable {
 		admin.setTelefone(phone);
 		admin.setEmail(email);
 		admin.setSenha(senha);
-		admin.setDatanascimento(new Date(date));
+		admin.setDatanascimento(date);
 		adminDAO.beginTransaction();
 		adminDAO.insert(admin);
 		adminDAO.commit();

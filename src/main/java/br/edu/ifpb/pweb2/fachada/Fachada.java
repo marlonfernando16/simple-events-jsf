@@ -1,6 +1,7 @@
 package br.edu.ifpb.pweb2.fachada;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +54,7 @@ public class Fachada implements Serializable {
 	}
 
 	/* controller User */
-	public User createUser(String nome, String phone, String email, String senha, String date, String typeUser,
+	public User createUser(String nome, String phone, String email, String senha, Date date, String typeUser,
 			String endereco) {
 		User user = null;
 		if (typeUser.equalsIgnoreCase("FIS")) {
@@ -147,6 +148,7 @@ public class Fachada implements Serializable {
 				cv.setCandidato(user);
 				mudaEstado.setState(false, State.NAO_AVALIADO, cv);
 				cv.setVaga(vaga);
+				System.out.println("candidato vaga="+cv);
 				candidatoVagaController.createCandidatoVaga(cv);
 			}
 		}
@@ -158,9 +160,13 @@ public class Fachada implements Serializable {
 			Evento evento = null;
 			for (Map.Entry<Long, Boolean> idc : checked.entrySet()) {
 				CandidatoVaga cv = candidatoVagaController.find(idc.getKey());
+				System.out.println(cv.getVaga());
 				evento = cv.getVaga().getEvento();
 				mudaEstado.setState(false, State.APROVADO, cv);
 				candidatoVagaController.updateCandidatoVaga(cv);
+				System.out.println("evento do candidato="+evento.getNome());
+//				System.out.println("vaga do candidato="+cv.getVaga());
+				
 			}
 			for (Vaga vaga : evento.getVagas()) {
 				for (CandidatoVaga cv : vaga.getCandidato_vaga()) {
@@ -171,6 +177,7 @@ public class Fachada implements Serializable {
 				}
 			}
 			evento.setFinalizado(true);
+			System.out.println("O evento que esta vindo e"+evento.getNome());
 			evento.notifyObservers();
 			eventoController.updateEvento(evento);
 			for (Vaga vaga : evento.getVagas()){
@@ -182,6 +189,30 @@ public class Fachada implements Serializable {
 		}
 		return false;
 	}
+	
+//	public boolean finalizarEvento(String[] candidatovagaIds) {
+//		Evento evento = null;
+//		for(String cvid: candidatovagaIds) {
+//			long id = Long.parseLong(cvid);
+//			CandidatoVaga cv = candidatoVagaController.find(id);
+//			evento = cv.getVaga().getEvento();
+//			mudaEstado.setState(false, State.APROVADO, cv);
+//			candidatoVagaController.updateCandidatoVaga(cv);
+//		}
+//		for (Vaga vaga : evento.getVagas()){
+//			for(CandidatoVaga cv : vaga.getCandidatovaga()) {
+//				if(cv.getState()== State.NAO_AVALIADO) {
+//					mudaEstado.setState(false, State.NAO_APROVADO, cv);
+//					candidatoVagaController.updateCandidatoVaga(cv);
+//				}
+//			}
+//		}
+//		evento.setFinalizado(true);
+//		evento.notifyObservers();
+//		eventoController.updateEvento(evento);
+//		return true;
+//
+// 	}
 	
 	public boolean isCandidate(Long id_user, Long id_vaga) {
 		for (CandidatoVaga cv : vagaController.find(id_vaga).getCandidato_vaga()) {

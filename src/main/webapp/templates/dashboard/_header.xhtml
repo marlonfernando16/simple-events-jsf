@@ -72,7 +72,7 @@
 				<!-- Listar todas as especialidades -->
 				<h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
 					action="/pages/dashboard/especialidades?faces-redirect=true"
-					rendered="#{loginBean.admin || loginBean.empresa}">
+					rendered="#{loginBean.admin == true or loginBean.empresa == true}">
 					<i class="fas fa-calendar mr-3"></i>Especialidades
 				</h:commandLink>
 				<!-- Listar apenas os eventos submetidos -->
@@ -83,7 +83,7 @@
 				<!-- Ver perfil do usuário -->
 				<h:commandLink styleClass="list-group-item list-group-item-action waves-effect"
 					action="/pages/dashboard/perfil?faces-redirect=true"
-					rendered="#{loginBean.admin || loginBean.empresa}">
+					rendered="#{loginBean.admin == true or loginBean.empresa == true}}">
 					<i class="fas fa-user mr-3"></i>Perfil
 				</h:commandLink>
 			</div>

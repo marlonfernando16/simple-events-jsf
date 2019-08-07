@@ -38,8 +38,10 @@ public class CandidatoVagaBean extends GenericBean implements Serializable {
 	}
 
 	public String candidatar() {
+		System.out.println("candidatar"+checked);
 		if (fachada.candidatar(checked)) {
 			this.addSuccessMessage("candidatura efetuada com suceso");
+			checked = null;
 			return "/pages/dashboard/eventos?redirect=true";
 		}
 		this.addErrorMessage("não foi possível efetuar sua candidatura");
@@ -47,8 +49,10 @@ public class CandidatoVagaBean extends GenericBean implements Serializable {
 	}
 
 	public String finalizar() {
+		System.out.println("finalizar"+checked);
 		if (fachada.finalizarEvento(checked)) {
 			this.addSuccessMessage("evento finalizado");
+			checked = null;
 			return "/pages/dashboard/eventos?redirect=true";
 		}
 		this.addErrorMessage("evento não pode ser finalizado sem candidatos");

@@ -71,12 +71,12 @@
 												<i class="fas fa-calendar prefix grey-text"></i>
 												<h:inputText class="form-control" id="date" required="true"
 													value="#{userBean.date}"
-													requiredMessage="insert your date of birth" />
-												<h:outputLabel for="date" value="Data de Nascimento" />
+													requiredMessage="insert your date of birth">
+													<f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+												</h:inputText>
+													<label for="date">Data de Nascimento</label>
 											</div>
-
-
-
+																						
 											<div class="md-form">
 												<i class="fas fa-envelope prefix grey-text"></i>
 												<h:inputText class="form-control" id="email" required="true"

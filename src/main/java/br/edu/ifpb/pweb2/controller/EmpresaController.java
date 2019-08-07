@@ -28,7 +28,7 @@ public class EmpresaController implements Serializable  {
 	}
 	
 	@Transactional
-	public Empresa createEmpresa(String nome, String phone,String email,String senha,String date, String endereco) {
+	public Empresa createEmpresa(String nome, String phone,String email,String senha,Date date, String endereco) {
 		User usuario = userDAO.findByLogin(email);
 		if(usuario != null) {
 			return null;
@@ -39,7 +39,7 @@ public class EmpresaController implements Serializable  {
 		user.setTelefone(phone);
 		user.setEmail(email);
 		user.setSenha(senha);
-		user.setDatanascimento(new Date(date));
+		user.setDatanascimento(date);
 		userDAO.beginTransaction();
 		userDAO.insert(user);
 		userDAO.commit();

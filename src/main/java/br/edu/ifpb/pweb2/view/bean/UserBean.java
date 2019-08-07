@@ -1,6 +1,7 @@
 package br.edu.ifpb.pweb2.view.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -25,7 +26,7 @@ private static final long serialVersionUID = 1L;
 
 	private String senha;
 
-	private String date;
+	private Date date;
 	
 	private String endereco;
 	
@@ -33,7 +34,7 @@ private static final long serialVersionUID = 1L;
 	
 	@PostConstruct
 	private void init() {
-		System.out.println("Fachada: "+ fachada);
+		
 	}
 	
 	public String createUser() {
@@ -89,11 +90,11 @@ private static final long serialVersionUID = 1L;
 		this.senha = senha;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	

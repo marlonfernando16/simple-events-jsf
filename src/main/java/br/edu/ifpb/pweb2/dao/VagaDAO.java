@@ -1,10 +1,12 @@
 package br.edu.ifpb.pweb2.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.jboss.logging.Logger;
 
-import br.edu.ifpb.pweb2.model.Especialidade;
 import br.edu.ifpb.pweb2.model.Vaga;
 
 public class VagaDAO extends GenericDAOJPAImpl<Vaga, Long>  {
@@ -15,6 +17,12 @@ public class VagaDAO extends GenericDAOJPAImpl<Vaga, Long>  {
 	public VagaDAO(EntityManager em) {
 		super(em); 
 	}
+
 	
+	@SuppressWarnings("unchecked")
+	public List<Vaga> findAll() {
+		Query q = entityManager.createQuery("from Vaga e");
+		return q.getResultList();
+	}
 
 }

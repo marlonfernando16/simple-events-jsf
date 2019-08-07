@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import br.edu.ifpb.pweb2.dao.EspecialidadeDAO;
 import br.edu.ifpb.pweb2.dao.Transactional;
 import br.edu.ifpb.pweb2.model.Especialidade;
-import br.edu.ifpb.pweb2.model.User;
 
 public class EspecialidadeController {
 	

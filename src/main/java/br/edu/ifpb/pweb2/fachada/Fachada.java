@@ -2,6 +2,7 @@ package br.edu.ifpb.pweb2.fachada;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
@@ -25,7 +26,6 @@ import br.edu.ifpb.pweb2.model.State;
 import br.edu.ifpb.pweb2.model.User;
 import br.edu.ifpb.pweb2.model.Vaga;
 
-
 public class Fachada implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -45,15 +45,16 @@ public class Fachada implements Serializable {
 	private VagaController vagaController;
 	@Inject
 	private CandidatoVagaController candidatoVagaController;
-	@Inject 
+	@Inject
 	MudaEstado mudaEstado;
 
-	
 	@PostConstruct
 	private void init() {
 	}
-	/*controller User */
-	public User createUser(String nome, String phone, String email, String senha, String date, String typeUser, String endereco) {
+
+	/* controller User */
+	public User createUser(String nome, String phone, String email, String senha, String date, String typeUser,
+			String endereco) {
 		User user = null;
 		if (typeUser.equalsIgnoreCase("FIS")) {
 			user = userController.createUser(nome, phone, email, senha, date);
@@ -65,104 +66,105 @@ public class Fachada implements Serializable {
 		return user;
 
 	}
-	/*controller login */
+
+	/* controller login */
 	public User loginIsValido(String usuario, String senha) {
 		return loginController.isValido(usuario, senha);
 	}
-	
+
 	public boolean userIsAdmin(long idUser) {
 		Admin admin = adminController.find(idUser);
-		if(admin != null) {
+		if (admin != null) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
-	
+
 	public boolean userIsEmpresa(long idUser) {
 		Empresa empresa = empresaController.find(idUser);
-		if(empresa != null) {
+		if (empresa != null) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
-	
-	/*controller Especialidade */
 
-	/*controller especialidade*/
+	/* controller Especialidade */
+
+	/* controller especialidade */
 	public Especialidade createEspecialidade(Especialidade especialidade) {
 		return especialidadeController.createEspecialidade(especialidade);
 	}
-	
-	public List<Especialidade>findAllEspecialidades(){
+
+	public List<Especialidade> findAllEspecialidades() {
 		return especialidadeController.findAllEspecialidades();
 	}
+
 	public void deleteEspecialidade(Long id) {
 		especialidadeController.deleteEspecialidade(id);
 	}
-	
-	/*controller evento */
-	public 	Evento createEvento(Evento evento, String[]quantidadevagas) {
+
+	/* controller evento */
+	public Evento createEvento(Evento evento, String[] quantidadevagas) {
 		List<Especialidade> especialidades = this.findAllEspecialidades();
 		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-		System.out.println("user logged"+user);
 		evento.setOwner(user);
 		Evento ev = eventoController.createEvento(evento);
-		if(ev == null) {
+		if (ev == null) {
 			return null;
 		}
 		int i = 0;
-		for(String s : quantidadevagas) {
-			if(s!= "" && s!=null) {
+		for (String qv : quantidadevagas) {
+			if (qv != "" && qv != null) {
 				Vaga vaga = new Vaga();
 				vaga.setEspecialidade(especialidades.get(i));
-				vaga.setQtd_vagas(Integer.parseInt(s));
+				vaga.setQtd_vagas(Integer.parseInt(qv));
 				evento.add(vaga);
 				vaga.setEvento(evento);
 				vagaController.createVaga(vaga);
 			}
 			i++;
 		}
-		System.out.println(evento);
 		return evento;
 	}
-	
-	public List<Evento>findAllEventos(){
+
+	public List<Evento> findAllEventos() {
 		return eventoController.findAllEventos();
 	}
+
 	public void deleteEvento(Long id) {
 		eventoController.deleteEvento(id);
 	}
-	
-	public boolean candidatar(List<String> vagas) {
+
+	public boolean candidatar(Map<Long, Boolean> checked) {
 		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-		
-		for(String idvagaS: vagas) {
-			long idvaga = Long.parseLong(idvagaS);
-			Vaga vaga = vagaController.find(idvaga);
-			CandidatoVaga cv= new CandidatoVaga();
-			cv.setCandidato(user);
-			mudaEstado.setState(false, State.NAO_AVALIADO, cv);
-			cv.setVaga(vaga);
-			candidatoVagaController.createCandidatoVaga(cv);
-			
+
+		for (Map.Entry<Long, Boolean> idvagaS : checked.entrySet()) {
+			if (idvagaS.getValue()) {
+				Vaga vaga = vagaController.find(idvagaS.getKey());
+				CandidatoVaga cv = new CandidatoVaga();
+				cv.setCandidato(user);
+				mudaEstado.setState(false, State.NAO_AVALIADO, cv);
+				cv.setVaga(vaga);
+				candidatoVagaController.createCandidatoVaga(cv);
+			}
 		}
 		return true;
 	}
-	
+
 	public boolean finalizarEvento(String[] candidatovagaIds) {
 		Evento evento = null;
-		for(String cvid: candidatovagaIds) {
+		for (String cvid : candidatovagaIds) {
 			long id = Long.parseLong(cvid);
 			CandidatoVaga cv = candidatoVagaController.find(id);
 			evento = cv.getVaga().getEvento();
 			mudaEstado.setState(false, State.APROVADO, cv);
 			candidatoVagaController.updateCandidatoVaga(cv);
 		}
-		for (Vaga vaga : evento.getVagas()){
-			for(CandidatoVaga cv : vaga.getCandidatovaga()) {
-				if(cv.getState()== State.NAO_AVALIADO) {
+		for (Vaga vaga : evento.getVagas()) {
+			for (CandidatoVaga cv : vaga.getCandidatovaga()) {
+				if (cv.getState() == State.NAO_AVALIADO) {
 					mudaEstado.setState(false, State.NAO_APROVADO, cv);
 					candidatoVagaController.updateCandidatoVaga(cv);
 				}
@@ -172,7 +174,15 @@ public class Fachada implements Serializable {
 		evento.notifyObservers();
 		eventoController.updateEvento(evento);
 		return true;
-		
+
 	}
-	
+
+	public List<Vaga> findAllVagas() {
+		return vagaController.findAllVagas();
+	}
+
+	public Vaga createVaga(Vaga vaga) {
+		return vagaController.createVaga(vaga);
+	}
+
 }

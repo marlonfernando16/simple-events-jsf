@@ -110,10 +110,12 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-bell"></i>
+                <i class="fas fa-bell">#{user.sizeNotifications}</i>
               </a>
               <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Menssagem</a>
+              #{user.notifys}
+              	<i:forEach items="#{user.notifys}" var="notify"></i:forEach>
+                	<a class="dropdown-item" href="#">#{notify.value}</a>
               </div>
             </li>
             <li class="nav-item">

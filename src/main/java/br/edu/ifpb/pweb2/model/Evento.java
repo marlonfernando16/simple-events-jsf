@@ -184,14 +184,15 @@ public class Evento extends EventoSubject {
 
 	@Override
 	public void notifyObservers() {
-		// TODO Auto-generated method stub
+		for(Vaga vaga: vagas) {
+			vaga.update(this);
+		}
 		
 	}
 
 	@Override
 	public Evento getState() {
-		// TODO Auto-generated method stub
-		return null;
+		return this;
 	}
 	
 	public String getImagem() {

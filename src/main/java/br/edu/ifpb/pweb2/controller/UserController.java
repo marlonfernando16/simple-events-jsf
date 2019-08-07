@@ -1,7 +1,6 @@
 package br.edu.ifpb.pweb2.controller;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -41,4 +40,8 @@ public class UserController implements Serializable {
 		return user;
 	}
 
+	public User find(Long id_user) {
+		return userDAO.find(id_user);
+	}
+	
 }

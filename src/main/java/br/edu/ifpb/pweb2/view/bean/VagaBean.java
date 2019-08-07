@@ -63,7 +63,7 @@ public class VagaBean extends GenericBean implements Serializable {
 	public boolean contains(Long id_candidato) {
 //		System.out.println(id_candidato);
 		for (Vaga vaga : vagas) {
-			for (CandidatoVaga cv: vaga.getCandidatovaga()) {
+			for (CandidatoVaga cv: vaga.getCandidato_vaga()) {
 				if(id_candidato == cv.getCandidato().getId())
 					return true;
 			}

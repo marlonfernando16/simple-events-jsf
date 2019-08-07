@@ -22,13 +22,6 @@ public class CandidatoVagaBean extends GenericBean implements Serializable {
 	private String[] candidatos;
 	private Map<Long, Boolean> checked;
 
-	public String[] getCandidatos() {
-		return candidatos;
-	}
-
-	public void setCandidatos(String[] candidatos) {
-		this.candidatos = candidatos;
-	}
 
 	@PostConstruct
 	private void init() {
@@ -54,12 +47,16 @@ public class CandidatoVagaBean extends GenericBean implements Serializable {
 	}
 
 	public String finalizar() {
-		if (fachada.finalizarEvento(candidatos)) {
+		if (fachada.finalizarEvento(checked)) {
 			this.addSuccessMessage("evento finalizado");
 			return "/pages/dashboard/eventos?redirect=true";
 		}
-
+		this.addErrorMessage("evento não pode ser finalizado sem candidatos");
 		return null;
+	}
+	
+	public boolean isCandidate(Long id_user, Long id_vaga) {
+		return fachada.isCandidate(id_user, id_vaga);
 	}
 
 	public List<String> getVagas() {
@@ -76,5 +73,13 @@ public class CandidatoVagaBean extends GenericBean implements Serializable {
 
 	public void setChecked(Map<Long, Boolean> checked) {
 		this.checked = checked;
+	}
+
+	public String[] getCandidatos() {
+		return candidatos;
+	}
+
+	public void setCandidatos(String[] candidatos) {
+		this.candidatos = candidatos;
 	}
 }

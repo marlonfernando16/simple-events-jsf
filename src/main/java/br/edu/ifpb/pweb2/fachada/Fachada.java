@@ -153,33 +153,43 @@ public class Fachada implements Serializable {
 		return true;
 	}
 
-	public boolean finalizarEvento(String[] candidatovagaIds) {
-		Evento evento = null;
-		for (String cvid : candidatovagaIds) {
-			long id = Long.parseLong(cvid);
-			CandidatoVaga cv = candidatoVagaController.find(id);
-			evento = cv.getVaga().getEvento();
-			mudaEstado.setState(false, State.APROVADO, cv);
-			candidatoVagaController.updateCandidatoVaga(cv);
-		}
-		for (Vaga vaga : evento.getVagas()) {
-			for (CandidatoVaga cv : vaga.getCandidatovaga()) {
-				if (cv.getState() == State.NAO_AVALIADO) {
-					mudaEstado.setState(false, State.NAO_APROVADO, cv);
-					candidatoVagaController.updateCandidatoVaga(cv);
+	public boolean finalizarEvento(Map<Long, Boolean> checked) {
+		if(!checked.isEmpty()) {
+			Evento evento = null;
+			for (Map.Entry<Long, Boolean> idc : checked.entrySet()) {
+				CandidatoVaga cv = candidatoVagaController.find(idc.getKey());
+				evento = cv.getVaga().getEvento();
+				mudaEstado.setState(false, State.APROVADO, cv);
+				candidatoVagaController.updateCandidatoVaga(cv);
+			}
+			for (Vaga vaga : evento.getVagas()) {
+				for (CandidatoVaga cv : vaga.getCandidato_vaga()) {
+					if (cv.getState() == State.NAO_AVALIADO) {
+						mudaEstado.setState(false, State.NAO_APROVADO, cv);
+						candidatoVagaController.updateCandidatoVaga(cv);
+					}
 				}
 			}
+			evento.setFinalizado(true);
+			evento.notifyObservers();
+			eventoController.updateEvento(evento);
+			for (Vaga vaga : evento.getVagas()){
+				for(CandidatoVaga cv : vaga.getCandidato_vaga()) {
+					System.out.println("eiiiita"+cv.getCandidato().getNotifys());
+				}
+			}
+			return true;
 		}
-		evento.setFinalizado(true);
-		evento.notifyObservers();
-		eventoController.updateEvento(evento);
-		for (Vaga vaga : evento.getVagas()){
-			for(CandidatoVaga cv : vaga.getCandidatovaga()) {
-				System.out.println("eiiiita"+cv.getCandidato().getNotifys());
+		return false;
+	}
+	
+	public boolean isCandidate(Long id_user, Long id_vaga) {
+		for (CandidatoVaga cv : vagaController.find(id_vaga).getCandidato_vaga()) {
+			if (cv.getCandidato().getId().equals(userController.find(id_user).getId())) {
+				return true;
 			}
 		}
-		return true;
-
+		return false;
 	}
 
 	public List<Vaga> findAllVagas() {

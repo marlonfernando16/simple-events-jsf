@@ -17,29 +17,24 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tb_vaga")
 public class Vaga extends VagasObserver {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
-	
-	public Vaga() {}
-	
-	@ManyToOne(fetch=FetchType.EAGER)
+
+	public Vaga() {
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
 	protected Evento evento;
-	
+
 	private int qtd_vagas;
-	
-	
-	
+
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "vaga", cascade = CascadeType.ALL)
 	private List<CandidatoVaga> candidato_vaga = new ArrayList<>();
-	
+
 	@OneToOne
 	private Especialidade especialidade;
-
-	
-
-
 
 	public Especialidade getEspecialidade() {
 		return especialidade;
@@ -49,8 +44,6 @@ public class Vaga extends VagasObserver {
 		this.especialidade = especialidade;
 	}
 
-
-
 	public int getQtd_vagas() {
 		return qtd_vagas;
 	}
@@ -59,21 +52,14 @@ public class Vaga extends VagasObserver {
 		this.qtd_vagas = qtd_vagas;
 	}
 
-	public List<CandidatoVaga> getCandidatovaga() {
-		return candidato_vaga;
+	public void add(int i, CandidatoVaga candidato) {
+		this.candidato_vaga.add(i, candidato);
 	}
 
-	public void setCandidatovaga(ArrayList<CandidatoVaga> candidato_vaga) {
-		this.candidato_vaga = candidato_vaga;
-	}
-	
-	public void setCandidato(int i,CandidatoVaga candidato) {
-		this.candidato_vaga.add(i,candidato);
-	}
-	
 	public long getId() {
 		return id;
 	}
+
 	@Override
 	public String toString() {
 		return "Vaga [id=" + id + ", evento=" + ", qtd_vagas=" + qtd_vagas + ", especialidade="
@@ -82,10 +68,10 @@ public class Vaga extends VagasObserver {
 
 	@Override
 	public void update(EventoSubject evento) {
-		for(CandidatoVaga cv : this.getCandidatovaga()) {
-			cv.getCandidato().addNotify("O evento "+evento.getState().getNome()+" foi finalizado !");
+		for (CandidatoVaga cv : this.getCandidato_vaga()) {
+			cv.getCandidato().addNotify("O evento " + evento.getState().getNome() + " foi finalizado !");
 		}
-		
+
 	}
 
 	public Evento getEvento() {
@@ -95,10 +81,15 @@ public class Vaga extends VagasObserver {
 	@Override
 	public void setEvento(Evento evento) {
 		this.evento = evento;
-		
+
 	}
 
-	
+	public List<CandidatoVaga> getCandidato_vaga() {
+		return candidato_vaga;
+	}
 
+	public void setCandidato_vaga(List<CandidatoVaga> candidato_vaga) {
+		this.candidato_vaga = candidato_vaga;
+	}
 
 }

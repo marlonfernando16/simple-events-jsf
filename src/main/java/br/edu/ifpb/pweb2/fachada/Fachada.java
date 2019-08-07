@@ -173,7 +173,13 @@ public class Fachada implements Serializable {
 		evento.setFinalizado(true);
 		evento.notifyObservers();
 		eventoController.updateEvento(evento);
+		for (Vaga vaga : evento.getVagas()){
+			for(CandidatoVaga cv : vaga.getCandidatovaga()) {
+				System.out.println("eiiiita"+cv.getCandidato().getNotifys());
+			}
+		}
 		return true;
+<<<<<<< HEAD
 
 	}
 
@@ -185,4 +191,8 @@ public class Fachada implements Serializable {
 		return vagaController.createVaga(vaga);
 	}
 
+=======
+	
+>>>>>>> c6647fe2fce088a315d604ebc587f34a8f30374d
+}
 }

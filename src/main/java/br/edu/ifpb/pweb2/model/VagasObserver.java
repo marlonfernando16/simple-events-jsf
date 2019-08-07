@@ -25,10 +25,17 @@ public abstract class VagasObserver {
 
 
 
-	public abstract void update();
+	
 
 	
 	public VagasObserver() {}
+
+
+
+	public void update(EventoSubject evento) {
+		// TODO Auto-generated method stub
+		
+	}
 	 
     
 

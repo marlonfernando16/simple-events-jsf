@@ -3,9 +3,13 @@ package br.edu.ifpb.pweb2.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -55,6 +59,32 @@ public class User implements Serializable {
 
 	@ManyToOne
 	private Avaliacao_Evento avaliacao_evento;
+	
+    @ElementCollection  
+    protected Set<String> notifys = new HashSet();
+  
+
+	public void addNotify(String message) {
+		this.notifys.add(message);
+	}
+
+	public Set<String> getNotifys() {
+		return notifys;
+	}
+	
+	public int getSizeNotifications() {
+		return this.notifys.size();
+	}
+
+
+	public void setNotifys(Set<String> notifys) {
+		this.notifys = notifys;
+	}
+
+
+
+
+
 
 
 	public User() {};

@@ -81,8 +81,10 @@ public class Vaga extends VagasObserver {
 	}
 
 	@Override
-	public void update() {
-		System.out.println("mudou kanalia...");
+	public void update(EventoSubject evento) {
+		for(CandidatoVaga cv : this.getCandidatovaga()) {
+			cv.getCandidato().addNotify("O evento "+evento.getState().getNome()+" foi finalizado !");
+		}
 		
 	}
 
@@ -95,6 +97,8 @@ public class Vaga extends VagasObserver {
 		this.evento = evento;
 		
 	}
+
+	
 
 
 }

@@ -22,13 +22,22 @@
 		<properties>
 
 			<!-- dados da conexao -->
-			<property name="javax.persistence.jdbc.driver"
+		   <!--
+		   <property name="javax.persistence.jdbc.driver"
 				value="org.postgresql.Driver" />
 			<property name="javax.persistence.jdbc.url"
 				value="jdbc:postgresql://localhost:5432/simple-events-jsf" />
 			<property name="javax.persistence.jdbc.user" value="postgres" />
 			<property name="javax.persistence.jdbc.password"
-				value="123" />
+				value="mfive122" />
+			 -->
+			<property name="javax.persistence.jdbc.driver"
+				value="org.postgresql.Driver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:postgresql://ec2-174-129-231-25.compute-1.amazonaws.com:5432/d1g8sctdgnvdhv" />
+			<property name="javax.persistence.jdbc.user" value="wauminrmykgakc" />
+			<property name="javax.persistence.jdbc.password"
+				value="31d363354a55e84e8e94b11b10b62a9a281f62f6c9edd19a5224a05ccb23c817" />	
 
 			<!-- propriedades do hibernate -->
 			<property name="hibernate.dialect"
@@ -41,4 +50,5 @@
 
 		</properties>
 	</persistence-unit>
+	
 </persistence>

@@ -1,0 +1,54 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+
+	<persistence-unit name="simple-events-jsf">
+
+		<!-- provedor/implementacao do JPA -->
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+		<!-- entidade mapeada -->
+		<class>br.edu.ifpb.pweb2.model.Admin</class>
+		<class>br.edu.ifpb.pweb2.model.Avaliacao_Evento</class>
+		<class>br.edu.ifpb.pweb2.model.CandidatoVaga</class>
+		<class>br.edu.ifpb.pweb2.model.Empresa</class>
+		<class>br.edu.ifpb.pweb2.model.Especialidade</class>
+		<class>br.edu.ifpb.pweb2.model.Evento</class>
+		<class>br.edu.ifpb.pweb2.model.User</class>
+		<class>br.edu.ifpb.pweb2.model.Vaga</class>
+
+		<properties>
+
+			<!-- dados da conexao -->
+		   <!--
+		   <property name="javax.persistence.jdbc.driver"
+				value="org.postgresql.Driver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:postgresql://localhost:5432/simple-events-jsf" />
+			<property name="javax.persistence.jdbc.user" value="postgres" />
+			<property name="javax.persistence.jdbc.password"
+				value="mfive122" />
+			 -->
+			<property name="javax.persistence.jdbc.driver"
+				value="org.postgresql.Driver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:postgresql://ec2-174-129-231-25.compute-1.amazonaws.com:5432/d1g8sctdgnvdhv" />
+			<property name="javax.persistence.jdbc.user" value="wauminrmykgakc" />
+			<property name="javax.persistence.jdbc.password"
+				value="31d363354a55e84e8e94b11b10b62a9a281f62f6c9edd19a5224a05ccb23c817" />	
+
+			<!-- propriedades do hibernate -->
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.format_sql" value="true" />
+
+			<!-- atualiza o banco, gera as tabelas se for preciso -->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+
+		</properties>
+	</persistence-unit>
+	
+</persistence>
